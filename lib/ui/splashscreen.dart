@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:instagram/Login.dart';
+import 'package:instagram/ui/Login.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -11,7 +11,6 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-
   @override
   void initState() {
     super.initState();
@@ -27,10 +26,29 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       backgroundColor: Colors.black,
+      body: Column(
+        children: [
+          SizedBox(
+            height: 380,
+          ),
+          Center(
+            child: Image.asset(
+              'assets/image/pngegg.png',
+              fit: BoxFit.cover,
+              height: 100,
+            ),
+          ),
+          SizedBox(
+            height: 280,
+          ),
+          Text(
+            'From',
+            style: TextStyle(color: Colors.grey, fontSize: 16),
+          )
+        ],
+      ),
     );
   }
 }
