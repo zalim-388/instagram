@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/ui/Login.dart';
 
 class Splashscreen extends StatefulWidget {
@@ -31,17 +32,17 @@ class _SplashscreenState extends State<Splashscreen> {
       body: Column(
         children: [
           SizedBox(
-            height: 380,
+            height: 380.h,
           ),
           Center(
             child: Image.asset(
               'assets/image/pngegg.png',
               fit: BoxFit.cover,
-              height: 100,
+              height: 100.h,
             ),
           ),
           SizedBox(
-            height: 280,
+            height: 280.h,
           ),
           Text(
             'From',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/ui/homepage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram/ui/bottomnavi.dart';
+
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -28,15 +30,15 @@ class _LoginState extends State<Login> {
           child: Column(
             children: [
               SizedBox(
-                height: 100,
+                height: 100.h,
               ),
               Image.asset(
                 'assets/image/Instagram Logo (1).png',
                 fit: BoxFit.contain,
-                height: 50,
+                height: 50.h,
               ),
               SizedBox(
-                height: 50,
+                height: 50.h,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -48,7 +50,7 @@ class _LoginState extends State<Login> {
                         borderSide: BorderSide(color: Colors.grey))),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -60,7 +62,7 @@ class _LoginState extends State<Login> {
                         borderSide: BorderSide(color: Colors.grey))),
               ),
               SizedBox(
-                height: 5,
+                height: 5.h,
               ),
               Padding(
                   padding: const EdgeInsets.only(left: 230),
@@ -72,15 +74,15 @@ class _LoginState extends State<Login> {
                     ),
                   )),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav(),));
                 },
                 child: Container(
-                  height: 50,
-                  width: 350,
+                  height: 50.h,
+                  width: 350.w,
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(5),
@@ -93,12 +95,12 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 40.h,
               ),
               Row(
                 children: [
                   SizedBox(
-                    width: 120,
+                    width: 120.w,
                   ),
                   Image.asset(
                     'assets/image/Icon.png',
@@ -113,7 +115,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
               SizedBox(
-                height: 40,
+                height: 40.h,
               ),
               Align(
                 alignment: Alignment.center,
@@ -123,7 +125,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 50.h,
               ),
               RichText(
                   text: TextSpan(
