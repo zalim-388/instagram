@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hidable/hidable.dart';
 import 'package:instagram/ui/Add.dart';
 import 'package:instagram/ui/homepage.dart';
+import 'package:instagram/ui/profile.dart';
+import 'package:instagram/ui/reel.dart';
 import 'package:instagram/ui/search.dart';
 
 class BottomNav extends StatefulWidget {
@@ -22,10 +24,10 @@ class _BottomNavState extends State<BottomNav> {
 
   final List<Widget> pages = [
     Homepage(),
- Search(),
-Add(),
-    Center(child: Text("Settings", style: TextStyle(fontSize: 20))),
-    Center(child: Text("Settings", style: TextStyle(fontSize: 20))),
+    Search(),
+    Add(),
+    Reel(),
+    Profile(),
   ];
 
   @override
@@ -49,24 +51,22 @@ Add(),
           label: 'Home',
           icon: Icon(Icons.home, color: Colors.white),
           backgroundColor: Colors.black),
-
-          BottomNavigationBarItem(
-        label: 'search',
-        icon: Icon(Icons.search, color: Colors.white),
-      ),
       BottomNavigationBarItem(
-        label: 'Add',
-        icon: Icon(Icons.add_box_outlined, color: Colors.white),
-      ),
-      
+          label: 'search',
+          icon: Icon(Icons.search, color: Colors.white),
+          backgroundColor: Colors.black),
       BottomNavigationBarItem(
-        label: 'Reel',
-        icon: Icon(Icons.video_library, color: Colors.white),
-      ),
+          label: 'Add',
+          icon: Icon(Icons.add_box_outlined, color: Colors.white),
+          backgroundColor: Colors.black),
       BottomNavigationBarItem(
-        label: 'profle',
-        icon: Icon(Icons.circle_outlined, color: Colors.white),
-      ),
+          label: 'Reel',
+          icon: Icon(Icons.video_library, color: Colors.white),
+          backgroundColor: Colors.black),
+      BottomNavigationBarItem(
+          label: 'profle',
+          icon: Icon(Icons.circle_outlined, color: Colors.white),
+          backgroundColor: Colors.black),
     ];
   }
 }
