@@ -47,60 +47,49 @@ class _HomepageState extends State<Homepage> {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-
-        // leading: IconButton(
-        //   onPressed: () {},
-        //   icon: Icon(
-        //     Icons.camera_alt_outlined,
-        //     color: Colors.white,
-        //   ),
-        // ),
-        title: Padding(
-          padding: const EdgeInsets.only(right: 60),
-          child: Row(
-            children: [
-              Image.asset(
-                'assets/image/Instagram Logo (1).png',
-                fit: BoxFit.cover,
-                height: 25,
-              ),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                    size: 25,
-                  ))
-            ],
-          ),
-        ),
-
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.favorite_border_outlined,
-                color: Colors.white,
-              )),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.send,
-                color: Colors.white,
-              )),
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 15,
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 30),
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/image/Instagram Logo (1).png',
+                        fit: BoxFit.contain,
+                        height: 20.h,
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white,
+                            size: 25,
+                          )),
+                      SizedBox(
+                        width: 125.w,
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.favorite_border_outlined,
+                            color: Colors.white,
+                          )),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.message_outlined,
+                            color: Colors.white,
+                          )),
+                    ],
+                  ),
+                ),
                 SizedBox(
                     height: 100.h,
                     child: ListView.builder(
@@ -108,39 +97,42 @@ class _HomepageState extends State<Homepage> {
                       itemCount: Story.length,
                       itemBuilder: (context, index) {
                         final story = Story[index];
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Container(
-                                height: 70.h,
-                                width: 70.w,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFFBAA47),
-                                      Color(0xFFD91A46),
-                                      Color(0xFFA60F93)
-                                    ],
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Container(
+                                  height: 70.h,
+                                  width: 70.w,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFFFBAA47),
+                                        Color(0xFFD91A46),
+                                        Color(0xFFA60F93)
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(3),
-                                  child: CircleAvatar(
-                                    backgroundImage:
-                                        AssetImage(story["image"] ?? ''),
-                                    radius: 30,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(3),
+                                    child: CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage(story["image"] ?? ''),
+                                      radius: 30,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              story["Name"] ?? '',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 13),
-                            )
-                          ],
+                              Text(
+                                story["Name"] ?? '',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 13),
+                              )
+                            ],
+                          ),
                         );
                       },
                     )),

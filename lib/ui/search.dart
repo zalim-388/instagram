@@ -20,7 +20,7 @@ class _SearchState extends State<Search> {
               height: 40,
             ),
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(6.0),
               child: TextField(
                 decoration: InputDecoration(
                     prefixIcon: Icon(
