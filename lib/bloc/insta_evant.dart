@@ -1,11 +1,11 @@
 part of 'insta_bloc.dart';
-@immutable
 
-abstract class InstaEvant {
+
+abstract class InstaEvent {
   
 } 
 
-class  Fecthinsta extends InstaEvant{}
+class  Fecthinsta extends InstaEvent{}
 
 
 

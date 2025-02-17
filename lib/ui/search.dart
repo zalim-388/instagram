@@ -22,6 +22,7 @@ class _SearchState extends State<Search> {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: TextField(
+                cursorColor: Colors.white,
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.search,
@@ -30,12 +31,22 @@ class _SearchState extends State<Search> {
                     ),
                     hintText: 'search',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
-                    border:
-                        OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                    focusedBorder:
-                        OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                    fillColor: Color(262626),
-                    filled: true),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.black.withOpacity(0.6),
+                    filled: true,
+                    
+                    
+
+
+
+                    ),
+
+
+
+
               ),
             ),
           ],

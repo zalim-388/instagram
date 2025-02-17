@@ -10,15 +10,15 @@ class Profile extends StatefulWidget {
   State<Profile> createState() => _ProfileState();
 }
 
-
 class _ProfileState extends State<Profile> {
- int  index=0;
-    @override
+  int index = 0;
+  @override
   void initState() {
     super.initState();
 
     BlocProvider.of<InstaBloc>(context).add(Fecthinsta());
   }
+
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 2,
@@ -39,11 +39,9 @@ class _ProfileState extends State<Profile> {
                   ),
                 );
               } else if (state is InstaBlocLoaded) {
-              var data = state.instagram;
-              
+                var data = state.instagram;
 
-
-        return Padding(
+                return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
@@ -52,7 +50,7 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           children: [
                             Text(
-                              data.data.fullName,
+                              data.data.username.toString(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
@@ -94,7 +92,7 @@ class _ProfileState extends State<Profile> {
                                 child: CircleAvatar(
                                   radius: 48,
                                   backgroundImage: AssetImage(
-                                      'assets/image/IMG_20250211_083815_295.jpg'),
+                                      data.data.hdProfilePicVersions.toString()),
                                 ),
                               ),
                               SizedBox(
@@ -108,9 +106,9 @@ class _ProfileState extends State<Profile> {
                                     style: TextStyle(
                                         color: Colors.white70, fontSize: 15),
                                   ),
-                                  Text('.\n.\n.',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15))
+                                  // Text('.\n.\n.',
+                                  //     style: TextStyle(
+                                  //         color: Colors.white, fontSize: 15))
                                 ],
                               ),
                             ],
@@ -122,7 +120,7 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'SALIM',
+                                data.data.fullName.toString(),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 14),
                               ),
@@ -138,18 +136,38 @@ class _ProfileState extends State<Profile> {
                                 SizedBox(
                                   width: 25.w,
                                 ),
-                                Text(
-                                  '   1k\nFollowers',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 17),
+                                Column(
+                                  children: [
+                                    Text(
+                                      data.data.followerCount.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 17),
+                                    ),
+                                     Text(
+                                      'followers',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 17),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   width: 25.w,
                                 ),
-                                Text(
-                                  '   450\nFollowing',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 17),
+                                Column(
+                                  children: [
+                                    Text(
+                                      data.data.followingCount.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 17),
+
+                                    ),
+                                     Text(
+                                      'following',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 17),
+                                    ),
+                                    
+                                  ],
                                 ),
                               ]),
                             ],
@@ -392,7 +410,6 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 );
-
               }
               return Container();
             })));

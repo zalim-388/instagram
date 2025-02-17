@@ -1,33 +1,34 @@
 // To parse this JSON data, do
 //
-//     final instaModel = instaModelFromJson(jsonString);
+//     final profileModel = profileModelFromJson(jsondynamic);
 
 import 'dart:convert';
 
-InstaModel instaModelFromJson(String str) =>
-    InstaModel.fromJson(json.decode(str));
+ProfileModel profileModelFromJson(dynamic str) =>
+    ProfileModel.fromJson(json.decode(str));
 
-String instaModelToJson(InstaModel data) => json.encode(data.toJson());
+dynamic profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
-class InstaModel {
+class ProfileModel {
   Data data;
 
-  InstaModel({
+  ProfileModel({
     required this.data,
   });
 
-  factory InstaModel.fromJson(Map<String, dynamic> json) => InstaModel(
+  factory ProfileModel.fromJson(Map<dynamic, dynamic> json) => ProfileModel(
         data: Data.fromJson(json["data"]),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "data": data.toJson(),
       };
 }
 
 class Data {
   dynamic about;
-  String accountCategory;
+  List<dynamic> accountBadges;
+  dynamic accountCategory;
   dynamic accountType;
   ActiveStandaloneFundraisers activeStandaloneFundraisers;
   List<dynamic> additionalBusinessAddresses;
@@ -37,13 +38,12 @@ class Data {
   dynamic adsPageName;
   dynamic autoExpandChaining;
   AvatarStatus avatarStatus;
-  List<BioLink> bioLinks;
-  String biography;
+  List<dynamic> bioLinks;
+  dynamic biography;
   dynamic biographyEmail;
   BiographyWithEntities biographyWithEntities;
-  String birthdayTodayVisibilityForViewer;
-  BroadcastChatPreferenceStatus broadcastChatPreferenceStatus;
-  String businessContactMethod;
+  dynamic birthdayTodayVisibilityForViewer;
+  dynamic businessContactMethod;
   dynamic canAddFbGroupLinkOnProfile;
   dynamic canHideCategory;
   dynamic canHidePublicContacts;
@@ -52,25 +52,27 @@ class Data {
   dynamic canUseBrandedContentDiscoveryAsBrand;
   dynamic canUseBrandedContentDiscoveryAsCreator;
   dynamic canUsePaidPartnershipMessagingAsCreator;
-  String category;
+  dynamic category;
   dynamic categoryId;
+  List<Chaining> chainingResults;
+  List<Chaining> chainingSuggestions;
   List<dynamic> chainingUpsellCards;
-  String contactPhoneNumber;
+  dynamic contactPhoneNumber;
   CreatorShoppingInfo creatorShoppingInfo;
   dynamic currentCatalogId;
-  String directMessaging;
+  dynamic directMessaging;
   dynamic enableAddSchoolInEditProfile;
   dynamic existingUserAgeCollectionEnabled;
-  String externalLynxUrl;
-  String externalUrl;
+  dynamic externalUrl;
   FanClubInfo fanClubInfo;
-  String fbidV2;
+  dynamic fbidV2;
   dynamic feedPostReshareDisabled;
   dynamic followFrictionType;
   dynamic followerCount;
   dynamic followingCount;
-  String fullName;
+  dynamic fullName;
   dynamic hasAnonymousProfilePicture;
+  dynamic hasBiographyTranslation;
   dynamic hasChaining;
   dynamic hasChains;
   dynamic hasCollabCollections;
@@ -81,7 +83,6 @@ class Data {
   dynamic hasGuides;
   dynamic hasHighlightReels;
   dynamic hasIgProfile;
-  dynamic hasIgtvSeries;
   dynamic hasLegacyBbPendingProfilePictureUpdate;
   dynamic hasMusicOnProfile;
   dynamic hasMv4BPendingProfilePictureUpdate;
@@ -93,10 +94,10 @@ class Data {
   HdProfilePic hdProfilePicUrlInfo;
   List<HdProfilePic> hdProfilePicVersions;
   dynamic highlightReshareDisabled;
-  String highlightsTrayType;
-  String id;
+  dynamic highlightsTrayType;
+  dynamic id;
   dynamic includeDirectBlacklistStatus;
-  String instagramPk;
+  dynamic instagramPk;
   dynamic dynamiceropMessagingUserFbid;
   dynamic isActiveOnTextPostApp;
   dynamic isAutoConfirmEnabledForAllReciprocalFollowRequests;
@@ -152,10 +153,10 @@ class Data {
   dynamic isWhatsappLinked;
   dynamic latestBestiesReelMedia;
   dynamic latestReelMedia;
-  String liveSubscriptionStatus;
+  dynamic liveSubscriptionStatus;
   LocationData locationData;
   dynamic mediaCount;
-  String merchantCheckoutStyle;
+  dynamic merchantCheckoutStyle;
   MetaVerifiedBenefitsInfo metaVerifiedBenefitsInfo;
   dynamic metaVerifiedRelatedAccountsCount;
   Nametag nametag;
@@ -163,28 +164,28 @@ class Data {
   NotMetaVerifiedFrictionInfo notMetaVerifiedFrictionInfo;
   dynamic openExternalUrlWithInAppBrowser;
   dynamic pageId;
-  String pageName;
+  dynamic pageName;
   PinnedChannelsInfo pinnedChannelsInfo;
   dynamic primaryProfileLinkType;
   dynamic professionalConversionSuggestedAccountType;
-  String profileContext;
+  dynamic profileContext;
   List<dynamic> profileContextFacepileUsers;
   List<dynamic> profileContextLinksWithUserIds;
   List<dynamic> profilePicGenaiToolInfo;
-  String profilePicId;
-  String profilePicUrl;
-  String profilePicUrlHd;
-  String profileReelsSortingEligibility;
+  dynamic profilePicId;
+  dynamic profilePicUrl;
+  dynamic profilePicUrlHd;
+  dynamic profileReelsSortingEligibility;
   dynamic profileType;
   List<dynamic> pronouns;
-  String publicEmail;
-  String publicPhoneCountryCode;
-  String publicPhoneNumber;
+  dynamic publicEmail;
+  dynamic publicPhoneCountryCode;
+  dynamic publicPhoneNumber;
   ReconFeatures reconFeatures;
   RecsFromFriends recsFromFriends;
   List<dynamic> relevantNewsRegulationLocations;
   dynamic removeMessageEntrypodynamic;
-  String sellerShoppableFeedType;
+  dynamic sellerShoppableFeedType;
   dynamic showAccountTransparencyDetails;
   dynamic showBlueBadgeOnMainProfile;
   dynamic showPostInsightsEntryPodynamic;
@@ -192,18 +193,20 @@ class Data {
   dynamic showShoppableFeed;
   dynamic spamFollowerSettingEnabled;
   dynamic textAppLastVisitedTime;
+  dynamic textPostAppBadgeLabel;
+  dynamic textPostNewPostCount;
   dynamic thirdPartyDownloadsEnabled;
-  String threadsProfileGlyphUrl;
+  dynamic threadsProfileGlyphUrl;
   dynamic totalArEffects;
   dynamic totalIgtvVideos;
   dynamic transparencyProductEnabled;
   List<dynamic> upcomingEvents;
-  String username;
-  String viewsOnGridStatus;
-  String whatsappNumber;
+  dynamic username;
+  dynamic viewsOnGridStatus;
 
   Data({
     required this.about,
+    required this.accountBadges,
     required this.accountCategory,
     required this.accountType,
     required this.activeStandaloneFundraisers,
@@ -219,7 +222,6 @@ class Data {
     required this.biographyEmail,
     required this.biographyWithEntities,
     required this.birthdayTodayVisibilityForViewer,
-    required this.broadcastChatPreferenceStatus,
     required this.businessContactMethod,
     required this.canAddFbGroupLinkOnProfile,
     required this.canHideCategory,
@@ -231,6 +233,8 @@ class Data {
     required this.canUsePaidPartnershipMessagingAsCreator,
     required this.category,
     required this.categoryId,
+    required this.chainingResults,
+    required this.chainingSuggestions,
     required this.chainingUpsellCards,
     required this.contactPhoneNumber,
     required this.creatorShoppingInfo,
@@ -238,7 +242,6 @@ class Data {
     required this.directMessaging,
     required this.enableAddSchoolInEditProfile,
     required this.existingUserAgeCollectionEnabled,
-    required this.externalLynxUrl,
     required this.externalUrl,
     required this.fanClubInfo,
     required this.fbidV2,
@@ -248,6 +251,7 @@ class Data {
     required this.followingCount,
     required this.fullName,
     required this.hasAnonymousProfilePicture,
+    required this.hasBiographyTranslation,
     required this.hasChaining,
     required this.hasChains,
     required this.hasCollabCollections,
@@ -258,7 +262,6 @@ class Data {
     required this.hasGuides,
     required this.hasHighlightReels,
     required this.hasIgProfile,
-    required this.hasIgtvSeries,
     required this.hasLegacyBbPendingProfilePictureUpdate,
     required this.hasMusicOnProfile,
     required this.hasMv4BPendingProfilePictureUpdate,
@@ -369,6 +372,8 @@ class Data {
     required this.showShoppableFeed,
     required this.spamFollowerSettingEnabled,
     required this.textAppLastVisitedTime,
+    required this.textPostAppBadgeLabel,
+    required this.textPostNewPostCount,
     required this.thirdPartyDownloadsEnabled,
     required this.threadsProfileGlyphUrl,
     required this.totalArEffects,
@@ -377,11 +382,11 @@ class Data {
     required this.upcomingEvents,
     required this.username,
     required this.viewsOnGridStatus,
-    required this.whatsappNumber,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<dynamic, dynamic> json) => Data(
         about: json["about"],
+        accountBadges: List<dynamic>.from(json["account_badges"].map((x) => x)),
         accountCategory: json["account_category"],
         accountType: json["account_type"],
         activeStandaloneFundraisers: ActiveStandaloneFundraisers.fromJson(
@@ -395,16 +400,13 @@ class Data {
         adsPageName: json["ads_page_name"],
         autoExpandChaining: json["auto_expand_chaining"],
         avatarStatus: AvatarStatus.fromJson(json["avatar_status"]),
-        bioLinks: List<BioLink>.from(
-            json["bio_links"].map((x) => BioLink.fromJson(x))),
+        bioLinks: List<dynamic>.from(json["bio_links"].map((x) => x)),
         biography: json["biography"],
         biographyEmail: json["biography_email"],
         biographyWithEntities:
             BiographyWithEntities.fromJson(json["biography_with_entities"]),
         birthdayTodayVisibilityForViewer:
             json["birthday_today_visibility_for_viewer"],
-        broadcastChatPreferenceStatus: BroadcastChatPreferenceStatus.fromJson(
-            json["broadcast_chat_preference_status"]),
         businessContactMethod: json["business_contact_method"],
         canAddFbGroupLinkOnProfile: json["can_add_fb_group_link_on_profile"],
         canHideCategory: json["can_hide_category"],
@@ -421,6 +423,10 @@ class Data {
             json["can_use_paid_partnership_messaging_as_creator"],
         category: json["category"],
         categoryId: json["category_id"],
+        chainingResults: List<Chaining>.from(
+            json["chaining_results"].map((x) => Chaining.fromJson(x))),
+        chainingSuggestions: List<Chaining>.from(
+            json["chaining_suggestions"].map((x) => Chaining.fromJson(x))),
         chainingUpsellCards:
             List<dynamic>.from(json["chaining_upsell_cards"].map((x) => x)),
         contactPhoneNumber: json["contact_phone_number"],
@@ -431,7 +437,6 @@ class Data {
         enableAddSchoolInEditProfile: json["enable_add_school_in_edit_profile"],
         existingUserAgeCollectionEnabled:
             json["existing_user_age_collection_enabled"],
-        externalLynxUrl: json["external_lynx_url"],
         externalUrl: json["external_url"],
         fanClubInfo: FanClubInfo.fromJson(json["fan_club_info"]),
         fbidV2: json["fbid_v2"],
@@ -441,6 +446,7 @@ class Data {
         followingCount: json["following_count"],
         fullName: json["full_name"],
         hasAnonymousProfilePicture: json["has_anonymous_profile_picture"],
+        hasBiographyTranslation: json["has_biography_translation"],
         hasChaining: json["has_chaining"],
         hasChains: json["has_chains"],
         hasCollabCollections: json["has_collab_collections"],
@@ -452,7 +458,6 @@ class Data {
         hasGuides: json["has_guides"],
         hasHighlightReels: json["has_highlight_reels"],
         hasIgProfile: json["has_ig_profile"],
-        hasIgtvSeries: json["has_igtv_series"],
         hasLegacyBbPendingProfilePictureUpdate:
             json["has_legacy_bb_pending_profile_picture_update"],
         hasMusicOnProfile: json["has_music_on_profile"],
@@ -473,7 +478,8 @@ class Data {
         id: json["id"],
         includeDirectBlacklistStatus: json["include_direct_blacklist_status"],
         instagramPk: json["instagram_pk"],
-        dynamiceropMessagingUserFbid: json["dynamicerop_messaging_user_fbid"],
+        dynamiceropMessagingUserFbid:
+            json["dynamicerop_messaging_user_fbid"]?.todynamic(),
         isActiveOnTextPostApp: json["is_active_on_text_post_app"],
         isAutoConfirmEnabledForAllReciprocalFollowRequests:
             json["is_auto_confirm_enabled_for_all_reciprocal_follow_requests"],
@@ -597,11 +603,14 @@ class Data {
         showAccountTransparencyDetails:
             json["show_account_transparency_details"],
         showBlueBadgeOnMainProfile: json["show_blue_badge_on_main_profile"],
-        showPostInsightsEntryPodynamic: json["show_post_insights_entry_podynamic"],
+        showPostInsightsEntryPodynamic:
+            json["show_post_insights_entry_podynamic"],
         showSchoolsBadge: json["show_schools_badge"],
         showShoppableFeed: json["show_shoppable_feed"],
         spamFollowerSettingEnabled: json["spam_follower_setting_enabled"],
         textAppLastVisitedTime: json["text_app_last_visited_time"],
+        textPostAppBadgeLabel: json["text_post_app_badge_label"],
+        textPostNewPostCount: json["text_post_new_post_count"],
         thirdPartyDownloadsEnabled: json["third_party_downloads_enabled"],
         threadsProfileGlyphUrl: json["threads_profile_glyph_url"],
         totalArEffects: json["total_ar_effects"],
@@ -611,11 +620,11 @@ class Data {
             List<dynamic>.from(json["upcoming_events"].map((x) => x)),
         username: json["username"],
         viewsOnGridStatus: json["views_on_grid_status"],
-        whatsappNumber: json["whatsapp_number"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "about": about,
+        "account_badges": List<dynamic>.from(accountBadges.map((x) => x)),
         "account_category": accountCategory,
         "account_type": accountType,
         "active_standalone_fundraisers": activeStandaloneFundraisers.toJson(),
@@ -628,14 +637,12 @@ class Data {
         "ads_page_name": adsPageName,
         "auto_expand_chaining": autoExpandChaining,
         "avatar_status": avatarStatus.toJson(),
-        "bio_links": List<dynamic>.from(bioLinks.map((x) => x.toJson())),
+        "bio_links": List<dynamic>.from(bioLinks.map((x) => x)),
         "biography": biography,
         "biography_email": biographyEmail,
         "biography_with_entities": biographyWithEntities.toJson(),
         "birthday_today_visibility_for_viewer":
             birthdayTodayVisibilityForViewer,
-        "broadcast_chat_preference_status":
-            broadcastChatPreferenceStatus.toJson(),
         "business_contact_method": businessContactMethod,
         "can_add_fb_group_link_on_profile": canAddFbGroupLinkOnProfile,
         "can_hide_category": canHideCategory,
@@ -652,6 +659,10 @@ class Data {
             canUsePaidPartnershipMessagingAsCreator,
         "category": category,
         "category_id": categoryId,
+        "chaining_results":
+            List<dynamic>.from(chainingResults.map((x) => x.toJson())),
+        "chaining_suggestions":
+            List<dynamic>.from(chainingSuggestions.map((x) => x.toJson())),
         "chaining_upsell_cards":
             List<dynamic>.from(chainingUpsellCards.map((x) => x)),
         "contact_phone_number": contactPhoneNumber,
@@ -661,7 +672,6 @@ class Data {
         "enable_add_school_in_edit_profile": enableAddSchoolInEditProfile,
         "existing_user_age_collection_enabled":
             existingUserAgeCollectionEnabled,
-        "external_lynx_url": externalLynxUrl,
         "external_url": externalUrl,
         "fan_club_info": fanClubInfo.toJson(),
         "fbid_v2": fbidV2,
@@ -671,6 +681,7 @@ class Data {
         "following_count": followingCount,
         "full_name": fullName,
         "has_anonymous_profile_picture": hasAnonymousProfilePicture,
+        "has_biography_translation": hasBiographyTranslation,
         "has_chaining": hasChaining,
         "has_chains": hasChains,
         "has_collab_collections": hasCollabCollections,
@@ -682,7 +693,6 @@ class Data {
         "has_guides": hasGuides,
         "has_highlight_reels": hasHighlightReels,
         "has_ig_profile": hasIgProfile,
-        "has_igtv_series": hasIgtvSeries,
         "has_legacy_bb_pending_profile_picture_update":
             hasLegacyBbPendingProfilePictureUpdate,
         "has_music_on_profile": hasMusicOnProfile,
@@ -819,6 +829,8 @@ class Data {
         "show_shoppable_feed": showShoppableFeed,
         "spam_follower_setting_enabled": spamFollowerSettingEnabled,
         "text_app_last_visited_time": textAppLastVisitedTime,
+        "text_post_app_badge_label": textPostAppBadgeLabel,
+        "text_post_new_post_count": textPostNewPostCount,
         "third_party_downloads_enabled": thirdPartyDownloadsEnabled,
         "threads_profile_glyph_url": threadsProfileGlyphUrl,
         "total_ar_effects": totalArEffects,
@@ -827,7 +839,6 @@ class Data {
         "upcoming_events": List<dynamic>.from(upcomingEvents.map((x) => x)),
         "username": username,
         "views_on_grid_status": viewsOnGridStatus,
-        "whatsapp_number": whatsappNumber,
       };
 }
 
@@ -840,13 +851,13 @@ class ActiveStandaloneFundraisers {
     required this.totalCount,
   });
 
-  factory ActiveStandaloneFundraisers.fromJson(Map<String, dynamic> json) =>
+  factory ActiveStandaloneFundraisers.fromJson(Map<dynamic, dynamic> json) =>
       ActiveStandaloneFundraisers(
         fundraisers: List<dynamic>.from(json["fundraisers"].map((x) => x)),
         totalCount: json["total_count"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "fundraisers": List<dynamic>.from(fundraisers.map((x) => x)),
         "total_count": totalCount,
       };
@@ -859,109 +870,142 @@ class AvatarStatus {
     required this.hasAvatar,
   });
 
-  factory AvatarStatus.fromJson(Map<String, dynamic> json) => AvatarStatus(
+  factory AvatarStatus.fromJson(Map<dynamic, dynamic> json) => AvatarStatus(
         hasAvatar: json["has_avatar"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "has_avatar": hasAvatar,
       };
 }
 
-class BioLink {
-  String iconUrl;
-
-  String imageUrl;
-  dynamic isPinned;
-  dynamic isVerified;
-  dynamic linkId;
-  String linkType;
-  String lynxUrl;
-  String mediaType;
-  dynamic openExternalUrlWithInAppBrowser;
-  String title;
-  String url;
-
-  BioLink({
-    required this.iconUrl,
-    required this.imageUrl,
-    required this.isPinned,
-    required this.isVerified,
-    required this.linkId,
-    required this.linkType,
-    required this.lynxUrl,
-    required this.mediaType,
-    required this.openExternalUrlWithInAppBrowser,
-    required this.title,
-    required this.url,
-  });
-
-  factory BioLink.fromJson(Map<String, dynamic> json) => BioLink(
-        iconUrl: json["icon_url"],
-        imageUrl: json["image_url"],
-        isPinned: json["is_pinned"],
-        isVerified: json["is_verified"],
-        linkId: json["link_id"],
-        linkType: json["link_type"],
-        lynxUrl: json["lynx_url"],
-        mediaType: json["media_type"],
-        openExternalUrlWithInAppBrowser:
-            json["open_external_url_with_in_app_browser"],
-        title: json["title"],
-        url: json["url"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "icon_url": iconUrl,
-        "image_url": imageUrl,
-        "is_pinned": isPinned,
-        "is_verified": isVerified,
-        "link_id": linkId,
-        "link_type": linkType,
-        "lynx_url": lynxUrl,
-        "media_type": mediaType,
-        "open_external_url_with_in_app_browser":
-            openExternalUrlWithInAppBrowser,
-        "title": title,
-        "url": url,
-      };
-}
-
 class BiographyWithEntities {
-  List<dynamic> entities;
-  String rawText;
+  List<Entity> entities;
+  dynamic rawText;
 
   BiographyWithEntities({
     required this.entities,
     required this.rawText,
   });
 
-  factory BiographyWithEntities.fromJson(Map<String, dynamic> json) =>
+  factory BiographyWithEntities.fromJson(Map<dynamic, dynamic> json) =>
       BiographyWithEntities(
-        entities: List<dynamic>.from(json["entities"].map((x) => x)),
+        entities:
+            List<Entity>.from(json["entities"].map((x) => Entity.fromJson(x))),
         rawText: json["raw_text"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "entities": List<dynamic>.from(entities.map((x) => x)),
+  Map<dynamic, dynamic> toJson() => {
+        "entities": List<dynamic>.from(entities.map((x) => x.toJson())),
         "raw_text": rawText,
       };
 }
 
-class BroadcastChatPreferenceStatus {
-  String jsonResponse;
+class Entity {
+  User user;
 
-  BroadcastChatPreferenceStatus({
-    required this.jsonResponse,
+  Entity({
+    required this.user,
   });
 
-  factory BroadcastChatPreferenceStatus.fromJson(Map<String, dynamic> json) =>
-      BroadcastChatPreferenceStatus(
-        jsonResponse: json["json_response"],
+  factory Entity.fromJson(Map<dynamic, dynamic> json) => Entity(
+        user: User.fromJson(json["user"]),
       );
 
-  Map<String, dynamic> toJson() => {
-        "json_response": jsonResponse,
+  Map<dynamic, dynamic> toJson() => {
+        "user": user.toJson(),
+      };
+}
+
+class User {
+  dynamic id;
+  dynamic username;
+
+  User({
+    required this.id,
+    required this.username,
+  });
+
+  factory User.fromJson(Map<dynamic, dynamic> json) => User(
+        id: json["id"],
+        username: json["username"],
+      );
+
+  Map<dynamic, dynamic> toJson() => {
+        "id": id,
+        "username": username,
+      };
+}
+
+class Chaining {
+  ChainingInfo chainingInfo;
+  dynamic fullName;
+  dynamic id;
+  dynamic isPrivate;
+  dynamic isVerified;
+  dynamic profileChainingSecondaryLabel;
+  dynamic profilePicId;
+  dynamic profilePicUrl;
+  dynamic socialContext;
+  dynamic username;
+
+  Chaining({
+    required this.chainingInfo,
+    required this.fullName,
+    required this.id,
+    required this.isPrivate,
+    required this.isVerified,
+    required this.profileChainingSecondaryLabel,
+    this.profilePicId,
+    this.profilePicUrl,
+    required this.socialContext,
+    required this.username,
+  });
+
+  factory Chaining.fromJson(Map<dynamic, dynamic> json) => Chaining(
+        chainingInfo: ChainingInfo.fromJson(json["chaining_info"]),
+        fullName: json["full_name"],
+        id: json["id"],
+        isPrivate: json["is_private"],
+        isVerified: json["is_verified"],
+        profileChainingSecondaryLabel: json["profile_chaining_secondary_label"],
+        profilePicId: json["profile_pic_id"],
+        profilePicUrl: json["profile_pic_url"],
+        socialContext: json["social_context"],
+        username: json["username"],
+      );
+
+  Map<dynamic, dynamic> toJson() => {
+        "chaining_info": chainingInfo.toJson(),
+        "full_name": fullName,
+        "id": id,
+        "is_private": isPrivate,
+        "is_verified": isVerified,
+        "profile_chaining_secondary_label": profileChainingSecondaryLabel,
+        "profile_pic_id": profilePicId,
+        "profile_pic_url": profilePicUrl,
+        "social_context": socialContext,
+        "username": username,
+      };
+}
+
+class ChainingInfo {
+  dynamic algorithm;
+  dynamic sources;
+
+  ChainingInfo({
+    required this.algorithm,
+    required this.sources,
+  });
+
+  factory ChainingInfo.fromJson(Map<dynamic, dynamic> json) => ChainingInfo(
+        algorithm: json["algorithm"],
+        sources: json["sources"],
+      );
+
+  Map<dynamic, dynamic> toJson() => {
+        "algorithm": algorithm,
+        "sources": sources,
       };
 }
 
@@ -972,13 +1016,13 @@ class CreatorShoppingInfo {
     required this.linkedMerchantAccounts,
   });
 
-  factory CreatorShoppingInfo.fromJson(Map<String, dynamic> json) =>
+  factory CreatorShoppingInfo.fromJson(Map<dynamic, dynamic> json) =>
       CreatorShoppingInfo(
         linkedMerchantAccounts:
             List<dynamic>.from(json["linked_merchant_accounts"].map((x) => x)),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "linked_merchant_accounts":
             List<dynamic>.from(linkedMerchantAccounts.map((x) => x)),
       };
@@ -1013,7 +1057,7 @@ class FanClubInfo {
     required this.subscriberCount,
   });
 
-  factory FanClubInfo.fromJson(Map<String, dynamic> json) => FanClubInfo(
+  factory FanClubInfo.fromJson(Map<dynamic, dynamic> json) => FanClubInfo(
         autosaveToExclusiveHighlight: json["autosave_to_exclusive_highlight"],
         connectedMemberCount: json["connected_member_count"],
         fanClubId: json["fan_club_id"],
@@ -1029,7 +1073,7 @@ class FanClubInfo {
         subscriberCount: json["subscriber_count"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "autosave_to_exclusive_highlight": autosaveToExclusiveHighlight,
         "connected_member_count": connectedMemberCount,
         "fan_club_id": fanClubId,
@@ -1048,7 +1092,7 @@ class FanClubInfo {
 
 class HdProfilePic {
   dynamic height;
-  String url;
+  dynamic url;
   dynamic width;
 
   HdProfilePic({
@@ -1057,13 +1101,13 @@ class HdProfilePic {
     required this.width,
   });
 
-  factory HdProfilePic.fromJson(Map<String, dynamic> json) => HdProfilePic(
+  factory HdProfilePic.fromJson(Map<dynamic, dynamic> json) => HdProfilePic(
         height: json["height"],
         url: json["url"],
         width: json["width"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "height": height,
         "url": url,
         "width": width,
@@ -1071,13 +1115,13 @@ class HdProfilePic {
 }
 
 class LocationData {
-  String addressStreet;
+  dynamic addressStreet;
   dynamic cityId;
-  String cityName;
-  String instagramLocationId;
+  dynamic cityName;
+  dynamic instagramLocationId;
   dynamic latitude;
   dynamic longitude;
-  String zip;
+  dynamic zip;
 
   LocationData({
     required this.addressStreet,
@@ -1089,7 +1133,7 @@ class LocationData {
     required this.zip,
   });
 
-  factory LocationData.fromJson(Map<String, dynamic> json) => LocationData(
+  factory LocationData.fromJson(Map<dynamic, dynamic> json) => LocationData(
         addressStreet: json["address_street"],
         cityId: json["city_id"],
         cityName: json["city_name"],
@@ -1099,7 +1143,7 @@ class LocationData {
         zip: json["zip"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "address_street": addressStreet,
         "city_id": cityId,
         "city_name": cityName,
@@ -1117,13 +1161,13 @@ class MetaVerifiedBenefitsInfo {
     required this.isEligibleForMetaVerifiedContentProtection,
   });
 
-  factory MetaVerifiedBenefitsInfo.fromJson(Map<String, dynamic> json) =>
+  factory MetaVerifiedBenefitsInfo.fromJson(Map<dynamic, dynamic> json) =>
       MetaVerifiedBenefitsInfo(
         isEligibleForMetaVerifiedContentProtection:
             json["is_eligible_for_meta_verified_content_protection"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "is_eligible_for_meta_verified_content_protection":
             isEligibleForMetaVerifiedContentProtection,
       };
@@ -1131,15 +1175,15 @@ class MetaVerifiedBenefitsInfo {
 
 class Nametag {
   List<dynamic> availableThemeColors;
-  String backgroundImageUrl;
-  String emoji;
+  dynamic backgroundImageUrl;
+  dynamic emoji;
   dynamic emojiColor;
   dynamic gradient;
   dynamic isBackgroundImageBlurred;
   dynamic mode;
   dynamic selectedThemeColor;
   dynamic selfieSticker;
-  String selfieUrl;
+  dynamic selfieUrl;
   ThemeColor themeColor;
 
   Nametag({
@@ -1156,7 +1200,7 @@ class Nametag {
     required this.themeColor,
   });
 
-  factory Nametag.fromJson(Map<String, dynamic> json) => Nametag(
+  factory Nametag.fromJson(Map<dynamic, dynamic> json) => Nametag(
         availableThemeColors:
             List<dynamic>.from(json["available_theme_colors"].map((x) => x)),
         backgroundImageUrl: json["background_image_url"],
@@ -1171,7 +1215,7 @@ class Nametag {
         themeColor: ThemeColor.fromJson(json["theme_color"]),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "available_theme_colors":
             List<dynamic>.from(availableThemeColors.map((x) => x)),
         "background_image_url": backgroundImageUrl,
@@ -1196,7 +1240,7 @@ class ThemeColor {
     required this.selectedThemeColor,
   });
 
-  factory ThemeColor.fromJson(Map<String, dynamic> json) => ThemeColor(
+  factory ThemeColor.fromJson(Map<dynamic, dynamic> json) => ThemeColor(
         availableThemeColors: List<SelectedThemeColorElement>.from(
             json["available_theme_colors"]
                 .map((x) => SelectedThemeColorElement.fromJson(x))),
@@ -1204,7 +1248,7 @@ class ThemeColor {
             SelectedThemeColorElement.fromJson(json["selected_theme_color"]),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "available_theme_colors":
             List<dynamic>.from(availableThemeColors.map((x) => x.toJson())),
         "selected_theme_color": selectedThemeColor.toJson(),
@@ -1212,7 +1256,7 @@ class ThemeColor {
 }
 
 class SelectedThemeColorElement {
-  String displayLabel;
+  dynamic displayLabel;
   dynamic dynamicValue;
 
   SelectedThemeColorElement({
@@ -1220,13 +1264,13 @@ class SelectedThemeColorElement {
     required this.dynamicValue,
   });
 
-  factory SelectedThemeColorElement.fromJson(Map<String, dynamic> json) =>
+  factory SelectedThemeColorElement.fromJson(Map<dynamic, dynamic> json) =>
       SelectedThemeColorElement(
         displayLabel: json["display_label"],
         dynamicValue: json["dynamic_value"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "display_label": displayLabel,
         "dynamic_value": dynamicValue,
       };
@@ -1234,20 +1278,20 @@ class SelectedThemeColorElement {
 
 class NotMetaVerifiedFrictionInfo {
   dynamic isEligibleForLabelFriction;
-  String labelFrictionContent;
+  dynamic labelFrictionContent;
 
   NotMetaVerifiedFrictionInfo({
     required this.isEligibleForLabelFriction,
     required this.labelFrictionContent,
   });
 
-  factory NotMetaVerifiedFrictionInfo.fromJson(Map<String, dynamic> json) =>
+  factory NotMetaVerifiedFrictionInfo.fromJson(Map<dynamic, dynamic> json) =>
       NotMetaVerifiedFrictionInfo(
         isEligibleForLabelFriction: json["is_eligible_for_label_friction"],
         labelFrictionContent: json["label_friction_content"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "is_eligible_for_label_friction": isEligibleForLabelFriction,
         "label_friction_content": labelFrictionContent,
       };
@@ -1262,14 +1306,14 @@ class PinnedChannelsInfo {
     required this.pinnedChannelsList,
   });
 
-  factory PinnedChannelsInfo.fromJson(Map<String, dynamic> json) =>
+  factory PinnedChannelsInfo.fromJson(Map<dynamic, dynamic> json) =>
       PinnedChannelsInfo(
         hasPublicChannels: json["has_public_channels"],
         pinnedChannelsList:
             List<dynamic>.from(json["pinned_channels_list"].map((x) => x)),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "has_public_channels": hasPublicChannels,
         "pinned_channels_list":
             List<dynamic>.from(pinnedChannelsList.map((x) => x)),
@@ -1283,33 +1327,34 @@ class ReconFeatures {
     required this.enableReconCta,
   });
 
-  factory ReconFeatures.fromJson(Map<String, dynamic> json) => ReconFeatures(
+  factory ReconFeatures.fromJson(Map<dynamic, dynamic> json) => ReconFeatures(
         enableReconCta: json["enable_recon_cta"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "enable_recon_cta": enableReconCta,
       };
 }
 
 class RecsFromFriends {
   dynamic enableRecsFromFriends;
-  String recsFromFriendsEntryPodynamicType;
+  dynamic recsFromFriendsEntryPodynamicType;
 
   RecsFromFriends({
     required this.enableRecsFromFriends,
     required this.recsFromFriendsEntryPodynamicType,
   });
 
-  factory RecsFromFriends.fromJson(Map<String, dynamic> json) =>
+  factory RecsFromFriends.fromJson(Map<dynamic, dynamic> json) =>
       RecsFromFriends(
         enableRecsFromFriends: json["enable_recs_from_friends"],
         recsFromFriendsEntryPodynamicType:
             json["recs_from_friends_entry_podynamic_type"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "enable_recs_from_friends": enableRecsFromFriends,
-        "recs_from_friends_entry_podynamic_type": recsFromFriendsEntryPodynamicType,
+        "recs_from_friends_entry_podynamic_type":
+            recsFromFriendsEntryPodynamicType,
       };
 }

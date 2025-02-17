@@ -65,6 +65,7 @@ class _BottomNavState extends State<BottomNav> {
           backgroundColor: Colors.black),
       BottomNavigationBarItem(
           label: 'profle',
+          
           icon: Icon(Icons.circle_outlined, color: Colors.white),
           backgroundColor: Colors.black),
     ];

@@ -1,16 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram/Repositoy/Api/insta_Api.dart';
-import 'package:instagram/Repositoy/Model%20class/insta_Model.dart';
+import 'package:instagram/Repositoy/Api/profile_Api/profile_Api.dart';
+import 'package:instagram/Repositoy/Model%20class/profileModel.dart';
+import 'package:instagram/Repositoy/Model%20class/search_Model.dart';
 
-part 'insta_evant.dart';
+
+part 'insta_event.dart';
 part 'insta_state.dart';
 
-class InstaBloc extends Bloc<InstaEvant, InstaState> {
-  InstaApi api = InstaApi();
+class InstaBloc extends Bloc<InstaEvent, InstaState> {
+  ProfileApi api = ProfileApi();
+  Searchmodel apisearch = Searchmodel();
 
-  late InstaModel instagram;
+  late ProfileModel instagram;
+  late Searchmodel search;
 
   InstaBloc() : super(Instainitial()) {
     on<Fecthinsta>(
@@ -19,10 +23,12 @@ class InstaBloc extends Bloc<InstaEvant, InstaState> {
 
         try {
           instagram = await api.getinsta();
-          emit(InstaBlocLoaded(instagram: instagram));
+          search = await apisearch.getsearch();
+
+          emit(InstaBlocLoaded(instagram: instagram, search: search));
         } catch (e) {
           print(e);
-          emit(InstaBlocErro());
+          emit(InstaBlocError());
         }
       },
     );

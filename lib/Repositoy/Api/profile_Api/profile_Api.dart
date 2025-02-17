@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:instagram/Repositoy/Api/Api_client.dart';
-import 'package:instagram/Repositoy/Model%20class/insta_Model.dart';
+import 'package:instagram/Repositoy/Model%20class/profileModel.dart';
 
 // class InstaApi {
 //   ApiClient _apiClient = ApiClient();
@@ -18,15 +18,15 @@ import 'package:instagram/Repositoy/Model%20class/insta_Model.dart';
 //   }
 // }
 
-class InstaApi {
+class ProfileApi {
   ApiClient apiClient = ApiClient();
 
-  Future<InstaModel> getinsta() async {
+  Future<ProfileModel> getinsta() async {
     String path =
-        'https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=mrbeast';
+        'https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=zaliiim__';
     var body = {};
 
     Response response = await apiClient.invokeAPI(path, 'GET', body);
-    return InstaModel.fromJson(jsonDecode(response.body));
+    return ProfileModel.fromJson(jsonDecode(response.body));
   }
 }
