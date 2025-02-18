@@ -14,12 +14,26 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final TextEditingController _controller = TextEditingController();
-  List<Map<dynamic,String> >_SearchData = [];
+  List<dynamic> _SearchData = [];
+  List<dynamic> _suggestedData = [];
+
   @override
   void initState() {
     super.initState();
-_SearchList=List.from(Data);
+    _SearchData = List.from([]);
+    _suggestedData = List.from([]);
     BlocProvider.of<SearchBloc>(context).add(FecthSearch());
+  }
+
+  void _SearchList(String query) {
+    setState(() {
+      _suggestedData = query.isEmpty
+          ? List.from(_SearchData)
+          : _SearchData.where((item) {
+              return item.username.contains(query) ||
+                  item.fullName.contains(query);
+            }).toList();
+    });
   }
 
   @override
@@ -40,7 +54,8 @@ _SearchList=List.from(Data);
               ),
             );
           } else if (state is SearchBlocLoaded) {
-            var Data = state.searchinsta;
+            var data = state.searchinsta;
+            _SearchData = data.data.users;
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
@@ -52,6 +67,7 @@ _SearchList=List.from(Data);
                     padding: const EdgeInsets.all(6.0),
                     child: TextField(
                       controller: _controller,
+                      onChanged: _SearchList,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         prefixIcon: Icon(
@@ -73,8 +89,9 @@ _SearchList=List.from(Data);
                   if (_controller.text.isNotEmpty)
                     Expanded(
                         child: ListView.builder(
-                      itemCount: Data.data.users.length,
+                      itemCount: data.data.users.length,
                       itemBuilder: (context, index) {
+                        final User = data.data.users[index];
                         return ListTile(
                           leading: Container(
                             height: 70.h,
@@ -92,11 +109,30 @@ _SearchList=List.from(Data);
                             child: Padding(
                               padding: EdgeInsets.all(3),
                               child: CircleAvatar(
-                                backgroundImage: NetworkImage(''),
+                                backgroundImage:
+                                    NetworkImage(User.profilePicId ?? ''),
                                 radius: 30,
                               ),
                             ),
                           ),
+                          title: Text(
+                            User.username,
+                            style: TextStyle(color: Colors.white, fontSize: 17),
+                          ),
+                          subtitle: Text(
+                            User.fullName,
+                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                _controller.clear();
+                                _SearchData;
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 15,
+                              )),
                         );
                       },
                     ))
