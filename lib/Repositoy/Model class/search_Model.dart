@@ -54,12 +54,12 @@ class Data {
 
 class User {
     List<dynamic> accountBadges;
-    double fbidV2;
+    dynamic fbidV2;
     String fullName;
-    bool hasAnonymousProfilePicture;
+    dynamic hasAnonymousProfilePicture;
     String id;
-    bool isPrivate;
-    bool isVerified;
+    dynamic isPrivate;
+    dynamic isVerified;
     int latestReelMedia;
     int position;
     String? profilePicId;

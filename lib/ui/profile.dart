@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram/bloc/insta_bloc.dart';
+import 'package:instagram/bloc/profile/insta_bloc.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -31,7 +31,7 @@ class _ProfileState extends State<Profile> {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state is InstaBlocErro) {
+              } else if (state is InstaBlocError) {
                 return Center(
                   child: Text(
                     'Something went wrong!',
@@ -91,25 +91,12 @@ class _ProfileState extends State<Profile> {
                                     shape: BoxShape.circle),
                                 child: CircleAvatar(
                                   radius: 48,
-                                  backgroundImage: AssetImage(
-                                      data.data.hdProfilePicVersions.toString()),
+                                  backgroundImage:
+                                      NetworkImage(data.data.profilePicUrl),
                                 ),
                               ),
                               SizedBox(
-                                height: 5.h,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Video creator',
-                                    style: TextStyle(
-                                        color: Colors.white70, fontSize: 15),
-                                  ),
-                                  // Text('.\n.\n.',
-                                  //     style: TextStyle(
-                                  //         color: Colors.white, fontSize: 15))
-                                ],
+                                height: 15.h,
                               ),
                             ],
                           ),
@@ -143,7 +130,7 @@ class _ProfileState extends State<Profile> {
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
                                     ),
-                                     Text(
+                                    Text(
                                       'followers',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
@@ -159,17 +146,32 @@ class _ProfileState extends State<Profile> {
                                       data.data.followingCount.toString(),
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
-
                                     ),
-                                     Text(
+                                    Text(
                                       'following',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
                                     ),
-                                    
                                   ],
                                 ),
                               ]),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(right: 40, top: 60),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      data.data.biography,
+                                      style: TextStyle(
+                                          color: Colors.white70, fontSize: 15),
+                                    ),
+                                    // Text('.\n.\n.',
+                                    //     style: TextStyle(
+                                    //         color: Colors.white, fontSize: 15))
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ],

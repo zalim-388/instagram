@@ -72,7 +72,7 @@ class ApiClient {
     print('Status code:$path => ' + (response.statusCode).toString());
     print(response.body);
 
-    if (response.statusCode >= 400) {
+    if (response.statusCode >= 200) {
       log(path +
           ' : ' +
           response.statusCode.toString() +

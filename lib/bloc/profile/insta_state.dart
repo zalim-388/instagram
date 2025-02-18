@@ -8,10 +8,11 @@ class Instainitial extends InstaState {}
 class InstaBlocLoading extends InstaState {}
 
 class InstaBlocLoaded extends InstaState {
-  late ProfileModel instagram;
-  late Searchmodel search;
+  final ProfileModel instagram;
 
-  InstaBlocLoaded({required this.instagram, required this.search});
+  InstaBlocLoaded({
+    required this.instagram,
+  });
 }
 
-class InstaBlocErro extends InstaState {}
+class InstaBlocError extends InstaState {}
