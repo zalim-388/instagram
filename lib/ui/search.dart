@@ -89,9 +89,9 @@ class _SearchState extends State<Search> {
                   if (_controller.text.isNotEmpty)
                     Expanded(
                         child: ListView.builder(
-                      itemCount: data.data.users.length,
+                      itemCount: _suggestedData.length,
                       itemBuilder: (context, index) {
-                        final User = data.data.users[index];
+                        final User = _suggestedData[index];
                         return ListTile(
                           leading: Container(
                             height: 70.h,
@@ -135,7 +135,7 @@ class _SearchState extends State<Search> {
                               )),
                         );
                       },
-                    ))
+                    )),
                 ],
               ),
             );

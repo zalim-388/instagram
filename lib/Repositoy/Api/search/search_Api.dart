@@ -5,7 +5,7 @@ import 'package:instagram/Repositoy/Api/Api_client.dart';
 import 'package:instagram/Repositoy/Model%20class/search_Model.dart';
 
 class SearchApi {
-  ApiClient Api = ApiClient();
+  ApiClient api = ApiClient();
 
   Future<Searchmodel> getsearch() async {
     String path =
@@ -13,7 +13,8 @@ class SearchApi {
 
     var body = '';
 
-    Response response = await Api.invokeAPI(body, 'GET', path);
+    Response response = await api.invokeAPI(path, 'GET', body);
+    print(response.body);
     return Searchmodel.fromJson(jsonDecode(response.body));
   }
 }

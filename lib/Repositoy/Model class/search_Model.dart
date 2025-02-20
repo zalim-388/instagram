@@ -4,84 +4,85 @@
 
 import 'dart:convert';
 
-Searchmodel searchmodelFromJson(String str) => Searchmodel.fromJson(json.decode(str));
+Searchmodel searchmodelFromJson(String str) =>
+    Searchmodel.fromJson(json.decode(str));
 
 String searchmodelToJson(Searchmodel data) => json.encode(data.toJson());
 
 class Searchmodel {
-    Data data;
-    String paginationToken;
+  Data data;
+  String paginationToken;
 
-    Searchmodel({
-        required this.data,
-        required this.paginationToken,
-    });
+  Searchmodel({
+    required this.data,
+    required this.paginationToken,
+  });
 
-    factory Searchmodel.fromJson(Map<String, dynamic> json) => Searchmodel(
+  factory Searchmodel.fromJson(Map<String, dynamic> json) => Searchmodel(
         data: Data.fromJson(json["data"]),
         paginationToken: json["pagination_token"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "data": data.toJson(),
         "pagination_token": paginationToken,
-    };
+      };
 }
 
 class Data {
-    List<dynamic> hashtags;
-    List<dynamic> places;
-    List<User> users;
+  List<dynamic> hashtags;
+  List<dynamic> places;
+  List<User> users;
 
-    Data({
-        required this.hashtags,
-        required this.places,
-        required this.users,
-    });
+  Data({
+    required this.hashtags,
+    required this.places,
+    required this.users,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         hashtags: List<dynamic>.from(json["hashtags"].map((x) => x)),
         places: List<dynamic>.from(json["places"].map((x) => x)),
         users: List<User>.from(json["users"].map((x) => User.fromJson(x))),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "hashtags": List<dynamic>.from(hashtags.map((x) => x)),
         "places": List<dynamic>.from(places.map((x) => x)),
         "users": List<dynamic>.from(users.map((x) => x.toJson())),
-    };
+      };
 }
 
 class User {
-    List<dynamic> accountBadges;
-    dynamic fbidV2;
-    String fullName;
-    dynamic hasAnonymousProfilePicture;
-    String id;
-    dynamic isPrivate;
-    dynamic isVerified;
-    int latestReelMedia;
-    int position;
-    String? profilePicId;
-    String profilePicUrl;
-    String username;
+  List<dynamic> accountBadges;
+  dynamic fbidV2;
+  String fullName;
+  dynamic hasAnonymousProfilePicture;
+  String id;
+  dynamic isPrivate;
+  dynamic isVerified;
+  int latestReelMedia;
+  int position;
+  String? profilePicId;
+  String profilePicUrl;
+  String username;
 
-    User({
-        required this.accountBadges,
-        required this.fbidV2,
-        required this.fullName,
-        required this.hasAnonymousProfilePicture,
-        required this.id,
-        required this.isPrivate,
-        required this.isVerified,
-        required this.latestReelMedia,
-        required this.position,
-        this.profilePicId,
-        required this.profilePicUrl,
-        required this.username,
-    });
+  User({
+    required this.accountBadges,
+    required this.fbidV2,
+    required this.fullName,
+    required this.hasAnonymousProfilePicture,
+    required this.id,
+    required this.isPrivate,
+    required this.isVerified,
+    required this.latestReelMedia,
+    required this.position,
+    this.profilePicId,
+    required this.profilePicUrl,
+    required this.username,
+  });
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         accountBadges: List<dynamic>.from(json["account_badges"].map((x) => x)),
         fbidV2: json["fbid_v2"]?.toDouble(),
         fullName: json["full_name"],
@@ -94,9 +95,9 @@ class User {
         profilePicId: json["profile_pic_id"],
         profilePicUrl: json["profile_pic_url"],
         username: json["username"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "account_badges": List<dynamic>.from(accountBadges.map((x) => x)),
         "fbid_v2": fbidV2,
         "full_name": fullName,
@@ -109,5 +110,5 @@ class User {
         "profile_pic_id": profilePicId,
         "profile_pic_url": profilePicUrl,
         "username": username,
-    };
+      };
 }
