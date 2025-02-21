@@ -24,6 +24,106 @@ class _ProfileState extends State<Profile> {
         length: 2,
         child: Scaffold(
             backgroundColor: Colors.black,
+            endDrawer: Drawer(
+                elevation: 20.0,
+                backgroundColor: Colors.black,
+                child: ListView(padding: EdgeInsets.zero, children: [
+                   SizedBox(
+                    height: 50,
+                  ),
+                
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: Text(
+                      'SALIM',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                 
+                  ListTile(
+                    leading: Icon(
+                      Icons.history,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Archive',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.access_time,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Your Activity',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.qr_code,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Nametag',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.bookmark_border,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Saved',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.star_border,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Close Friends',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.person_add_alt_1,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Discover People',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.facebook,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Open Facebook',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                  SizedBox(
+                    height: 340,
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    title: Text('Settings',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                    onTap: () {},
+                  ),
+                ])),
             body: BlocBuilder<InstaBloc, InstaState>(builder: (context, state) {
               if (state is InstaBlocLoading) {
                 print('loading...');
@@ -65,7 +165,9 @@ class _ProfileState extends State<Profile> {
                               width: 175.w,
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Scaffold.of(context).openEndDrawer();
+                                },
                                 icon: Icon(
                                   Icons.menu,
                                   color: Colors.white,
@@ -75,7 +177,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 30.h,
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,6 +199,19 @@ class _ProfileState extends State<Profile> {
                               ),
                               SizedBox(
                                 height: 15.h,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ('video creator'),
+                                    style: TextStyle(
+                                        color: Colors.white70, fontSize: 15),
+                                  ),
+                                  Text('.\n.\n.',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15))
+                                ],
                               ),
                             ],
                           ),
@@ -155,23 +270,6 @@ class _ProfileState extends State<Profile> {
                                   ],
                                 ),
                               ]),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 40, top: 60),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data.data.biography,
-                                      style: TextStyle(
-                                          color: Colors.white70, fontSize: 15),
-                                    ),
-                                    // Text('.\n.\n.',
-                                    //     style: TextStyle(
-                                    //         color: Colors.white, fontSize: 15))
-                                  ],
-                                ),
-                              ),
                             ],
                           ),
                         ],
@@ -262,7 +360,8 @@ class _ProfileState extends State<Profile> {
                                           color: Colors.grey, width: 1),
                                       shape: BoxShape.circle),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                        AssetImage('assets/image/Oval.png'),
                                     radius: 40,
                                   ),
                                 ),
@@ -286,7 +385,8 @@ class _ProfileState extends State<Profile> {
                                           color: Colors.grey, width: 1),
                                       shape: BoxShape.circle),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                        AssetImage('assets/image/Oval (1).png'),
                                     radius: 40,
                                   ),
                                 ),
@@ -310,7 +410,8 @@ class _ProfileState extends State<Profile> {
                                           color: Colors.grey, width: 1),
                                       shape: BoxShape.circle),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                        AssetImage('assets/image/Oval (2).png'),
                                     radius: 40,
                                   ),
                                 ),
@@ -334,12 +435,13 @@ class _ProfileState extends State<Profile> {
                                           color: Colors.grey, width: 1),
                                       shape: BoxShape.circle),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundImage: AssetImage(
+                                        'assets/image/liverpool_logo_PNG5.png'),
                                     radius: 40,
                                   ),
                                 ),
                                 Text(
-                                  '.',
+                                  'Lfc',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 14),
                                 ),
