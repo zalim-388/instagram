@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram/Repositoy/Model%20class/profileModel.dart';
-
 import 'package:instagram/bloc/search/search_bloc.dart';
 
 class Search extends StatefulWidget {
@@ -40,6 +38,37 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+          leading: IconButton(
+              onPressed: () {
+              Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
+          title: TextField(
+            controller: _controller,
+            onChanged: _SearchList,
+            cursorColor: Colors.white,
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.search,
+                color: Colors.white,
+                size: 20,
+              ),
+              hintText: 'search',
+              hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              focusedBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              fillColor: Colors.black.withOpacity(0.8),
+              filled: true,
+            ),
+          ),
+        ),
         body: BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
           if (state is SearchBlocLoading) {
             print('loading...');
@@ -56,88 +85,61 @@ class _SearchState extends State<Search> {
           } else if (state is SearchBlocLoaded) {
             var data = state.searchinsta;
             _SearchData = data.data.users;
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: TextField(
-                      controller: _controller,
-                      onChanged: _SearchList,
-                      cursorColor: Colors.white,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                          size: 20,
+            return Column(
+              children: [
+                SizedBox(
+                  height: 40,
+                ),
+                if (_controller.text.isNotEmpty)
+                  Expanded(
+                      child: ListView.builder(
+                    itemCount: _SearchData.length,
+                    itemBuilder: (context, index) {
+                      final User = _SearchData[index];
+                      return ListTile(
+                        leading: Container(
+                          height: 80.h,
+                          width: 80.w,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFFBAA47),
+                                Color(0xFFD91A46),
+                                Color(0xFFA60F93)
+                              ],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(3),
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(User.profilePicId),
+                              radius: 40,
+                            ),
+                          ),
                         ),
-                        hintText: 'search',
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 20),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        fillColor: Colors.black.withOpacity(0.6),
-                        filled: true,
-                      ),
-                    ),
-                  ),
-                  if (_controller.text.isNotEmpty)
-                    Expanded(
-                        child: ListView.builder(
-                      itemCount: data.data.users.length,
-                      itemBuilder: (context, index) {
-                        final User = data.data.users[index];
-                        return ListTile(
-                          leading: Container(
-                            height: 70.h,
-                            width: 70.w,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFFFBAA47),
-                                  Color(0xFFD91A46),
-                                  Color(0xFFA60F93)
-                                ],
-                              ),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(3),
-                              child: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(User.profilePicId ?? ''),
-                                radius: 30,
-                              ),
-                            ),
-                          ),
-                          title: Text(
-                            User.username,
-                            style: TextStyle(color: Colors.white, fontSize: 17),
-                          ),
-                          subtitle: Text(
-                            User.fullName,
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                          trailing: IconButton(
-                              onPressed: () {
-                                _controller.clear();
-                                _SearchData;
-                              },
-                              icon: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 15,
-                              )),
-                        );
-                      },
-                    ))
-                ],
-              ),
+                        title: Text(
+                          User.username,
+                          style: TextStyle(color: Colors.white, fontSize: 17),
+                        ),
+                        subtitle: Text(
+                          User.fullName,
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                        trailing: IconButton(
+                            onPressed: () {
+                              _controller.clear();
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 15,
+                            )),
+                      );
+                    },
+                  )),
+              ],
             );
           }
           return Container();
