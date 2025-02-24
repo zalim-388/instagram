@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/bloc/profile/insta_bloc.dart';
 import 'package:instagram/bloc/search/search_bloc.dart';
+import 'package:instagram/bloc/search_reel/search_reel_bloc.dart';
 import 'package:instagram/ui/splashscreen.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<SearchBloc>(
           create: (context) => SearchBloc(),
         ),
+        BlocProvider<SearchReelBloc>(create: (context) => SearchReelBloc())
       ],
       child: ScreenUtilInit(
           designSize: Size(375, 812),
