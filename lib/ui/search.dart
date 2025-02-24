@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram/Repositoy/Model%20class/SearchreelsModel.dart';
 import 'package:instagram/bloc/search/search_bloc.dart';
+import 'package:instagram/bloc/search_reel/search_reel_bloc.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -21,6 +23,7 @@ class _SearchState extends State<Search> {
     _SearchData = List.from([]);
     _suggestedData = List.from([]);
     BlocProvider.of<SearchBloc>(context).add(FecthSearch());
+    BlocProvider.of<SearchReelBloc>(context).add(fetchSearchReel());
   }
 
   void _SearchList(String query) {
@@ -28,8 +31,10 @@ class _SearchState extends State<Search> {
       _suggestedData = query.isEmpty
           ? List.from(_SearchData)
           : _SearchData.where((item) {
-              return item.username.contains(query) ||
-                  item.fullName.contains(query);
+              return item.username
+                      .toLowerCase()
+                      .contains(query.toLowerCase()) ||
+                  item.fullName.toLowerCase().contains(query.toLowerCase());
             }).toList();
     });
   }
@@ -39,10 +44,10 @@ class _SearchState extends State<Search> {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-            backgroundColor: Colors.black,
+          backgroundColor: Colors.black,
           leading: IconButton(
               onPressed: () {
-              Navigator.pop(context);
+                Navigator.pop(context);
               },
               icon: Icon(
                 Icons.arrow_back,
@@ -71,7 +76,6 @@ class _SearchState extends State<Search> {
         ),
         body: BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
           if (state is SearchBlocLoading) {
-            print('loading...');
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -85,6 +89,8 @@ class _SearchState extends State<Search> {
           } else if (state is SearchBlocLoaded) {
             var data = state.searchinsta;
             _SearchData = data.data.users;
+            
+
             return Column(
               children: [
                 SizedBox(
@@ -95,7 +101,7 @@ class _SearchState extends State<Search> {
                       child: ListView.builder(
                     itemCount: _SearchData.length,
                     itemBuilder: (context, index) {
-                      final User = _SearchData[index];
+                      final user = _SearchData[index];
                       return ListTile(
                         leading: Container(
                           height: 80.h,
@@ -114,22 +120,24 @@ class _SearchState extends State<Search> {
                             padding: EdgeInsets.all(3),
                             child: CircleAvatar(
                               backgroundImage:
-                                  NetworkImage(User.profilePicId),
+                                  NetworkImage(user.profilePicUrl ?? ''),
                               radius: 40,
                             ),
                           ),
                         ),
                         title: Text(
-                          User.username,
+                          user.username ?? '',
                           style: TextStyle(color: Colors.white, fontSize: 17),
                         ),
                         subtitle: Text(
-                          User.fullName,
+                          user.fullName ?? '',
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         trailing: IconButton(
                             onPressed: () {
-                              _controller.clear();
+                              setState(() {
+                                _SearchData.removeAt(index);
+                              });
                             },
                             icon: Icon(
                               Icons.close,
@@ -141,8 +149,61 @@ class _SearchState extends State<Search> {
                   )),
               ],
             );
+          } else {
+            return BlocBuilder<SearchReelBloc, SearchReelState>(
+                builder: (context, state) {
+              if (state is SearchReelBlocLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is searchBlocError) {
+                return Center(
+                  child: Text(
+                    'Something went wrong!',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                );
+} else if (state is SearchReelBlocLoaded) {
+  var data = state.searchreel;
+  if (data.data?.items != null) {
+    _suggestedData = data.data.items;
+  } else {
+    _suggestedData = []; 
+  
+
+
+
+                if (_controller.text.isNotEmpty) {
+                  return Expanded(
+                      child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      childAspectRatio: 1,
+                    ),
+                    itemCount: _suggestedData.length,
+                    itemBuilder: (context, index) {
+                      final reel = _suggestedData[index];
+                      return Container(
+                        height: 449,
+                        width: 360,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(reel.imageUrl ?? ''),
+                              fit: BoxFit.cover),
+                          shape: BoxShape.rectangle,
+                        ),
+                      );
+                    },
+                  ));
+                }
+              } 
+}
+
+              return Container();
+            });
           }
-          return Container();
         }));
   }
 }
