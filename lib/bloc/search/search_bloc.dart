@@ -23,7 +23,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         print(e);
         emit(searchBlocError());
         print('');
-      }
+      }                                                                                                                                                                                                             
     });
   }
 }
