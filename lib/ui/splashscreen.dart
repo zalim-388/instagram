@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram/ui/Login.dart';
+
+import 'package:instagram/ui/account.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -21,7 +22,7 @@ class _SplashscreenState extends State<Splashscreen> {
       () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Login(),
+            builder: (context) => Account(),
           )),
     );
   }

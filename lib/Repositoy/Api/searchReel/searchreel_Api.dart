@@ -9,7 +9,7 @@ class SearchreelApi {
 
   Future<ReelModel> getsearchreel() async {
     String path =
-        'https://instagram-scraper-api2.p.rapidapi.com/v1/search_reels?search_query=trentarnold66';
+        'https://instagram-scraper-api2.p.rapidapi.com/v1/posts?username_or_id_or_url=trentarnold66';
 
     var body = '';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram/Repositoy/Model%20class/SearchreelsModel.dart';
 import 'package:instagram/bloc/search/search_bloc.dart';
 import 'package:instagram/bloc/search_reel/search_reel_bloc.dart';
+import 'package:instagram/ui/homepage.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -31,10 +31,10 @@ class _SearchState extends State<Search> {
       _suggestedData = query.isEmpty
           ? List.from(_SearchData)
           : _SearchData.where((item) {
-              return item.username
-                      .toLowerCase()
+              return (item.username?.toLowerCase() ?? '')
                       .contains(query.toLowerCase()) ||
-                  item.fullName.toLowerCase().contains(query.toLowerCase());
+                  (item.fullName?.toLowerCase() ?? '')
+                      .contains(query.toLowerCase());
             }).toList();
     });
   }
@@ -46,13 +46,17 @@ class _SearchState extends State<Search> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              )),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Homepage()),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
           title: TextField(
             controller: _controller,
             onChanged: _SearchList,
@@ -87,9 +91,9 @@ class _SearchState extends State<Search> {
               ),
             );
           } else if (state is SearchBlocLoaded) {
+            print('Search Data: ${state.searchinsta}');
             var data = state.searchinsta;
             _SearchData = data.data.users;
-            
 
             return Column(
               children: [
@@ -163,15 +167,8 @@ class _SearchState extends State<Search> {
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 );
-} else if (state is SearchReelBlocLoaded) {
-  var data = state.searchreel;
-  if (data.data?.items != null) {
-    _suggestedData = data.data.items;
-  } else {
-    _suggestedData = []; 
-  
-
-
+              } else if (state is SearchReelBlocLoaded) {
+                var data = state.searchreel;
 
                 if (_controller.text.isNotEmpty) {
                   return Expanded(
@@ -184,13 +181,14 @@ class _SearchState extends State<Search> {
                     ),
                     itemCount: _suggestedData.length,
                     itemBuilder: (context, index) {
-                      final reel = _suggestedData[index];
                       return Container(
                         height: 449,
                         width: 360,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: NetworkImage(reel.imageUrl ?? ''),
+                              image: NetworkImage(data
+                                  .data.items[index].imageVersions.items
+                                  .toString()),
                               fit: BoxFit.cover),
                           shape: BoxShape.rectangle,
                         ),
@@ -198,8 +196,7 @@ class _SearchState extends State<Search> {
                     },
                   ));
                 }
-              } 
-}
+              }
 
               return Container();
             });

@@ -55,24 +55,23 @@ class Data {
 }
 
 class DataItem {
-  dynamic canReply;
-  dynamic canReshare;
-  dynamic canSave;
+  dynamic boostUnavailableIdentifier;
+  dynamic boostUnavailableReason;
+  dynamic boostUnavailableReasonV2;
+  bool canReply;
+  bool canReshare;
+  bool canSave;
   Caption? caption;
-  dynamic captionIsEdited;
-  List<CarouselMedia>? carouselMedia;
-  int? carouselMediaCount;
-  List<double>? carouselMediaIds;
-  int? carouselMediaPendingPostCount;
-
-  dynamic coauthorProducerCanSeeOrganicInsights;
+  bool captionIsEdited;
+  List<dynamic> clipsTabPinnedUserIds;
+  bool coauthorProducerCanSeeOrganicInsights;
   List<UserElement> coauthorProducers;
   dynamic code;
   int commentCount;
   CommentInformTreatment commentInformTreatment;
   dynamic commerceIntegrityReviewDecision;
   CrosspostMetadata crosspostMetadata;
-
+  int deletedReason;
   int deviceTimestamp;
   int fbAggregatedCommentCount;
   int fbAggregatedLikeCount;
@@ -82,60 +81,60 @@ class DataItem {
   int filterType;
   FundraiserTag fundraiserTag;
   GenAiDetectionMethod genAiDetectionMethod;
-  dynamic hasHighRiskGenAiInformTreatment;
-  dynamic hasLiked;
-  dynamic hasPrivatelyLiked;
+  bool hasHighRiskGenAiInformTreatment;
+  bool hasLiked;
+  bool hasPrivatelyLiked;
   int hasSharedToFb;
-  dynamic hasViewsFetching;
+  bool hasViewsFetching;
   dynamic id;
-  dynamic igMediaSharingDisabled;
+  bool igMediaSharingDisabled;
   dynamic igbioProduct;
   MediaNotesClass imageVersions;
   InlineComposerDisplayCondition inlineComposerDisplayCondition;
   int inlineComposerImpTriggerTime;
   IntegrityReviewDecision integrityReviewDecision;
   List<dynamic> invitedCoauthorProducers;
-  dynamic isCommentsGifComposerEnabled;
-  dynamic isCutoutStickerAllowed;
-  dynamic isEligibleContentForPostRollAd;
-  dynamic isEligibleForMediaNoteRecsNux;
-  dynamic isEligibleForMetaAiShare;
-  dynamic isInProfileGrid;
-  dynamic isOpenToPublicSubmission;
-  dynamic isOrganicProductTaggingEligible;
-  dynamic isPaidPartnership;
-  dynamic isPinned;
-  dynamic isPostLiveClipsMedia;
-  dynamic isQuietPost;
-  dynamic isReshareOfTextPostAppMediaInIg;
-  dynamic isReuseAllowed;
-  dynamic isSocialUfiDisabled;
-  dynamic isTaggedMediaSharedToViewerProfileGrid;
-  dynamic isVideo;
-  dynamic likeAndViewCountsDisabled;
+  bool isCommentsGifComposerEnabled;
+  bool isCutoutStickerAllowed;
+  bool isEligibleContentForPostRollAd;
+  bool isEligibleForMediaNoteRecsNux;
+  bool isEligibleForMetaAiShare;
+  bool isInProfileGrid;
+  bool isOpenToPublicSubmission;
+  bool isOrganicProductTaggingEligible;
+  bool isPaidPartnership;
+  bool isPinned;
+  bool isPostLiveClipsMedia;
+  bool isQuietPost;
+  bool isReshareOfTextPostAppMediaInIg;
+  bool isReuseAllowed;
+  bool isSocialUfiDisabled;
+  bool isTaggedMediaSharedToViewerProfileGrid;
+  bool isVideo;
+  bool likeAndViewCountsDisabled;
   int likeCount;
   Location? location;
+  MashupInfo? mashupInfo;
   ItemMediaFormat mediaFormat;
   ItemMediaName mediaName;
   MediaNotesClass mediaNotes;
   int mediaType;
   List<dynamic> metaAiSuggestedPrompts;
   MusicMetadata musicMetadata;
-  dynamic openCarouselShowFollowButton;
-  dynamic openCarouselSubmissionState;
+  bool openCarouselShowFollowButton;
   int originalHeight;
   int originalWidth;
   List<dynamic> previewComments;
   List<dynamic> productSuggestions;
   ItemProductType productType;
   ProfileGridThumbnailFittingStyle profileGridThumbnailFittingStyle;
-  dynamic shareCountDisabled;
+  bool shareCountDisabled;
   SharingFrictionInfo sharingFrictionInfo;
   dynamic shopRoutingUserId;
-  dynamic shouldShowAuthorPogForTaggedMediaSharedToProfileGrid;
+  bool shouldShowAuthorPogForTaggedMediaSharedToProfileGrid;
   List<dynamic> socialContext;
   List<dynamic> sponsorTags;
-  dynamic subscribeCtaVisible;
+  bool subscribeCtaVisible;
   List<TaggedUser> taggedUsers;
   int takenAt;
   DateTime takenAtDate;
@@ -145,19 +144,27 @@ class DataItem {
   List<dynamic> topLikers;
   PurpleUser user;
   List<dynamic> videoStickerLocales;
-  double? lat;
-  double? lng;
+  bool? canModifyCarousel;
+  List<CarouselMedia>? carouselMedia;
+  int? carouselMediaCount;
+  List<dynamic>? carouselMediaIds;
+  int? carouselMediaPendingPostCount;
+  dynamic openCarouselSubmissionState;
+  dynamic lat;
+  dynamic lng;
+  CollabFollowButtonInfo? collabFollowButtonInfo;
+  bool? shouldOpenCollabBottomsheetOnFacepileTap;
 
   DataItem({
+    required this.boostUnavailableIdentifier,
+    required this.boostUnavailableReason,
+    required this.boostUnavailableReasonV2,
     required this.canReply,
     required this.canReshare,
     required this.canSave,
     required this.caption,
     required this.captionIsEdited,
-    this.carouselMedia,
-    this.carouselMediaCount,
-    this.carouselMediaIds,
-    this.carouselMediaPendingPostCount,
+    required this.clipsTabPinnedUserIds,
     required this.coauthorProducerCanSeeOrganicInsights,
     required this.coauthorProducers,
     required this.code,
@@ -165,6 +172,7 @@ class DataItem {
     required this.commentInformTreatment,
     required this.commerceIntegrityReviewDecision,
     required this.crosspostMetadata,
+    required this.deletedReason,
     required this.deviceTimestamp,
     required this.fbAggregatedCommentCount,
     required this.fbAggregatedLikeCount,
@@ -207,6 +215,7 @@ class DataItem {
     required this.likeAndViewCountsDisabled,
     required this.likeCount,
     required this.location,
+    this.mashupInfo,
     required this.mediaFormat,
     required this.mediaName,
     required this.mediaNotes,
@@ -214,7 +223,6 @@ class DataItem {
     required this.metaAiSuggestedPrompts,
     required this.musicMetadata,
     required this.openCarouselShowFollowButton,
-    this.openCarouselSubmissionState,
     required this.originalHeight,
     required this.originalWidth,
     required this.previewComments,
@@ -237,28 +245,30 @@ class DataItem {
     required this.topLikers,
     required this.user,
     required this.videoStickerLocales,
+    this.canModifyCarousel,
+    this.carouselMedia,
+    this.carouselMediaCount,
+    this.carouselMediaIds,
+    this.carouselMediaPendingPostCount,
+    this.openCarouselSubmissionState,
     this.lat,
     this.lng,
+    this.collabFollowButtonInfo,
+    this.shouldOpenCollabBottomsheetOnFacepileTap,
   });
 
   factory DataItem.fromJson(Map<dynamic, dynamic> json) => DataItem(
+        boostUnavailableIdentifier: json["boost_unavailable_identifier"],
+        boostUnavailableReason: json["boost_unavailable_reason"],
+        boostUnavailableReasonV2: json["boost_unavailable_reason_v2"],
         canReply: json["can_reply"],
         canReshare: json["can_reshare"],
         canSave: json["can_save"],
         caption:
             json["caption"] == null ? null : Caption.fromJson(json["caption"]),
         captionIsEdited: json["caption_is_edited"],
-        carouselMedia: json["carousel_media"] == null
-            ? []
-            : List<CarouselMedia>.from(
-                json["carousel_media"]!.map((x) => CarouselMedia.fromJson(x))),
-        carouselMediaCount: json["carousel_media_count"],
-        carouselMediaIds: json["carousel_media_ids"] == null
-            ? []
-            : List<double>.from(
-                json["carousel_media_ids"]!.map((x) => x?.toDouble())),
-        carouselMediaPendingPostCount:
-            json["carousel_media_pending_post_count"],
+        clipsTabPinnedUserIds:
+            List<dynamic>.from(json["clips_tab_pinned_user_ids"].map((x) => x)),
         coauthorProducerCanSeeOrganicInsights:
             json["coauthor_producer_can_see_organic_insights"],
         coauthorProducers: List<UserElement>.from(
@@ -271,6 +281,7 @@ class DataItem {
             json["commerce_integrity_review_decision"],
         crosspostMetadata:
             CrosspostMetadata.fromJson(json["crosspost_metadata"]),
+        deletedReason: json["deleted_reason"],
         deviceTimestamp: json["device_timestamp"],
         fbAggregatedCommentCount: json["fb_aggregated_comment_count"],
         fbAggregatedLikeCount: json["fb_aggregated_like_count"],
@@ -326,6 +337,9 @@ class DataItem {
         location: json["location"] == null
             ? null
             : Location.fromJson(json["location"]),
+        mashupInfo: json["mashup_info"] == null
+            ? null
+            : MashupInfo.fromJson(json["mashup_info"]),
         mediaFormat: itemMediaFormatValues.map[json["media_format"]]!,
         mediaName: itemMediaNameValues.map[json["media_name"]]!,
         mediaNotes: MediaNotesClass.fromJson(json["media_notes"]),
@@ -334,7 +348,6 @@ class DataItem {
             List<dynamic>.from(json["meta_ai_suggested_prompts"].map((x) => x)),
         musicMetadata: MusicMetadata.fromJson(json["music_metadata"]),
         openCarouselShowFollowButton: json["open_carousel_show_follow_button"],
-        openCarouselSubmissionState: json["open_carousel_submission_state"],
         originalHeight: json["original_height"],
         originalWidth: json["original_width"],
         previewComments:
@@ -365,25 +378,42 @@ class DataItem {
         user: PurpleUser.fromJson(json["user"]),
         videoStickerLocales:
             List<dynamic>.from(json["video_sticker_locales"].map((x) => x)),
+        canModifyCarousel: json["can_modify_carousel"],
+        carouselMedia: json["carousel_media"] == null
+            ? []
+            : List<CarouselMedia>.from(
+                json["carousel_media"]!.map((x) => CarouselMedia.fromJson(x))),
+        carouselMediaCount: json["carousel_media_count"],
+        carouselMediaIds: json["carousel_media_ids"] == null
+            ? []
+            : List<dynamic>.from(
+                json["carousel_media_ids"]!.map((x) => x?.toDouble())),
+        carouselMediaPendingPostCount:
+            json["carousel_media_pending_post_count"],
+        openCarouselSubmissionState: json["open_carousel_submission_state"],
         lat: json["lat"]?.toDouble(),
         lng: json["lng"]?.toDouble(),
+        collabFollowButtonInfo: json["collab_follow_button_info"] == null
+            ? null
+            : CollabFollowButtonInfo.fromJson(
+                json["collab_follow_button_info"]),
+        shouldOpenCollabBottomsheetOnFacepileTap:
+            json["should_open_collab_bottomsheet_on_facepile_tap"],
       );
 
   Map<dynamic, dynamic> toJson() => {
+        "boost_unavailable_identifier": boostUnavailableIdentifier,
+        "boost_unavailable_reason": boostUnavailableReason,
+        "boost_unavailable_reason_v2": boostUnavailableReasonV2,
         "can_reply": canReply,
         "can_reshare": canReshare,
         "can_save": canSave,
         "caption": caption?.toJson(),
         "caption_is_edited": captionIsEdited,
-        "carousel_media": carouselMedia == null
-            ? []
-            : List<dynamic>.from(carouselMedia!.map((x) => x.toJson())),
-        "carousel_media_count": carouselMediaCount,
-        "carousel_media_ids": carouselMediaIds == null
-            ? []
-            : List<dynamic>.from(carouselMediaIds!.map((x) => x)),
-        "carousel_media_pending_post_count": carouselMediaPendingPostCount,
-        "clips_tab_pinned_user_ids": coauthorProducerCanSeeOrganicInsights,
+        "clips_tab_pinned_user_ids":
+            List<dynamic>.from(clipsTabPinnedUserIds.map((x) => x)),
+        "coauthor_producer_can_see_organic_insights":
+            coauthorProducerCanSeeOrganicInsights,
         "coauthor_producers":
             List<dynamic>.from(coauthorProducers.map((x) => x.toJson())),
         "code": code,
@@ -391,6 +421,7 @@ class DataItem {
         "comment_inform_treatment": commentInformTreatment.toJson(),
         "commerce_integrity_review_decision": commerceIntegrityReviewDecision,
         "crosspost_metadata": crosspostMetadata.toJson(),
+        "deleted_reason": deletedReason,
         "device_timestamp": deviceTimestamp,
         "fb_aggregated_comment_count": fbAggregatedCommentCount,
         "fb_aggregated_like_count": fbAggregatedLikeCount,
@@ -440,6 +471,7 @@ class DataItem {
         "like_and_view_counts_disabled": likeAndViewCountsDisabled,
         "like_count": likeCount,
         "location": location?.toJson(),
+        "mashup_info": mashupInfo?.toJson(),
         "media_format": itemMediaFormatValues.reverse[mediaFormat],
         "media_name": itemMediaNameValues.reverse[mediaName],
         "media_notes": mediaNotes.toJson(),
@@ -448,7 +480,6 @@ class DataItem {
             List<dynamic>.from(metaAiSuggestedPrompts.map((x) => x)),
         "music_metadata": musicMetadata.toJson(),
         "open_carousel_show_follow_button": openCarouselShowFollowButton,
-        "open_carousel_submission_state": openCarouselSubmissionState,
         "original_height": originalHeight,
         "original_width": originalWidth,
         "preview_comments": List<dynamic>.from(previewComments.map((x) => x)),
@@ -477,22 +508,35 @@ class DataItem {
         "user": user.toJson(),
         "video_sticker_locales":
             List<dynamic>.from(videoStickerLocales.map((x) => x)),
+        "can_modify_carousel": canModifyCarousel,
+        "carousel_media": carouselMedia == null
+            ? []
+            : List<dynamic>.from(carouselMedia!.map((x) => x.toJson())),
+        "carousel_media_count": carouselMediaCount,
+        "carousel_media_ids": carouselMediaIds == null
+            ? []
+            : List<dynamic>.from(carouselMediaIds!.map((x) => x)),
+        "carousel_media_pending_post_count": carouselMediaPendingPostCount,
+        "open_carousel_submission_state": openCarouselSubmissionState,
         "lat": lat,
         "lng": lng,
+        "collab_follow_button_info": collabFollowButtonInfo?.toJson(),
+        "should_open_collab_bottomsheet_on_facepile_tap":
+            shouldOpenCollabBottomsheetOnFacepileTap,
       };
 }
 
 class Caption {
   int createdAt;
   int createdAtUtc;
-  dynamic didReportAsSpam;
+  bool didReportAsSpam;
   List<dynamic> hashtags;
   dynamic id;
-  dynamic isCovered;
-  dynamic isRankedComment;
+  bool isCovered;
+  bool isRankedComment;
   List<dynamic> mentions;
   int privateReplyStatus;
-  dynamic shareEnabled;
+  bool shareEnabled;
   dynamic text;
   int type;
   UserElement user;
@@ -551,16 +595,16 @@ class Caption {
 }
 
 class UserElement {
-  double? fbidV2;
+  dynamic fbidV2;
   dynamic fullName;
   dynamic id;
-  dynamic isPrivate;
-  dynamic isUnpublished;
-  dynamic isVerified;
+  bool isPrivate;
+  bool? isUnpublished;
+  bool isVerified;
   dynamic profilePicId;
   dynamic profilePicUrl;
   dynamic username;
-  dynamic isActiveOnTextPostApp;
+  bool? isActiveOnTextPostApp;
 
   UserElement({
     this.fbidV2,
@@ -576,7 +620,7 @@ class UserElement {
   });
 
   factory UserElement.fromJson(Map<dynamic, dynamic> json) => UserElement(
-        fbidV2: json["fbid_v2"].toDouble(),
+        fbidV2: json["fbid_v2"]?.toDouble(),
         fullName: json["full_name"],
         id: json["id"],
         isPrivate: json["is_private"],
@@ -605,12 +649,12 @@ class UserElement {
 class CarouselMedia {
   dynamic carouselParentId;
   CommercialityStatus commercialityStatus;
-  dynamic explorePivotGrid;
+  bool explorePivotGrid;
   FbUserTags fbUserTags;
   List<dynamic> featuredProducts;
   dynamic id;
   CarouselMediaImageVersions imageVersions;
-  dynamic isVideo;
+  bool isVideo;
   dynamic location;
   CarouselMediaMediaFormat mediaFormat;
   CarouselMediaMediaName mediaName;
@@ -628,11 +672,11 @@ class CarouselMedia {
   int takenAtTs;
   dynamic thumbnailUrl;
   List<dynamic> videoStickerLocales;
-  dynamic hasAudio;
+  bool? hasAudio;
   int? isDashEligible;
   int? numberOfQualities;
   dynamic videoCodec;
-  double? videoDuration;
+  dynamic videoDuration;
   dynamic videoUrl;
   List<VideoVersion>? videoVersions;
 
@@ -666,7 +710,7 @@ class CarouselMedia {
     this.isDashEligible,
     this.numberOfQualities,
     this.videoCodec,
-    this.videoDuration,
+    required this.videoDuration,
     this.videoUrl,
     this.videoVersions,
   });
@@ -857,12 +901,12 @@ class Default {
   int spriteHeight;
   List<dynamic> spriteUrls;
   int spriteWidth;
-  double thumbnailDuration;
+  dynamic thumbnailDuration;
   int thumbnailHeight;
   int thumbnailWidth;
   int thumbnailsPerRow;
   int totalThumbnailNumPerSprite;
-  double videoLength;
+  dynamic videoLength;
 
   Default({
     required this.fileSizeKb,
@@ -940,7 +984,7 @@ class ProductSuggestion {
 }
 
 class ProductItem {
-  dynamic checkoutStyle;
+  CheckoutStyle checkoutStyle;
   dynamic compoundProductId;
   dynamic currentPrice;
   dynamic currentPriceAmount;
@@ -950,15 +994,15 @@ class ProductItem {
   dynamic fullPrice;
   dynamic fullPriceAmount;
   dynamic fullPriceStripped;
-  dynamic hasVariants;
-  dynamic isInStock;
+  bool hasVariants;
+  bool isInStock;
   Image mainImage;
   Merchant merchant;
   dynamic name;
   dynamic price;
   dynamic productId;
   dynamic retailerId;
-  dynamic reviewStatus;
+  ReviewStatus reviewStatus;
   Image thumbnailImage;
 
   ProductItem({
@@ -985,7 +1029,7 @@ class ProductItem {
   });
 
   factory ProductItem.fromJson(Map<dynamic, dynamic> json) => ProductItem(
-        checkoutStyle: json["checkout_style"],
+        checkoutStyle: checkoutStyleValues.map[json["checkout_style"]]!,
         compoundProductId: json["compound_product_id"],
         currentPrice: json["current_price"],
         currentPriceAmount: json["current_price_amount"],
@@ -1003,12 +1047,12 @@ class ProductItem {
         price: json["price"],
         productId: json["product_id"],
         retailerId: json["retailer_id"],
-        reviewStatus: json["review_status"],
+        reviewStatus: reviewStatusValues.map[json["review_status"]]!,
         thumbnailImage: Image.fromJson(json["thumbnail_image"]),
       );
 
   Map<dynamic, dynamic> toJson() => {
-        "checkout_style": checkoutStyle,
+        "checkout_style": checkoutStyleValues.reverse[checkoutStyle],
         "compound_product_id": compoundProductId,
         "current_price": currentPrice,
         "current_price_amount": currentPriceAmount,
@@ -1026,10 +1070,15 @@ class ProductItem {
         "price": price,
         "product_id": productId,
         "retailer_id": retailerId,
-        "review_status": reviewStatus,
+        "review_status": reviewStatusValues.reverse[reviewStatus],
         "thumbnail_image": thumbnailImage.toJson(),
       };
 }
+
+enum CheckoutStyle { EXTERNAL_LINK }
+
+final checkoutStyleValues =
+    EnumValues({"external_link": CheckoutStyle.EXTERNAL_LINK});
 
 class Image {
   MediaNotesClass imageVersions;
@@ -1067,9 +1116,9 @@ class MediaNotesClass {
 
 class Merchant {
   dynamic id;
-  dynamic isVerified;
+  bool isVerified;
   dynamic profilePicUrl;
-  dynamic username;
+  MerchantUsername username;
 
   Merchant({
     required this.id,
@@ -1082,16 +1131,25 @@ class Merchant {
         id: json["id"],
         isVerified: json["is_verified"],
         profilePicUrl: json["profile_pic_url"],
-        username: json["username"],
+        username: merchantUsernameValues.map[json["username"]]!,
       );
 
   Map<dynamic, dynamic> toJson() => {
         "id": id,
         "is_verified": isVerified,
         "profile_pic_url": profilePicUrl,
-        "username": username,
+        "username": merchantUsernameValues.reverse[username],
       };
 }
+
+enum MerchantUsername { JDSPORTS }
+
+final merchantUsernameValues =
+    EnumValues({"jdsports": MerchantUsername.JDSPORTS});
+
+enum ReviewStatus { APPROVED }
+
+final reviewStatusValues = EnumValues({"approved": ReviewStatus.APPROVED});
 
 enum CarouselMediaProductType { CAROUSEL_ITEM }
 
@@ -1101,7 +1159,7 @@ final carouselMediaProductTypeValues =
 class SharingFrictionInfo {
   dynamic bloksAppUrl;
   dynamic sharingFrictionPayload;
-  dynamic shouldHaveSharingFriction;
+  bool shouldHaveSharingFriction;
 
   SharingFrictionInfo({
     required this.bloksAppUrl,
@@ -1124,11 +1182,11 @@ class SharingFrictionInfo {
 }
 
 class TaggedUser {
-  List<double> position;
-  dynamic showCategoryOfUser;
+  List<dynamic> position;
+  bool showCategoryOfUser;
   UserElement user;
-  double x;
-  double y;
+  dynamic x;
+  dynamic y;
 
   TaggedUser({
     required this.position,
@@ -1139,7 +1197,7 @@ class TaggedUser {
   });
 
   factory TaggedUser.fromJson(Map<dynamic, dynamic> json) => TaggedUser(
-        position: List<double>.from(json["position"].map((x) => x?.toDouble())),
+        position: List<dynamic>.from(json["position"].map((x) => x?.toDouble())),
         showCategoryOfUser: json["show_category_of_user"],
         user: UserElement.fromJson(json["user"]),
         x: json["x"]?.toDouble(),
@@ -1192,8 +1250,8 @@ class VideoVersion {
 }
 
 class CollabFollowButtonInfo {
-  dynamic isOwnerInAuthorExp;
-  dynamic showFollowButton;
+  bool isOwnerInAuthorExp;
+  bool showFollowButton;
 
   CollabFollowButtonInfo({
     required this.isOwnerInAuthorExp,
@@ -1214,7 +1272,7 @@ class CollabFollowButtonInfo {
 
 class CommentInformTreatment {
   dynamic actionType;
-  dynamic shouldHaveInformTreatment;
+  bool shouldHaveInformTreatment;
   dynamic text;
   dynamic url;
 
@@ -1284,7 +1342,7 @@ enum DetectionMethod { NONE }
 final detectionMethodValues = EnumValues({"NONE": DetectionMethod.NONE});
 
 class FundraiserTag {
-  dynamic hasStandaloneFundraiser;
+  bool hasStandaloneFundraiser;
 
   FundraiserTag({
     required this.hasStandaloneFundraiser,
@@ -1332,8 +1390,8 @@ class Location {
   dynamic externalSource;
   int facebookPlacesId;
   dynamic id;
-  double lat;
-  double lng;
+  dynamic lat;
+  dynamic lng;
   dynamic name;
   dynamic shortName;
 
@@ -1375,17 +1433,17 @@ class Location {
 }
 
 class MashupInfo {
-  dynamic canToggleMashupsAllowed;
+  bool canToggleMashupsAllowed;
   dynamic formattedMashupsCount;
-  dynamic hasBeenMashedUp;
-  dynamic hasNonmimicableAdditionalAudio;
-  dynamic isCreatorRequestingMashup;
-  dynamic isLightWeightCheck;
-  dynamic isLightWeightReuseAllowedCheck;
-  dynamic isPivotPageAvailable;
-  dynamic isReuseAllowed;
+  bool hasBeenMashedUp;
+  bool hasNonmimicableAdditionalAudio;
+  bool isCreatorRequestingMashup;
+  bool isLightWeightCheck;
+  bool isLightWeightReuseAllowedCheck;
+  bool isPivotPageAvailable;
+  bool isReuseAllowed;
   dynamic mashupType;
-  dynamic mashupsAllowed;
+  bool mashupsAllowed;
   int nonPrivacyFilteredMashupsMediaCount;
   dynamic originalMedia;
   dynamic privacyFilteredMashupsMediaCount;
@@ -1506,22 +1564,22 @@ class PurpleUser {
   List<dynamic> accountBadges;
   int accountType;
   FanClubInfo fanClubInfo;
-  double fbidV2;
-  dynamic feedPostReshareDisabled;
+  dynamic fbidV2;
+  bool feedPostReshareDisabled;
   FullName fullName;
-  dynamic hasAnonymousProfilePicture;
+  bool hasAnonymousProfilePicture;
   dynamic id;
-  dynamic isFavorite;
-  dynamic isPrivate;
-  dynamic isUnpublished;
-  dynamic isVerified;
+  bool isFavorite;
+  bool isPrivate;
+  bool isUnpublished;
+  bool isVerified;
   int latestReelMedia;
   dynamic profilePicId;
   dynamic profilePicUrl;
-  dynamic showAccountTransparencyDetails;
+  bool showAccountTransparencyDetails;
   int thirdPartyDownloadsEnabled;
-  dynamic transparencyProductEnabled;
-  Username username;
+  bool transparencyProductEnabled;
+  UserUsername username;
 
   PurpleUser({
     required this.accountBadges,
@@ -1565,7 +1623,7 @@ class PurpleUser {
             json["show_account_transparency_details"],
         thirdPartyDownloadsEnabled: json["third_party_downloads_enabled"],
         transparencyProductEnabled: json["transparency_product_enabled"],
-        username: usernameValues.map[json["username"]]!,
+        username: userUsernameValues.map[json["username"]]!,
       );
 
   Map<dynamic, dynamic> toJson() => {
@@ -1587,7 +1645,7 @@ class PurpleUser {
         "show_account_transparency_details": showAccountTransparencyDetails,
         "third_party_downloads_enabled": thirdPartyDownloadsEnabled,
         "transparency_product_enabled": transparencyProductEnabled,
-        "username": usernameValues.reverse[username],
+        "username": userUsernameValues.reverse[username],
       };
 }
 
@@ -1658,9 +1716,10 @@ enum FullName { TRENT_ALEXANDER_ARNOLD }
 final fullNameValues =
     EnumValues({"Trent Alexander-Arnold": FullName.TRENT_ALEXANDER_ARNOLD});
 
-enum Username { TRENTARNOLD66 }
+enum UserUsername { TRENTARNOLD66 }
 
-final usernameValues = EnumValues({"trentarnold66": Username.TRENTARNOLD66});
+final userUsernameValues =
+    EnumValues({"trentarnold66": UserUsername.TRENTARNOLD66});
 
 class EnumValues<T> {
   Map<dynamic, T> map;

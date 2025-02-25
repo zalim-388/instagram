@@ -18,7 +18,9 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: Icon(
               Icons.arrow_back_ios_new_outlined,
               color: Colors.white,
@@ -138,6 +140,7 @@ class _LoginState extends State<Login> {
                       ]
                       
                       )),
+                      
                       
             ],
           ),

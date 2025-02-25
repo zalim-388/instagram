@@ -16,7 +16,7 @@ class SearchReelBloc extends Bloc<SearchReelEvent, SearchReelState> {
         searchreel = await api.getsearchreel();
         emit(SearchReelBlocLoaded(searchreel: searchreel));
       } catch (e) {
-        print(e);
+        print("0000000000000000000000${e}");
         emit(SearchReelBlocError());
       }
     });

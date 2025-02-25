@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/ui/homepage.dart';
 
 class Add extends StatefulWidget {
   const Add({super.key});
@@ -12,12 +13,12 @@ class _AddState extends State<Add> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-
       appBar: AppBar(
-              backgroundColor: Colors.black,
+        backgroundColor: Colors.black,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Homepage()));
           },
           icon: Icon(
             Icons.close,
@@ -34,7 +35,7 @@ class _AddState extends State<Add> {
               onPressed: () {},
               child: Text(
                 'Next',
-                style: TextStyle(color: Colors.blue,fontSize: 20),
+                style: TextStyle(color: Colors.blue, fontSize: 20),
               ))
         ],
       ),

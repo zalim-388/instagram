@@ -150,7 +150,8 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           children: [
                             Text(
-                              data.data.username.toString(),
+                              data.data.username(),
+
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
