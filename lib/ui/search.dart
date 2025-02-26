@@ -98,7 +98,7 @@ class _SearchState extends State<Search> {
             return Column(
               children: [
                 SizedBox(
-                  height: 40,
+                  height: 40.h,
                 ),
                 if (_controller.text.isNotEmpty)
                   Expanded(
@@ -169,7 +169,7 @@ class _SearchState extends State<Search> {
                 );
               } else if (state is SearchReelBlocLoaded) {
                 var data = state.searchreel;
-
+                data.data.items.shuffle();
                 if (_controller.text.isNotEmpty) {
                   return Expanded(
                       child: GridView.builder(
@@ -179,16 +179,15 @@ class _SearchState extends State<Search> {
                       mainAxisSpacing: 5,
                       childAspectRatio: 1,
                     ),
-                    itemCount: _suggestedData.length,
+                    itemCount: data.data.items.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        height: 449,
-                        width: 360,
+                        height: 449.h,
+                        width: 360.w,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: NetworkImage(data
-                                  .data.items[index].imageVersions.items
-                                  .toString()),
+                              image: NetworkImage(
+                                  data.data.items[0].thumbnailUrl.toString()),
                               fit: BoxFit.cover),
                           shape: BoxShape.rectangle,
                         ),

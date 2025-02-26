@@ -83,8 +83,8 @@ class _LoginState extends State<Login> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav(),));
                 },
                 child: Container(
-                  height: 50.h,
-                  width: 350.w,
+                  height: 44.h,
+                  width: 343.w,
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(5),

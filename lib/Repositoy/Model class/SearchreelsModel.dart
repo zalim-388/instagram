@@ -55,9 +55,6 @@ class Data {
 }
 
 class DataItem {
-  dynamic boostUnavailableIdentifier;
-  dynamic boostUnavailableReason;
-  dynamic boostUnavailableReasonV2;
   bool canReply;
   bool canReshare;
   bool canSave;
@@ -156,9 +153,6 @@ class DataItem {
   bool? shouldOpenCollabBottomsheetOnFacepileTap;
 
   DataItem({
-    required this.boostUnavailableIdentifier,
-    required this.boostUnavailableReason,
-    required this.boostUnavailableReasonV2,
     required this.canReply,
     required this.canReshare,
     required this.canSave,
@@ -258,9 +252,6 @@ class DataItem {
   });
 
   factory DataItem.fromJson(Map<dynamic, dynamic> json) => DataItem(
-        boostUnavailableIdentifier: json["boost_unavailable_identifier"],
-        boostUnavailableReason: json["boost_unavailable_reason"],
-        boostUnavailableReasonV2: json["boost_unavailable_reason_v2"],
         canReply: json["can_reply"],
         canReshare: json["can_reshare"],
         canSave: json["can_save"],
@@ -402,9 +393,6 @@ class DataItem {
       );
 
   Map<dynamic, dynamic> toJson() => {
-        "boost_unavailable_identifier": boostUnavailableIdentifier,
-        "boost_unavailable_reason": boostUnavailableReason,
-        "boost_unavailable_reason_v2": boostUnavailableReasonV2,
         "can_reply": canReply,
         "can_reshare": canReshare,
         "can_save": canSave,
@@ -1197,7 +1185,8 @@ class TaggedUser {
   });
 
   factory TaggedUser.fromJson(Map<dynamic, dynamic> json) => TaggedUser(
-        position: List<dynamic>.from(json["position"].map((x) => x?.toDouble())),
+        position:
+            List<dynamic>.from(json["position"].map((x) => x?.toDouble())),
         showCategoryOfUser: json["show_category_of_user"],
         user: UserElement.fromJson(json["user"]),
         x: json["x"]?.toDouble(),

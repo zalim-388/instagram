@@ -28,10 +28,9 @@ class _ProfileState extends State<Profile> {
                 elevation: 20.0,
                 backgroundColor: Colors.black,
                 child: ListView(padding: EdgeInsets.zero, children: [
-                   SizedBox(
+                  SizedBox(
                     height: 50,
                   ),
-                
                   Padding(
                     padding: const EdgeInsets.only(left: 30),
                     child: Text(
@@ -39,7 +38,6 @@ class _ProfileState extends State<Profile> {
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-                 
                   ListTile(
                     leading: Icon(
                       Icons.history,
@@ -150,8 +148,7 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           children: [
                             Text(
-                              data.data.username(),
-
+                              data.data.username.toString(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
@@ -195,7 +192,7 @@ class _ProfileState extends State<Profile> {
                                 child: CircleAvatar(
                                   radius: 48,
                                   backgroundImage:
-                                      NetworkImage(data.data.profilePicUrl),
+                                      NetworkImage(data.data.profilePicUrl.toString()),
                                 ),
                               ),
                               SizedBox(

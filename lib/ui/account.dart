@@ -51,11 +51,12 @@ class _AccountState extends State<Account> {
                     Image.asset(
                                   'assets/image/Instagram Logo (1).png',
                                   fit: BoxFit.contain,
-                                  height: 50.h,
+                                  height: 44.h,
+                                  width: 182.w,
                                 ),
                 
                 SizedBox(
-                  height: 60.h,
+                  height: 40.h,
                 ),
                 Container(
                   height: 96.h,
@@ -66,14 +67,14 @@ class _AccountState extends State<Account> {
                   ),
                   child: CircleAvatar(
                     radius: 48,
-                    backgroundImage: NetworkImage(data.data.profilePicUrl),
+                    backgroundImage: NetworkImage(data.data.profilePicUrl.toString()),
                   ),
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
                 Text(
-                  data.data.username,
+                  data.data.username.toString(),
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 SizedBox(
@@ -90,8 +91,8 @@ GestureDetector(
                     );
                   },
                   child: Container(
-                    height: 50.h,
-                    width: 350.w,
+                    height: 44.h,
+                    width: 307.w,
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(5),
@@ -119,7 +120,7 @@ GestureDetector(
                   onPressed: () {},
                   child: Text(
                     'Switch accounts',
-                    style: TextStyle(color: Colors.blue, fontSize: 20),
+                    style: TextStyle(color: Colors.blue, fontSize: 18),
                   ),
                 )),
             SizedBox(
@@ -128,6 +129,9 @@ GestureDetector(
             Divider(
               color: Colors.grey.shade800,
               thickness: 1,
+            ),
+              SizedBox(
+              height: 15.h,
             ),
             RichText(
                 text: TextSpan(
