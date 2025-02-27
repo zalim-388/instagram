@@ -30,7 +30,7 @@ class ReelModel {
 }
 
 class Data {
-  int count;
+  dynamic count;
   List<DataItem> items;
   UserElement user;
 
@@ -64,32 +64,32 @@ class DataItem {
   bool coauthorProducerCanSeeOrganicInsights;
   List<UserElement> coauthorProducers;
   dynamic code;
-  int commentCount;
+  dynamic commentCount;
   CommentInformTreatment commentInformTreatment;
-  dynamic commerceIntegrityReviewDecision;
+  dynamic commercedynamicegrityReviewDecision;
   CrosspostMetadata crosspostMetadata;
-  int deletedReason;
-  int deviceTimestamp;
-  int fbAggregatedCommentCount;
-  int fbAggregatedLikeCount;
+  dynamic deletedReason;
+  dynamic deviceTimestamp;
+  dynamic fbAggregatedCommentCount;
+  dynamic fbAggregatedLikeCount;
   FbUserTags fbUserTags;
   dynamic fbid;
   List<dynamic> featuredProducts;
-  int filterType;
+  dynamic filterType;
   FundraiserTag fundraiserTag;
   GenAiDetectionMethod genAiDetectionMethod;
   bool hasHighRiskGenAiInformTreatment;
   bool hasLiked;
   bool hasPrivatelyLiked;
-  int hasSharedToFb;
+  dynamic hasSharedToFb;
   bool hasViewsFetching;
   dynamic id;
   bool igMediaSharingDisabled;
   dynamic igbioProduct;
   MediaNotesClass imageVersions;
   InlineComposerDisplayCondition inlineComposerDisplayCondition;
-  int inlineComposerImpTriggerTime;
-  IntegrityReviewDecision integrityReviewDecision;
+  dynamic inlineComposerImpTriggerTime;
+
   List<dynamic> invitedCoauthorProducers;
   bool isCommentsGifComposerEnabled;
   bool isCutoutStickerAllowed;
@@ -109,18 +109,18 @@ class DataItem {
   bool isTaggedMediaSharedToViewerProfileGrid;
   bool isVideo;
   bool likeAndViewCountsDisabled;
-  int likeCount;
+  dynamic likeCount;
   Location? location;
   MashupInfo? mashupInfo;
   ItemMediaFormat mediaFormat;
   ItemMediaName mediaName;
   MediaNotesClass mediaNotes;
-  int mediaType;
+  dynamic mediaType;
   List<dynamic> metaAiSuggestedPrompts;
   MusicMetadata musicMetadata;
   bool openCarouselShowFollowButton;
-  int originalHeight;
-  int originalWidth;
+  dynamic originalHeight;
+  dynamic originalWidth;
   List<dynamic> previewComments;
   List<dynamic> productSuggestions;
   ItemProductType productType;
@@ -133,9 +133,9 @@ class DataItem {
   List<dynamic> sponsorTags;
   bool subscribeCtaVisible;
   List<TaggedUser> taggedUsers;
-  int takenAt;
+  dynamic takenAt;
   DateTime takenAtDate;
-  int takenAtTs;
+  dynamic takenAtTs;
   dynamic thumbnailUrl;
   List<dynamic> timelinePinnedUserIds;
   List<dynamic> topLikers;
@@ -143,9 +143,9 @@ class DataItem {
   List<dynamic> videoStickerLocales;
   bool? canModifyCarousel;
   List<CarouselMedia>? carouselMedia;
-  int? carouselMediaCount;
+  dynamic carouselMediaCount;
   List<dynamic>? carouselMediaIds;
-  int? carouselMediaPendingPostCount;
+  dynamic carouselMediaPendingPostCount;
   dynamic openCarouselSubmissionState;
   dynamic lat;
   dynamic lng;
@@ -164,7 +164,7 @@ class DataItem {
     required this.code,
     required this.commentCount,
     required this.commentInformTreatment,
-    required this.commerceIntegrityReviewDecision,
+    required this.commercedynamicegrityReviewDecision,
     required this.crosspostMetadata,
     required this.deletedReason,
     required this.deviceTimestamp,
@@ -187,7 +187,6 @@ class DataItem {
     required this.imageVersions,
     required this.inlineComposerDisplayCondition,
     required this.inlineComposerImpTriggerTime,
-    required this.integrityReviewDecision,
     required this.invitedCoauthorProducers,
     required this.isCommentsGifComposerEnabled,
     required this.isCutoutStickerAllowed,
@@ -268,8 +267,8 @@ class DataItem {
         commentCount: json["comment_count"],
         commentInformTreatment:
             CommentInformTreatment.fromJson(json["comment_inform_treatment"]),
-        commerceIntegrityReviewDecision:
-            json["commerce_integrity_review_decision"],
+        commercedynamicegrityReviewDecision:
+            json["commerce_dynamicegrity_review_decision"],
         crosspostMetadata:
             CrosspostMetadata.fromJson(json["crosspost_metadata"]),
         deletedReason: json["deleted_reason"],
@@ -297,8 +296,6 @@ class DataItem {
         inlineComposerDisplayCondition: inlineComposerDisplayConditionValues
             .map[json["inline_composer_display_condition"]]!,
         inlineComposerImpTriggerTime: json["inline_composer_imp_trigger_time"],
-        integrityReviewDecision: integrityReviewDecisionValues
-            .map[json["integrity_review_decision"]]!,
         invitedCoauthorProducers: List<dynamic>.from(
             json["invited_coauthor_producers"].map((x) => x)),
         isCommentsGifComposerEnabled: json["is_comments_gif_composer_enabled"],
@@ -407,7 +404,8 @@ class DataItem {
         "code": code,
         "comment_count": commentCount,
         "comment_inform_treatment": commentInformTreatment.toJson(),
-        "commerce_integrity_review_decision": commerceIntegrityReviewDecision,
+        "commerce_dynamicegrity_review_decision":
+            commercedynamicegrityReviewDecision,
         "crosspost_metadata": crosspostMetadata.toJson(),
         "deleted_reason": deletedReason,
         "device_timestamp": deviceTimestamp,
@@ -433,8 +431,8 @@ class DataItem {
             inlineComposerDisplayConditionValues
                 .reverse[inlineComposerDisplayCondition],
         "inline_composer_imp_trigger_time": inlineComposerImpTriggerTime,
-        "integrity_review_decision":
-            integrityReviewDecisionValues.reverse[integrityReviewDecision],
+        "dynamicegrity_review_decision": dynamicegrityReviewDecisionValues
+            .reverse[dynamicegrityReviewDecision],
         "invited_coauthor_producers":
             List<dynamic>.from(invitedCoauthorProducers.map((x) => x)),
         "is_comments_gif_composer_enabled": isCommentsGifComposerEnabled,
@@ -515,18 +513,18 @@ class DataItem {
 }
 
 class Caption {
-  int createdAt;
-  int createdAtUtc;
+  dynamic createdAt;
+  dynamic createdAtUtc;
   bool didReportAsSpam;
   List<dynamic> hashtags;
   dynamic id;
   bool isCovered;
   bool isRankedComment;
   List<dynamic> mentions;
-  int privateReplyStatus;
+  dynamic privateReplyStatus;
   bool shareEnabled;
   dynamic text;
-  int type;
+  dynamic type;
   UserElement user;
   dynamic userId;
 
@@ -646,23 +644,23 @@ class CarouselMedia {
   dynamic location;
   CarouselMediaMediaFormat mediaFormat;
   CarouselMediaMediaName mediaName;
-  int mediaType;
-  int originalHeight;
-  int originalWidth;
+  dynamic mediaType;
+  dynamic originalHeight;
+  dynamic originalWidth;
   List<ProductSuggestion> productSuggestions;
   CarouselMediaProductType productType;
   SharingFrictionInfo sharingFrictionInfo;
   dynamic shopRoutingUserId;
   List<dynamic> sponsorTags;
   List<TaggedUser> taggedUsers;
-  int takenAt;
+  dynamic takenAt;
   DateTime takenAtDate;
-  int takenAtTs;
+  dynamic takenAtTs;
   dynamic thumbnailUrl;
   List<dynamic> videoStickerLocales;
   bool? hasAudio;
-  int? isDashEligible;
-  int? numberOfQualities;
+  dynamic isDashEligible;
+  dynamic numberOfQualities;
   dynamic videoCodec;
   dynamic videoDuration;
   dynamic videoUrl;
@@ -839,9 +837,9 @@ class CarouselMediaImageVersions {
 }
 
 class ImageVersionsItem {
-  int height;
+  dynamic height;
   dynamic url;
-  int width;
+  dynamic width;
 
   ImageVersionsItem({
     required this.height,
@@ -883,17 +881,17 @@ class ScrubberSpritesheetInfoCandidates {
 }
 
 class Default {
-  int fileSizeKb;
-  int maxThumbnailsPerSprite;
-  int renderedWidth;
-  int spriteHeight;
+  dynamic fileSizeKb;
+  dynamic maxThumbnailsPerSprite;
+  dynamic renderedWidth;
+  dynamic spriteHeight;
   List<dynamic> spriteUrls;
-  int spriteWidth;
+  dynamic spriteWidth;
   dynamic thumbnailDuration;
-  int thumbnailHeight;
-  int thumbnailWidth;
-  int thumbnailsPerRow;
-  int totalThumbnailNumPerSprite;
+  dynamic thumbnailHeight;
+  dynamic thumbnailWidth;
+  dynamic thumbnailsPerRow;
+  dynamic totalThumbnailNumPerSprite;
   dynamic videoLength;
 
   Default({
@@ -1203,12 +1201,12 @@ class TaggedUser {
 }
 
 class VideoVersion {
-  int bandwidth;
-  int height;
+  dynamic bandwidth;
+  dynamic height;
   dynamic id;
-  int type;
+  dynamic type;
   dynamic url;
-  int width;
+  dynamic width;
 
   VideoVersion({
     required this.bandwidth,
@@ -1368,16 +1366,16 @@ enum InlineComposerDisplayCondition { IMPRESSION_TRIGGER }
 final inlineComposerDisplayConditionValues = EnumValues(
     {"impression_trigger": InlineComposerDisplayCondition.IMPRESSION_TRIGGER});
 
-enum IntegrityReviewDecision { PENDING }
+enum dynamicegrityReviewDecision { PENDING }
 
-final integrityReviewDecisionValues =
-    EnumValues({"pending": IntegrityReviewDecision.PENDING});
+final dynamicegrityReviewDecisionValues =
+    EnumValues({"pending": dynamicegrityReviewDecision.PENDING});
 
 class Location {
   dynamic address;
   dynamic city;
   dynamic externalSource;
-  int facebookPlacesId;
+  dynamic facebookPlacesId;
   dynamic id;
   dynamic lat;
   dynamic lng;
@@ -1433,7 +1431,7 @@ class MashupInfo {
   bool isReuseAllowed;
   dynamic mashupType;
   bool mashupsAllowed;
-  int nonPrivacyFilteredMashupsMediaCount;
+  dynamic nonPrivacyFilteredMashupsMediaCount;
   dynamic originalMedia;
   dynamic privacyFilteredMashupsMediaCount;
 
@@ -1551,7 +1549,7 @@ final profileGridThumbnailFittingStyleValues =
 
 class PurpleUser {
   List<dynamic> accountBadges;
-  int accountType;
+  dynamic accountType;
   FanClubInfo fanClubInfo;
   dynamic fbidV2;
   bool feedPostReshareDisabled;
@@ -1562,11 +1560,11 @@ class PurpleUser {
   bool isPrivate;
   bool isUnpublished;
   bool isVerified;
-  int latestReelMedia;
+  dynamic latestReelMedia;
   dynamic profilePicId;
   dynamic profilePicUrl;
   bool showAccountTransparencyDetails;
-  int thirdPartyDownloadsEnabled;
+  dynamic thirdPartyDownloadsEnabled;
   bool transparencyProductEnabled;
   UserUsername username;
 

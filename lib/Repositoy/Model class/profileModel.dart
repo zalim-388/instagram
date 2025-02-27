@@ -1,1031 +1,1261 @@
-// To parse this JSON data, do
-//
-//     final profileModel = profileModelFromJson(jsondynamic);
-
-import 'dart:convert';
-
-ProfileModel profileModelFromJson(dynamic str) =>
-    ProfileModel.fromJson(json.decode(str));
-
-dynamic profileModelToJson(ProfileModel data) => json.encode(data.toJson());
-
 class ProfileModel {
-  Data data;
+  Data? data;
 
-  ProfileModel({
-    required this.data,
-  });
+  ProfileModel({this.data});
 
-  factory ProfileModel.fromJson(Map<dynamic, dynamic> json) => ProfileModel(
-        data: Data.fromJson(json["data"]),
-      );
+  ProfileModel.fromJson(Map<String, dynamic> json) {
+    data = json["data"] == null ? null : Data.fromJson(json["data"]);
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "data": data.toJson(),
-      };
+  static List<ProfileModel> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ProfileModel.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (data != null) {
+      _data["data"] = data?.toJson();
+    }
+    return _data;
+  }
 }
 
 class Data {
   dynamic about;
-  List<dynamic> accountBadges;
-  dynamic accountCategory;
+  List<dynamic>? accountBadges;
+  String? accountCategory;
   dynamic accountType;
-  ActiveStandaloneFundraisers activeStandaloneFundraisers;
-  List<dynamic> additionalBusinessAddresses;
-  List<dynamic> adjustedBannersOrder;
+  ActiveStandaloneFundraisers? activeStandaloneFundraisers;
+  List<dynamic>? additionalBusinessAddresses;
+  List<dynamic>? adjustedBannersOrder;
   dynamic adsIncentiveExpirationDate;
   dynamic adsPageId;
   dynamic adsPageName;
-  dynamic autoExpandChaining;
-  AvatarStatus avatarStatus;
-  List<dynamic> bioLinks;
-  dynamic biography;
+  bool? autoExpandChaining;
+  AvatarStatus? avatarStatus;
+  List<BioLinks>? bioLinks;
+  String? biography;
   dynamic biographyEmail;
-  BiographyWithEntities biographyWithEntities;
-  dynamic birthdayTodayVisibilityForViewer;
-  dynamic businessContactMethod;
-  dynamic canAddFbGroupLinkOnProfile;
-  dynamic canHideCategory;
-  dynamic canHidePublicContacts;
-  dynamic canUseAffiliatePartnershipMessagingAsBrand;
-  dynamic canUseAffiliatePartnershipMessagingAsCreator;
-  dynamic canUseBrandedContentDiscoveryAsBrand;
-  dynamic canUseBrandedContentDiscoveryAsCreator;
-  dynamic canUsePaidPartnershipMessagingAsCreator;
-  dynamic category;
+  BiographyWithEntities? biographyWithEntities;
+  String? birthdayTodayVisibilityForViewer;
+  String? businessContactMethod;
+  bool? canAddFbGroupLinkOnProfile;
+  bool? canHideCategory;
+  bool? canHidePublicContacts;
+  bool? canUseAffiliatePartnershipMessagingAsBrand;
+  bool? canUseAffiliatePartnershipMessagingAsCreator;
+  bool? canUseBrandedContentDiscoveryAsBrand;
+  bool? canUseBrandedContentDiscoveryAsCreator;
+  bool? canUsePaidPartnershipMessagingAsCreator;
+  String? category;
   dynamic categoryId;
-  List<Chaining> chainingResults;
-  List<Chaining> chainingSuggestions;
-  List<dynamic> chainingUpsellCards;
-  dynamic contactPhoneNumber;
-  CreatorShoppingInfo creatorShoppingInfo;
+  List<ChainingResults>? chainingResults;
+  List<ChainingSuggestions>? chainingSuggestions;
+  List<dynamic>? chainingUpsellCards;
+  String? contactPhoneNumber;
   dynamic currentCatalogId;
-  dynamic directMessaging;
-  dynamic enableAddSchoolInEditProfile;
-  dynamic existingUserAgeCollectionEnabled;
-  dynamic externalUrl;
-  FanClubInfo fanClubInfo;
-  dynamic fbidV2;
-  dynamic feedPostReshareDisabled;
+  String? directMessaging;
+  bool? enableAddSchoolInEditProfile;
+  bool? existingUserAgeCollectionEnabled;
+  String? externalLynxUrl;
+  String? externalUrl;
+  FanClubInfo? fanClubInfo;
+  String? fbidV2;
+  bool? feedPostReshareDisabled;
   dynamic followFrictionType;
   dynamic followerCount;
   dynamic followingCount;
-  dynamic fullName;
-  dynamic hasAnonymousProfilePicture;
-  dynamic hasBiographyTranslation;
-  dynamic hasChaining;
-  dynamic hasChains;
-  dynamic hasCollabCollections;
-  dynamic hasEverSelectedTopics;
-  dynamic hasExclusiveFeedContent;
-  dynamic hasFanClubSubscriptions;
-  dynamic hasGenAiPersonasForProfileBanner;
-  dynamic hasGuides;
-  dynamic hasHighlightReels;
-  dynamic hasIgProfile;
-  dynamic hasLegacyBbPendingProfilePictureUpdate;
-  dynamic hasMusicOnProfile;
-  dynamic hasMv4BPendingProfilePictureUpdate;
-  dynamic hasNmeBadge;
-  dynamic hasPrivateCollections;
-  dynamic hasPublicTabThreads;
-  dynamic hasVideos;
-  dynamic hasViewsFetching;
-  HdProfilePic hdProfilePicUrlInfo;
-  List<HdProfilePic> hdProfilePicVersions;
-  dynamic highlightReshareDisabled;
-  dynamic highlightsTrayType;
-  dynamic id;
-  dynamic includeDirectBlacklistStatus;
-  dynamic instagramPk;
-  dynamic dynamiceropMessagingUserFbid;
-  dynamic isActiveOnTextPostApp;
-  dynamic isAutoConfirmEnabledForAllReciprocalFollowRequests;
-  dynamic isBestie;
-  dynamic isBusiness;
-  dynamic isCallToActionEnabled;
-  dynamic isCategoryTappable;
-  dynamic isCreatorAgentEnabled;
-  dynamic isDirectRollCallEnabled;
-  dynamic isEligibleForDiverseOwnedBusinessInfo;
-  dynamic isEligibleForMetaVerifiedEnhancedLinkSheet;
-  dynamic isEligibleForMetaVerifiedEnhancedLinkSheetConsumption;
-  dynamic isEligibleForMetaVerifiedLabel;
-  dynamic isEligibleForMetaVerifiedLinksInReels;
-  dynamic isEligibleForMetaVerifiedMultipleAddressesConsumption;
-  dynamic isEligibleForMetaVerifiedMultipleAddressesCreation;
-  dynamic isEligibleForMetaVerifiedRelatedAccounts;
-  dynamic isEligibleForPostBoostMvUpsell;
-  dynamic isEligibleForRequestMessage;
-  dynamic isEligibleToDisplayDiverseOwnedBusinessInfo;
-  dynamic isFavorite;
-  dynamic isFavoriteForClips;
-  dynamic isFavoriteForHighlights;
-  dynamic isFavoriteForIgtv;
-  dynamic isFavoriteForStories;
-  dynamic isInCanada;
-  dynamic isdynamicerestAccount;
-  dynamic isLegacyVerifiedMaxProfilePicEditReached;
-  dynamic isMemorialized;
-  dynamic isMetaVerifiedRelatedAccountsDisplayEnabled;
-  dynamic isMv4BApplicationMaturedForProfileEdit;
-  dynamic isMv4BBizAssetProfileLocked;
-  dynamic isMv4BMaxProfileEditReached;
-  dynamic isNewToInstagram;
-  dynamic isOpalEnabled;
-  dynamic isOpenToCollab;
-  dynamic isOregonCustomGenderConsented;
-  dynamic isParentingAccount;
-  dynamic isPotentialBusiness;
-  dynamic isPrivate;
-  dynamic isProfileAudioCallEnabled;
-  dynamic isProfileBroadcastSharingEnabled;
-  dynamic isProfilePictureExpansionEnabled;
-  dynamic isReconAdCtaOnProfileEligibleWithViewer;
-  dynamic isRegulatedC18;
-  dynamic isRegulatedNewsInViewerLocation;
-  dynamic isRemixSettingEnabledForPosts;
-  dynamic isRemixSettingEnabledForReels;
-  dynamic isSecondaryAccountCreation;
-  dynamic isStoriesTeaserMuted;
-  dynamic isSupervisionFeaturesEnabled;
-  dynamic isVerified;
-  dynamic isWhatsappLinked;
+  String? fullName;
+  bool? hasAnonymousProfilePicture;
+  bool? hasBiographyTranslation;
+  bool? hasChaining;
+  bool? hasChains;
+  bool? hasCollabCollections;
+  bool? hasEverSelectedTopics;
+  bool? hasExclusiveFeedContent;
+  bool? hasFanClubSubscriptions;
+  bool? hasGenAiPersonasForProfileBanner;
+  bool? hasGuides;
+  bool? hasHighlightReels;
+  bool? hasIgProfile;
+  bool? hasLegacyBbPendingProfilePictureUpdate;
+  bool? hasMusicOnProfile;
+  bool? hasMv4BPendingProfilePictureUpdate;
+  bool? hasNmeBadge;
+  bool? hasPrivateCollections;
+  bool? hasPublicTabThreads;
+  bool? hasVideos;
+  bool? hasViewsFetching;
+  HdProfilePicUrlInfo? hdProfilePicUrlInfo;
+  List<HdProfilePicVersions>? hdProfilePicVersions;
+  bool? highlightReshareDisabled;
+  String? highlightsTrayType;
+  String? id;
+  bool? includeDirectBlacklistStatus;
+  String? instagramPk;
+  dynamic interopMessagingUserFbid;
+  bool? isActiveOnTextPostApp;
+  bool? isAutoConfirmEnabledForAllReciprocalFollowRequests;
+  bool? isBestie;
+  bool? isBusiness;
+  bool? isCallToActionEnabled;
+  bool? isCategoryTappable;
+  bool? isCreatorAgentEnabled;
+  bool? isDirectRollCallEnabled;
+  bool? isEligibleForDiverseOwnedBusinessInfo;
+  bool? isEligibleForMetaVerifiedEnhancedLinkSheet;
+  bool? isEligibleForMetaVerifiedEnhancedLinkSheetConsumption;
+  bool? isEligibleForMetaVerifiedLabel;
+  bool? isEligibleForMetaVerifiedLinksInReels;
+  bool? isEligibleForMetaVerifiedMultipleAddressesConsumption;
+  bool? isEligibleForMetaVerifiedMultipleAddressesCreation;
+  bool? isEligibleForMetaVerifiedRelatedAccounts;
+  bool? isEligibleForPostBoostMvUpsell;
+  bool? isEligibleForRequestMessage;
+  bool? isEligibleToDisplayDiverseOwnedBusinessInfo;
+  bool? isFavorite;
+  bool? isFavoriteForClips;
+  bool? isFavoriteForHighlights;
+  bool? isFavoriteForIgtv;
+  bool? isFavoriteForStories;
+  bool? isInCanada;
+  bool? isInterestAccount;
+  bool? isLegacyVerifiedMaxProfilePicEditReached;
+  bool? isMemorialized;
+  bool? isMetaVerifiedRelatedAccountsDisplayEnabled;
+  bool? isMv4BApplicationMaturedForProfileEdit;
+  bool? isMv4BBizAssetProfileLocked;
+  bool? isMv4BMaxProfileEditReached;
+  bool? isNewToInstagram;
+  bool? isOpalEnabled;
+  bool? isOpenToCollab;
+  bool? isOregonCustomGenderConsented;
+  bool? isParentingAccount;
+  bool? isPotentialBusiness;
+  bool? isPrivate;
+  bool? isProfileAudioCallEnabled;
+  bool? isProfileBroadcastSharingEnabled;
+  bool? isProfilePictureExpansionEnabled;
+  bool? isReconAdCtaOnProfileEligibleWithViewer;
+  bool? isRegulatedC18;
+  bool? isRegulatedNewsInViewerLocation;
+  bool? isRemixSettingEnabledForPosts;
+  bool? isRemixSettingEnabledForReels;
+  bool? isSecondaryAccountCreation;
+  bool? isStoriesTeaserMuted;
+  bool? isSupervisionFeaturesEnabled;
+  bool? isVerified;
+  bool? isWhatsappLinked;
   dynamic latestBestiesReelMedia;
   dynamic latestReelMedia;
-  dynamic liveSubscriptionStatus;
-  LocationData locationData;
+  String? liveSubscriptionStatus;
+  LocationData? locationData;
   dynamic mediaCount;
-  dynamic merchantCheckoutStyle;
-  MetaVerifiedBenefitsInfo metaVerifiedBenefitsInfo;
+  MetaVerifiedBenefitsInfo? metaVerifiedBenefitsInfo;
   dynamic metaVerifiedRelatedAccountsCount;
-  Nametag nametag;
-  dynamic nonproCanMaybeSeeProfileHypercard;
-  NotMetaVerifiedFrictionInfo notMetaVerifiedFrictionInfo;
-  dynamic openExternalUrlWithInAppBrowser;
+  Nametag? nametag;
+  bool? nonproCanMaybeSeeProfileHypercard;
+  NotMetaVerifiedFrictionInfo? notMetaVerifiedFrictionInfo;
+  bool? openExternalUrlWithInAppBrowser;
   dynamic pageId;
   dynamic pageName;
-  PinnedChannelsInfo pinnedChannelsInfo;
+  PinnedChannelsInfo? pinnedChannelsInfo;
   dynamic primaryProfileLinkType;
   dynamic professionalConversionSuggestedAccountType;
-  dynamic profileContext;
-  List<dynamic> profileContextFacepileUsers;
-  List<dynamic> profileContextLinksWithUserIds;
-  List<dynamic> profilePicGenaiToolInfo;
-  dynamic profilePicId;
-  dynamic profilePicUrl;
-  dynamic profilePicUrlHd;
-  dynamic profileReelsSortingEligibility;
+  String? profileContext;
+  List<dynamic>? profileContextFacepileUsers;
+  List<dynamic>? profileContextLinksWithUserIds;
+  List<dynamic>? profilePicGenaiToolInfo;
+  String? profilePicUrl;
+  String? profilePicUrlHd;
+  String? profileReelsSortingEligibility;
   dynamic profileType;
-  List<dynamic> pronouns;
-  dynamic publicEmail;
-  dynamic publicPhoneCountryCode;
-  dynamic publicPhoneNumber;
-  ReconFeatures reconFeatures;
-  RecsFromFriends recsFromFriends;
-  List<dynamic> relevantNewsRegulationLocations;
-  dynamic removeMessageEntrypodynamic;
-  dynamic sellerShoppableFeedType;
-  dynamic showAccountTransparencyDetails;
-  dynamic showBlueBadgeOnMainProfile;
-  dynamic showPostInsightsEntryPodynamic;
+  List<dynamic>? pronouns;
+  String? publicEmail;
+  String? publicPhoneCountryCode;
+  String? publicPhoneNumber;
+  ReconFeatures? reconFeatures;
+  RecsFromFriends? recsFromFriends;
+  List<dynamic>? relevantNewsRegulationLocations;
+  bool? removeMessageEntrypoint;
+  bool? showAccountTransparencyDetails;
+  bool? showBlueBadgeOnMainProfile;
+  bool? showPostInsightsEntryPoint;
   dynamic showSchoolsBadge;
-  dynamic showShoppableFeed;
-  dynamic spamFollowerSettingEnabled;
+  bool? spamFollowerSettingEnabled;
   dynamic textAppLastVisitedTime;
-  dynamic textPostAppBadgeLabel;
+  String? textPostAppBadgeLabel;
   dynamic textPostNewPostCount;
   dynamic thirdPartyDownloadsEnabled;
-  dynamic threadsProfileGlyphUrl;
+  String? threadsProfileGlyphUrl;
   dynamic totalArEffects;
   dynamic totalIgtvVideos;
-  dynamic transparencyProductEnabled;
-  List<dynamic> upcomingEvents;
-  dynamic username;
-  dynamic viewsOnGridStatus;
+  bool? transparencyProductEnabled;
+  List<dynamic>? upcomingEvents;
+  String? username;
+  String? viewsOnGridStatus;
 
-  Data({
-    required this.about,
-    required this.accountBadges,
-    required this.accountCategory,
-    required this.accountType,
-    required this.activeStandaloneFundraisers,
-    required this.additionalBusinessAddresses,
-    required this.adjustedBannersOrder,
-    required this.adsIncentiveExpirationDate,
-    required this.adsPageId,
-    required this.adsPageName,
-    required this.autoExpandChaining,
-    required this.avatarStatus,
-    required this.bioLinks,
-    required this.biography,
-    required this.biographyEmail,
-    required this.biographyWithEntities,
-    required this.birthdayTodayVisibilityForViewer,
-    required this.businessContactMethod,
-    required this.canAddFbGroupLinkOnProfile,
-    required this.canHideCategory,
-    required this.canHidePublicContacts,
-    required this.canUseAffiliatePartnershipMessagingAsBrand,
-    required this.canUseAffiliatePartnershipMessagingAsCreator,
-    required this.canUseBrandedContentDiscoveryAsBrand,
-    required this.canUseBrandedContentDiscoveryAsCreator,
-    required this.canUsePaidPartnershipMessagingAsCreator,
-    required this.category,
-    required this.categoryId,
-    required this.chainingResults,
-    required this.chainingSuggestions,
-    required this.chainingUpsellCards,
-    required this.contactPhoneNumber,
-    required this.creatorShoppingInfo,
-    required this.currentCatalogId,
-    required this.directMessaging,
-    required this.enableAddSchoolInEditProfile,
-    required this.existingUserAgeCollectionEnabled,
-    required this.externalUrl,
-    required this.fanClubInfo,
-    required this.fbidV2,
-    required this.feedPostReshareDisabled,
-    required this.followFrictionType,
-    required this.followerCount,
-    required this.followingCount,
-    required this.fullName,
-    required this.hasAnonymousProfilePicture,
-    required this.hasBiographyTranslation,
-    required this.hasChaining,
-    required this.hasChains,
-    required this.hasCollabCollections,
-    required this.hasEverSelectedTopics,
-    required this.hasExclusiveFeedContent,
-    required this.hasFanClubSubscriptions,
-    required this.hasGenAiPersonasForProfileBanner,
-    required this.hasGuides,
-    required this.hasHighlightReels,
-    required this.hasIgProfile,
-    required this.hasLegacyBbPendingProfilePictureUpdate,
-    required this.hasMusicOnProfile,
-    required this.hasMv4BPendingProfilePictureUpdate,
-    required this.hasNmeBadge,
-    required this.hasPrivateCollections,
-    required this.hasPublicTabThreads,
-    required this.hasVideos,
-    required this.hasViewsFetching,
-    required this.hdProfilePicUrlInfo,
-    required this.hdProfilePicVersions,
-    required this.highlightReshareDisabled,
-    required this.highlightsTrayType,
-    required this.id,
-    required this.includeDirectBlacklistStatus,
-    required this.instagramPk,
-    required this.dynamiceropMessagingUserFbid,
-    required this.isActiveOnTextPostApp,
-    required this.isAutoConfirmEnabledForAllReciprocalFollowRequests,
-    required this.isBestie,
-    required this.isBusiness,
-    required this.isCallToActionEnabled,
-    required this.isCategoryTappable,
-    required this.isCreatorAgentEnabled,
-    required this.isDirectRollCallEnabled,
-    required this.isEligibleForDiverseOwnedBusinessInfo,
-    required this.isEligibleForMetaVerifiedEnhancedLinkSheet,
-    required this.isEligibleForMetaVerifiedEnhancedLinkSheetConsumption,
-    required this.isEligibleForMetaVerifiedLabel,
-    required this.isEligibleForMetaVerifiedLinksInReels,
-    required this.isEligibleForMetaVerifiedMultipleAddressesConsumption,
-    required this.isEligibleForMetaVerifiedMultipleAddressesCreation,
-    required this.isEligibleForMetaVerifiedRelatedAccounts,
-    required this.isEligibleForPostBoostMvUpsell,
-    required this.isEligibleForRequestMessage,
-    required this.isEligibleToDisplayDiverseOwnedBusinessInfo,
-    required this.isFavorite,
-    required this.isFavoriteForClips,
-    required this.isFavoriteForHighlights,
-    required this.isFavoriteForIgtv,
-    required this.isFavoriteForStories,
-    required this.isInCanada,
-    required this.isdynamicerestAccount,
-    required this.isLegacyVerifiedMaxProfilePicEditReached,
-    required this.isMemorialized,
-    required this.isMetaVerifiedRelatedAccountsDisplayEnabled,
-    required this.isMv4BApplicationMaturedForProfileEdit,
-    required this.isMv4BBizAssetProfileLocked,
-    required this.isMv4BMaxProfileEditReached,
-    required this.isNewToInstagram,
-    required this.isOpalEnabled,
-    required this.isOpenToCollab,
-    required this.isOregonCustomGenderConsented,
-    required this.isParentingAccount,
-    required this.isPotentialBusiness,
-    required this.isPrivate,
-    required this.isProfileAudioCallEnabled,
-    required this.isProfileBroadcastSharingEnabled,
-    required this.isProfilePictureExpansionEnabled,
-    required this.isReconAdCtaOnProfileEligibleWithViewer,
-    required this.isRegulatedC18,
-    required this.isRegulatedNewsInViewerLocation,
-    required this.isRemixSettingEnabledForPosts,
-    required this.isRemixSettingEnabledForReels,
-    required this.isSecondaryAccountCreation,
-    required this.isStoriesTeaserMuted,
-    required this.isSupervisionFeaturesEnabled,
-    required this.isVerified,
-    required this.isWhatsappLinked,
-    required this.latestBestiesReelMedia,
-    required this.latestReelMedia,
-    required this.liveSubscriptionStatus,
-    required this.locationData,
-    required this.mediaCount,
-    required this.merchantCheckoutStyle,
-    required this.metaVerifiedBenefitsInfo,
-    required this.metaVerifiedRelatedAccountsCount,
-    required this.nametag,
-    required this.nonproCanMaybeSeeProfileHypercard,
-    required this.notMetaVerifiedFrictionInfo,
-    required this.openExternalUrlWithInAppBrowser,
-    required this.pageId,
-    required this.pageName,
-    required this.pinnedChannelsInfo,
-    required this.primaryProfileLinkType,
-    required this.professionalConversionSuggestedAccountType,
-    required this.profileContext,
-    required this.profileContextFacepileUsers,
-    required this.profileContextLinksWithUserIds,
-    required this.profilePicGenaiToolInfo,
-    required this.profilePicId,
-    required this.profilePicUrl,
-    required this.profilePicUrlHd,
-    required this.profileReelsSortingEligibility,
-    required this.profileType,
-    required this.pronouns,
-    required this.publicEmail,
-    required this.publicPhoneCountryCode,
-    required this.publicPhoneNumber,
-    required this.reconFeatures,
-    required this.recsFromFriends,
-    required this.relevantNewsRegulationLocations,
-    required this.removeMessageEntrypodynamic,
-    required this.sellerShoppableFeedType,
-    required this.showAccountTransparencyDetails,
-    required this.showBlueBadgeOnMainProfile,
-    required this.showPostInsightsEntryPodynamic,
-    required this.showSchoolsBadge,
-    required this.showShoppableFeed,
-    required this.spamFollowerSettingEnabled,
-    required this.textAppLastVisitedTime,
-    required this.textPostAppBadgeLabel,
-    required this.textPostNewPostCount,
-    required this.thirdPartyDownloadsEnabled,
-    required this.threadsProfileGlyphUrl,
-    required this.totalArEffects,
-    required this.totalIgtvVideos,
-    required this.transparencyProductEnabled,
-    required this.upcomingEvents,
-    required this.username,
-    required this.viewsOnGridStatus,
-  });
+  Data(
+      {this.about,
+      this.accountBadges,
+      this.accountCategory,
+      this.accountType,
+      this.activeStandaloneFundraisers,
+      this.additionalBusinessAddresses,
+      this.adjustedBannersOrder,
+      this.adsIncentiveExpirationDate,
+      this.adsPageId,
+      this.adsPageName,
+      this.autoExpandChaining,
+      this.avatarStatus,
+      this.bioLinks,
+      this.biography,
+      this.biographyEmail,
+      this.biographyWithEntities,
+      this.birthdayTodayVisibilityForViewer,
+      this.businessContactMethod,
+      this.canAddFbGroupLinkOnProfile,
+      this.canHideCategory,
+      this.canHidePublicContacts,
+      this.canUseAffiliatePartnershipMessagingAsBrand,
+      this.canUseAffiliatePartnershipMessagingAsCreator,
+      this.canUseBrandedContentDiscoveryAsBrand,
+      this.canUseBrandedContentDiscoveryAsCreator,
+      this.canUsePaidPartnershipMessagingAsCreator,
+      this.category,
+      this.categoryId,
+      this.chainingResults,
+      this.chainingSuggestions,
+      this.chainingUpsellCards,
+      this.contactPhoneNumber,
+      this.currentCatalogId,
+      this.directMessaging,
+      this.enableAddSchoolInEditProfile,
+      this.existingUserAgeCollectionEnabled,
+      this.externalLynxUrl,
+      this.externalUrl,
+      this.fanClubInfo,
+      this.fbidV2,
+      this.feedPostReshareDisabled,
+      this.followFrictionType,
+      this.followerCount,
+      this.followingCount,
+      this.fullName,
+      this.hasAnonymousProfilePicture,
+      this.hasBiographyTranslation,
+      this.hasChaining,
+      this.hasChains,
+      this.hasCollabCollections,
+      this.hasEverSelectedTopics,
+      this.hasExclusiveFeedContent,
+      this.hasFanClubSubscriptions,
+      this.hasGenAiPersonasForProfileBanner,
+      this.hasGuides,
+      this.hasHighlightReels,
+      this.hasIgProfile,
+      this.hasLegacyBbPendingProfilePictureUpdate,
+      this.hasMusicOnProfile,
+      this.hasMv4BPendingProfilePictureUpdate,
+      this.hasNmeBadge,
+      this.hasPrivateCollections,
+      this.hasPublicTabThreads,
+      this.hasVideos,
+      this.hasViewsFetching,
+      this.hdProfilePicUrlInfo,
+      this.hdProfilePicVersions,
+      this.highlightReshareDisabled,
+      this.highlightsTrayType,
+      this.id,
+      this.includeDirectBlacklistStatus,
+      this.instagramPk,
+      this.interopMessagingUserFbid,
+      this.isActiveOnTextPostApp,
+      this.isAutoConfirmEnabledForAllReciprocalFollowRequests,
+      this.isBestie,
+      this.isBusiness,
+      this.isCallToActionEnabled,
+      this.isCategoryTappable,
+      this.isCreatorAgentEnabled,
+      this.isDirectRollCallEnabled,
+      this.isEligibleForDiverseOwnedBusinessInfo,
+      this.isEligibleForMetaVerifiedEnhancedLinkSheet,
+      this.isEligibleForMetaVerifiedEnhancedLinkSheetConsumption,
+      this.isEligibleForMetaVerifiedLabel,
+      this.isEligibleForMetaVerifiedLinksInReels,
+      this.isEligibleForMetaVerifiedMultipleAddressesConsumption,
+      this.isEligibleForMetaVerifiedMultipleAddressesCreation,
+      this.isEligibleForMetaVerifiedRelatedAccounts,
+      this.isEligibleForPostBoostMvUpsell,
+      this.isEligibleForRequestMessage,
+      this.isEligibleToDisplayDiverseOwnedBusinessInfo,
+      this.isFavorite,
+      this.isFavoriteForClips,
+      this.isFavoriteForHighlights,
+      this.isFavoriteForIgtv,
+      this.isFavoriteForStories,
+      this.isInCanada,
+      this.isInterestAccount,
+      this.isLegacyVerifiedMaxProfilePicEditReached,
+      this.isMemorialized,
+      this.isMetaVerifiedRelatedAccountsDisplayEnabled,
+      this.isMv4BApplicationMaturedForProfileEdit,
+      this.isMv4BBizAssetProfileLocked,
+      this.isMv4BMaxProfileEditReached,
+      this.isNewToInstagram,
+      this.isOpalEnabled,
+      this.isOpenToCollab,
+      this.isOregonCustomGenderConsented,
+      this.isParentingAccount,
+      this.isPotentialBusiness,
+      this.isPrivate,
+      this.isProfileAudioCallEnabled,
+      this.isProfileBroadcastSharingEnabled,
+      this.isProfilePictureExpansionEnabled,
+      this.isReconAdCtaOnProfileEligibleWithViewer,
+      this.isRegulatedC18,
+      this.isRegulatedNewsInViewerLocation,
+      this.isRemixSettingEnabledForPosts,
+      this.isRemixSettingEnabledForReels,
+      this.isSecondaryAccountCreation,
+      this.isStoriesTeaserMuted,
+      this.isSupervisionFeaturesEnabled,
+      this.isVerified,
+      this.isWhatsappLinked,
+      this.latestBestiesReelMedia,
+      this.latestReelMedia,
+      this.liveSubscriptionStatus,
+      this.locationData,
+      this.mediaCount,
+      this.metaVerifiedBenefitsInfo,
+      this.metaVerifiedRelatedAccountsCount,
+      this.nametag,
+      this.nonproCanMaybeSeeProfileHypercard,
+      this.notMetaVerifiedFrictionInfo,
+      this.openExternalUrlWithInAppBrowser,
+      this.pageId,
+      this.pageName,
+      this.pinnedChannelsInfo,
+      this.primaryProfileLinkType,
+      this.professionalConversionSuggestedAccountType,
+      this.profileContext,
+      this.profileContextFacepileUsers,
+      this.profileContextLinksWithUserIds,
+      this.profilePicGenaiToolInfo,
+      this.profilePicUrl,
+      this.profilePicUrlHd,
+      this.profileReelsSortingEligibility,
+      this.profileType,
+      this.pronouns,
+      this.publicEmail,
+      this.publicPhoneCountryCode,
+      this.publicPhoneNumber,
+      this.reconFeatures,
+      this.recsFromFriends,
+      this.relevantNewsRegulationLocations,
+      this.removeMessageEntrypoint,
+      this.showAccountTransparencyDetails,
+      this.showBlueBadgeOnMainProfile,
+      this.showPostInsightsEntryPoint,
+      this.showSchoolsBadge,
+      this.spamFollowerSettingEnabled,
+      this.textAppLastVisitedTime,
+      this.textPostAppBadgeLabel,
+      this.textPostNewPostCount,
+      this.thirdPartyDownloadsEnabled,
+      this.threadsProfileGlyphUrl,
+      this.totalArEffects,
+      this.totalIgtvVideos,
+      this.transparencyProductEnabled,
+      this.upcomingEvents,
+      this.username,
+      this.viewsOnGridStatus});
 
-  factory Data.fromJson(Map<dynamic, dynamic> json) => Data(
-        about: json["about"],
-        accountBadges: List<dynamic>.from(json["account_badges"].map((x) => x)),
-        accountCategory: json["account_category"],
-        accountType: json["account_type"],
-        activeStandaloneFundraisers: ActiveStandaloneFundraisers.fromJson(
-            json["active_standalone_fundraisers"]),
-        additionalBusinessAddresses: List<dynamic>.from(
-            json["additional_business_addresses"].map((x) => x)),
-        adjustedBannersOrder:
-            List<dynamic>.from(json["adjusted_banners_order"].map((x) => x)),
-        adsIncentiveExpirationDate: json["ads_incentive_expiration_date"],
-        adsPageId: json["ads_page_id"],
-        adsPageName: json["ads_page_name"],
-        autoExpandChaining: json["auto_expand_chaining"],
-        avatarStatus: AvatarStatus.fromJson(json["avatar_status"]),
-        bioLinks: List<dynamic>.from(json["bio_links"].map((x) => x)),
-        biography: json["biography"],
-        biographyEmail: json["biography_email"],
-        biographyWithEntities:
-            BiographyWithEntities.fromJson(json["biography_with_entities"]),
-        birthdayTodayVisibilityForViewer:
-            json["birthday_today_visibility_for_viewer"],
-        businessContactMethod: json["business_contact_method"],
-        canAddFbGroupLinkOnProfile: json["can_add_fb_group_link_on_profile"],
-        canHideCategory: json["can_hide_category"],
-        canHidePublicContacts: json["can_hide_public_contacts"],
-        canUseAffiliatePartnershipMessagingAsBrand:
-            json["can_use_affiliate_partnership_messaging_as_brand"],
-        canUseAffiliatePartnershipMessagingAsCreator:
-            json["can_use_affiliate_partnership_messaging_as_creator"],
-        canUseBrandedContentDiscoveryAsBrand:
-            json["can_use_branded_content_discovery_as_brand"],
-        canUseBrandedContentDiscoveryAsCreator:
-            json["can_use_branded_content_discovery_as_creator"],
-        canUsePaidPartnershipMessagingAsCreator:
-            json["can_use_paid_partnership_messaging_as_creator"],
-        category: json["category"],
-        categoryId: json["category_id"],
-        chainingResults: List<Chaining>.from(
-            json["chaining_results"].map((x) => Chaining.fromJson(x))),
-        chainingSuggestions: List<Chaining>.from(
-            json["chaining_suggestions"].map((x) => Chaining.fromJson(x))),
-        chainingUpsellCards:
-            List<dynamic>.from(json["chaining_upsell_cards"].map((x) => x)),
-        contactPhoneNumber: json["contact_phone_number"],
-        creatorShoppingInfo:
-            CreatorShoppingInfo.fromJson(json["creator_shopping_info"]),
-        currentCatalogId: json["current_catalog_id"],
-        directMessaging: json["direct_messaging"],
-        enableAddSchoolInEditProfile: json["enable_add_school_in_edit_profile"],
-        existingUserAgeCollectionEnabled:
-            json["existing_user_age_collection_enabled"],
-        externalUrl: json["external_url"],
-        fanClubInfo: FanClubInfo.fromJson(json["fan_club_info"]),
-        fbidV2: json["fbid_v2"],
-        feedPostReshareDisabled: json["feed_post_reshare_disabled"],
-        followFrictionType: json["follow_friction_type"],
-        followerCount: json["follower_count"],
-        followingCount: json["following_count"],
-        fullName: json["full_name"],
-        hasAnonymousProfilePicture: json["has_anonymous_profile_picture"],
-        hasBiographyTranslation: json["has_biography_translation"],
-        hasChaining: json["has_chaining"],
-        hasChains: json["has_chains"],
-        hasCollabCollections: json["has_collab_collections"],
-        hasEverSelectedTopics: json["has_ever_selected_topics"],
-        hasExclusiveFeedContent: json["has_exclusive_feed_content"],
-        hasFanClubSubscriptions: json["has_fan_club_subscriptions"],
-        hasGenAiPersonasForProfileBanner:
-            json["has_gen_ai_personas_for_profile_banner"],
-        hasGuides: json["has_guides"],
-        hasHighlightReels: json["has_highlight_reels"],
-        hasIgProfile: json["has_ig_profile"],
-        hasLegacyBbPendingProfilePictureUpdate:
-            json["has_legacy_bb_pending_profile_picture_update"],
-        hasMusicOnProfile: json["has_music_on_profile"],
-        hasMv4BPendingProfilePictureUpdate:
-            json["has_mv4b_pending_profile_picture_update"],
-        hasNmeBadge: json["has_nme_badge"],
-        hasPrivateCollections: json["has_private_collections"],
-        hasPublicTabThreads: json["has_public_tab_threads"],
-        hasVideos: json["has_videos"],
-        hasViewsFetching: json["has_views_fetching"],
-        hdProfilePicUrlInfo:
-            HdProfilePic.fromJson(json["hd_profile_pic_url_info"]),
-        hdProfilePicVersions: List<HdProfilePic>.from(
-            json["hd_profile_pic_versions"]
-                .map((x) => HdProfilePic.fromJson(x))),
-        highlightReshareDisabled: json["highlight_reshare_disabled"],
-        highlightsTrayType: json["highlights_tray_type"],
-        id: json["id"],
-        includeDirectBlacklistStatus: json["include_direct_blacklist_status"],
-        instagramPk: json["instagram_pk"],
-        dynamiceropMessagingUserFbid:
-            json["dynamicerop_messaging_user_fbid"]?.todynamic(),
-        isActiveOnTextPostApp: json["is_active_on_text_post_app"],
-        isAutoConfirmEnabledForAllReciprocalFollowRequests:
-            json["is_auto_confirm_enabled_for_all_reciprocal_follow_requests"],
-        isBestie: json["is_bestie"],
-        isBusiness: json["is_business"],
-        isCallToActionEnabled: json["is_call_to_action_enabled"],
-        isCategoryTappable: json["is_category_tappable"],
-        isCreatorAgentEnabled: json["is_creator_agent_enabled"],
-        isDirectRollCallEnabled: json["is_direct_roll_call_enabled"],
-        isEligibleForDiverseOwnedBusinessInfo:
-            json["is_eligible_for_diverse_owned_business_info"],
-        isEligibleForMetaVerifiedEnhancedLinkSheet:
-            json["is_eligible_for_meta_verified_enhanced_link_sheet"],
-        isEligibleForMetaVerifiedEnhancedLinkSheetConsumption: json[
-            "is_eligible_for_meta_verified_enhanced_link_sheet_consumption"],
-        isEligibleForMetaVerifiedLabel:
-            json["is_eligible_for_meta_verified_label"],
-        isEligibleForMetaVerifiedLinksInReels:
-            json["is_eligible_for_meta_verified_links_in_reels"],
-        isEligibleForMetaVerifiedMultipleAddressesConsumption: json[
-            "is_eligible_for_meta_verified_multiple_addresses_consumption"],
-        isEligibleForMetaVerifiedMultipleAddressesCreation:
-            json["is_eligible_for_meta_verified_multiple_addresses_creation"],
-        isEligibleForMetaVerifiedRelatedAccounts:
-            json["is_eligible_for_meta_verified_related_accounts"],
-        isEligibleForPostBoostMvUpsell:
-            json["is_eligible_for_post_boost_mv_upsell"],
-        isEligibleForRequestMessage: json["is_eligible_for_request_message"],
-        isEligibleToDisplayDiverseOwnedBusinessInfo:
-            json["is_eligible_to_display_diverse_owned_business_info"],
-        isFavorite: json["is_favorite"],
-        isFavoriteForClips: json["is_favorite_for_clips"],
-        isFavoriteForHighlights: json["is_favorite_for_highlights"],
-        isFavoriteForIgtv: json["is_favorite_for_igtv"],
-        isFavoriteForStories: json["is_favorite_for_stories"],
-        isInCanada: json["is_in_canada"],
-        isdynamicerestAccount: json["is_dynamicerest_account"],
-        isLegacyVerifiedMaxProfilePicEditReached:
-            json["is_legacy_verified_max_profile_pic_edit_reached"],
-        isMemorialized: json["is_memorialized"],
-        isMetaVerifiedRelatedAccountsDisplayEnabled:
-            json["is_meta_verified_related_accounts_display_enabled"],
-        isMv4BApplicationMaturedForProfileEdit:
-            json["is_mv4b_application_matured_for_profile_edit"],
-        isMv4BBizAssetProfileLocked: json["is_mv4b_biz_asset_profile_locked"],
-        isMv4BMaxProfileEditReached: json["is_mv4b_max_profile_edit_reached"],
-        isNewToInstagram: json["is_new_to_instagram"],
-        isOpalEnabled: json["is_opal_enabled"],
-        isOpenToCollab: json["is_open_to_collab"],
-        isOregonCustomGenderConsented:
-            json["is_oregon_custom_gender_consented"],
-        isParentingAccount: json["is_parenting_account"],
-        isPotentialBusiness: json["is_potential_business"],
-        isPrivate: json["is_private"],
-        isProfileAudioCallEnabled: json["is_profile_audio_call_enabled"],
-        isProfileBroadcastSharingEnabled:
-            json["is_profile_broadcast_sharing_enabled"],
-        isProfilePictureExpansionEnabled:
-            json["is_profile_picture_expansion_enabled"],
-        isReconAdCtaOnProfileEligibleWithViewer:
-            json["is_recon_ad_cta_on_profile_eligible_with_viewer"],
-        isRegulatedC18: json["is_regulated_c18"],
-        isRegulatedNewsInViewerLocation:
-            json["is_regulated_news_in_viewer_location"],
-        isRemixSettingEnabledForPosts:
-            json["is_remix_setting_enabled_for_posts"],
-        isRemixSettingEnabledForReels:
-            json["is_remix_setting_enabled_for_reels"],
-        isSecondaryAccountCreation: json["is_secondary_account_creation"],
-        isStoriesTeaserMuted: json["is_stories_teaser_muted"],
-        isSupervisionFeaturesEnabled: json["is_supervision_features_enabled"],
-        isVerified: json["is_verified"],
-        isWhatsappLinked: json["is_whatsapp_linked"],
-        latestBestiesReelMedia: json["latest_besties_reel_media"],
-        latestReelMedia: json["latest_reel_media"],
-        liveSubscriptionStatus: json["live_subscription_status"],
-        locationData: LocationData.fromJson(json["location_data"]),
-        mediaCount: json["media_count"],
-        merchantCheckoutStyle: json["merchant_checkout_style"],
-        metaVerifiedBenefitsInfo: MetaVerifiedBenefitsInfo.fromJson(
-            json["meta_verified_benefits_info"]),
-        metaVerifiedRelatedAccountsCount:
-            json["meta_verified_related_accounts_count"],
-        nametag: Nametag.fromJson(json["nametag"]),
-        nonproCanMaybeSeeProfileHypercard:
-            json["nonpro_can_maybe_see_profile_hypercard"],
-        notMetaVerifiedFrictionInfo: NotMetaVerifiedFrictionInfo.fromJson(
-            json["not_meta_verified_friction_info"]),
-        openExternalUrlWithInAppBrowser:
-            json["open_external_url_with_in_app_browser"],
-        pageId: json["page_id"],
-        pageName: json["page_name"],
-        pinnedChannelsInfo:
-            PinnedChannelsInfo.fromJson(json["pinned_channels_info"]),
-        primaryProfileLinkType: json["primary_profile_link_type"],
-        professionalConversionSuggestedAccountType:
-            json["professional_conversion_suggested_account_type"],
-        profileContext: json["profile_context"],
-        profileContextFacepileUsers: List<dynamic>.from(
-            json["profile_context_facepile_users"].map((x) => x)),
-        profileContextLinksWithUserIds: List<dynamic>.from(
-            json["profile_context_links_with_user_ids"].map((x) => x)),
-        profilePicGenaiToolInfo: List<dynamic>.from(
-            json["profile_pic_genai_tool_info"].map((x) => x)),
-        profilePicId: json["profile_pic_id"],
-        profilePicUrl: json["profile_pic_url"],
-        profilePicUrlHd: json["profile_pic_url_hd"],
-        profileReelsSortingEligibility:
-            json["profile_reels_sorting_eligibility"],
-        profileType: json["profile_type"],
-        pronouns: List<dynamic>.from(json["pronouns"].map((x) => x)),
-        publicEmail: json["public_email"],
-        publicPhoneCountryCode: json["public_phone_country_code"],
-        publicPhoneNumber: json["public_phone_number"],
-        reconFeatures: ReconFeatures.fromJson(json["recon_features"]),
-        recsFromFriends: RecsFromFriends.fromJson(json["recs_from_friends"]),
-        relevantNewsRegulationLocations: List<dynamic>.from(
-            json["relevant_news_regulation_locations"].map((x) => x)),
-        removeMessageEntrypodynamic: json["remove_message_entrypodynamic"],
-        sellerShoppableFeedType: json["seller_shoppable_feed_type"],
-        showAccountTransparencyDetails:
-            json["show_account_transparency_details"],
-        showBlueBadgeOnMainProfile: json["show_blue_badge_on_main_profile"],
-        showPostInsightsEntryPodynamic:
-            json["show_post_insights_entry_podynamic"],
-        showSchoolsBadge: json["show_schools_badge"],
-        showShoppableFeed: json["show_shoppable_feed"],
-        spamFollowerSettingEnabled: json["spam_follower_setting_enabled"],
-        textAppLastVisitedTime: json["text_app_last_visited_time"],
-        textPostAppBadgeLabel: json["text_post_app_badge_label"],
-        textPostNewPostCount: json["text_post_new_post_count"],
-        thirdPartyDownloadsEnabled: json["third_party_downloads_enabled"],
-        threadsProfileGlyphUrl: json["threads_profile_glyph_url"],
-        totalArEffects: json["total_ar_effects"],
-        totalIgtvVideos: json["total_igtv_videos"],
-        transparencyProductEnabled: json["transparency_product_enabled"],
-        upcomingEvents:
-            List<dynamic>.from(json["upcoming_events"].map((x) => x)),
-        username: json["username"],
-        viewsOnGridStatus: json["views_on_grid_status"],
-      );
+  Data.fromJson(Map<String, dynamic> json) {
+    about = json["about"];
+    accountBadges = json["account_badges"] ?? [];
+    accountCategory = json["account_category"];
+    accountType = json["account_type"];
+    activeStandaloneFundraisers = json["active_standalone_fundraisers"] == null
+        ? null
+        : ActiveStandaloneFundraisers.fromJson(
+            json["active_standalone_fundraisers"]);
+    additionalBusinessAddresses = json["additional_business_addresses"] ?? [];
+    adjustedBannersOrder = json["adjusted_banners_order"] ?? [];
+    adsIncentiveExpirationDate = json["ads_incentive_expiration_date"];
+    adsPageId = json["ads_page_id"];
+    adsPageName = json["ads_page_name"];
+    autoExpandChaining = json["auto_expand_chaining"];
+    avatarStatus = json["avatar_status"] == null
+        ? null
+        : AvatarStatus.fromJson(json["avatar_status"]);
+    bioLinks = json["bio_links"] == null
+        ? null
+        : (json["bio_links"] as List).map((e) => BioLinks.fromJson(e)).toList();
+    biography = json["biography"];
+    biographyEmail = json["biography_email"];
+    biographyWithEntities = json["biography_with_entities"] == null
+        ? null
+        : BiographyWithEntities.fromJson(json["biography_with_entities"]);
+    birthdayTodayVisibilityForViewer =
+        json["birthday_today_visibility_for_viewer"];
+    businessContactMethod = json["business_contact_method"];
+    canAddFbGroupLinkOnProfile = json["can_add_fb_group_link_on_profile"];
+    canHideCategory = json["can_hide_category"];
+    canHidePublicContacts = json["can_hide_public_contacts"];
+    canUseAffiliatePartnershipMessagingAsBrand =
+        json["can_use_affiliate_partnership_messaging_as_brand"];
+    canUseAffiliatePartnershipMessagingAsCreator =
+        json["can_use_affiliate_partnership_messaging_as_creator"];
+    canUseBrandedContentDiscoveryAsBrand =
+        json["can_use_branded_content_discovery_as_brand"];
+    canUseBrandedContentDiscoveryAsCreator =
+        json["can_use_branded_content_discovery_as_creator"];
+    canUsePaidPartnershipMessagingAsCreator =
+        json["can_use_paid_partnership_messaging_as_creator"];
+    category = json["category"];
+    categoryId = json["category_id"];
+    chainingResults = json["chaining_results"] == null
+        ? null
+        : (json["chaining_results"] as List)
+            .map((e) => ChainingResults.fromJson(e))
+            .toList();
+    chainingSuggestions = json["chaining_suggestions"] == null
+        ? null
+        : (json["chaining_suggestions"] as List)
+            .map((e) => ChainingSuggestions.fromJson(e))
+            .toList();
+    chainingUpsellCards = json["chaining_upsell_cards"] ?? [];
+    contactPhoneNumber = json["contact_phone_number"];
+    currentCatalogId = json["current_catalog_id"];
+    directMessaging = json["direct_messaging"];
+    enableAddSchoolInEditProfile = json["enable_add_school_in_edit_profile"];
+    existingUserAgeCollectionEnabled =
+        json["existing_user_age_collection_enabled"];
+    externalLynxUrl = json["external_lynx_url"];
+    externalUrl = json["external_url"];
+    fanClubInfo = json["fan_club_info"] == null
+        ? null
+        : FanClubInfo.fromJson(json["fan_club_info"]);
+    fbidV2 = json["fbid_v2"];
+    feedPostReshareDisabled = json["feed_post_reshare_disabled"];
+    followFrictionType = json["follow_friction_type"];
+    followerCount = json["follower_count"];
+    followingCount = json["following_count"];
+    fullName = json["full_name"];
+    hasAnonymousProfilePicture = json["has_anonymous_profile_picture"];
+    hasBiographyTranslation = json["has_biography_translation"];
+    hasChaining = json["has_chaining"];
+    hasChains = json["has_chains"];
+    hasCollabCollections = json["has_collab_collections"];
+    hasEverSelectedTopics = json["has_ever_selected_topics"];
+    hasExclusiveFeedContent = json["has_exclusive_feed_content"];
+    hasFanClubSubscriptions = json["has_fan_club_subscriptions"];
+    hasGenAiPersonasForProfileBanner =
+        json["has_gen_ai_personas_for_profile_banner"];
+    hasGuides = json["has_guides"];
+    hasHighlightReels = json["has_highlight_reels"];
+    hasIgProfile = json["has_ig_profile"];
+    hasLegacyBbPendingProfilePictureUpdate =
+        json["has_legacy_bb_pending_profile_picture_update"];
+    hasMusicOnProfile = json["has_music_on_profile"];
+    hasMv4BPendingProfilePictureUpdate =
+        json["has_mv4b_pending_profile_picture_update"];
+    hasNmeBadge = json["has_nme_badge"];
+    hasPrivateCollections = json["has_private_collections"];
+    hasPublicTabThreads = json["has_public_tab_threads"];
+    hasVideos = json["has_videos"];
+    hasViewsFetching = json["has_views_fetching"];
+    hdProfilePicUrlInfo = json["hd_profile_pic_url_info"] == null
+        ? null
+        : HdProfilePicUrlInfo.fromJson(json["hd_profile_pic_url_info"]);
+    hdProfilePicVersions = json["hd_profile_pic_versions"] == null
+        ? null
+        : (json["hd_profile_pic_versions"] as List)
+            .map((e) => HdProfilePicVersions.fromJson(e))
+            .toList();
+    highlightReshareDisabled = json["highlight_reshare_disabled"];
+    highlightsTrayType = json["highlights_tray_type"];
+    id = json["id"];
+    includeDirectBlacklistStatus = json["include_direct_blacklist_status"];
+    instagramPk = json["instagram_pk"];
+    interopMessagingUserFbid = json["interop_messaging_user_fbid"];
+    isActiveOnTextPostApp = json["is_active_on_text_post_app"];
+    isAutoConfirmEnabledForAllReciprocalFollowRequests =
+        json["is_auto_confirm_enabled_for_all_reciprocal_follow_requests"];
+    isBestie = json["is_bestie"];
+    isBusiness = json["is_business"];
+    isCallToActionEnabled = json["is_call_to_action_enabled"];
+    isCategoryTappable = json["is_category_tappable"];
+    isCreatorAgentEnabled = json["is_creator_agent_enabled"];
+    isDirectRollCallEnabled = json["is_direct_roll_call_enabled"];
+    isEligibleForDiverseOwnedBusinessInfo =
+        json["is_eligible_for_diverse_owned_business_info"];
+    isEligibleForMetaVerifiedEnhancedLinkSheet =
+        json["is_eligible_for_meta_verified_enhanced_link_sheet"];
+    isEligibleForMetaVerifiedEnhancedLinkSheetConsumption =
+        json["is_eligible_for_meta_verified_enhanced_link_sheet_consumption"];
+    isEligibleForMetaVerifiedLabel =
+        json["is_eligible_for_meta_verified_label"];
+    isEligibleForMetaVerifiedLinksInReels =
+        json["is_eligible_for_meta_verified_links_in_reels"];
+    isEligibleForMetaVerifiedMultipleAddressesConsumption =
+        json["is_eligible_for_meta_verified_multiple_addresses_consumption"];
+    isEligibleForMetaVerifiedMultipleAddressesCreation =
+        json["is_eligible_for_meta_verified_multiple_addresses_creation"];
+    isEligibleForMetaVerifiedRelatedAccounts =
+        json["is_eligible_for_meta_verified_related_accounts"];
+    isEligibleForPostBoostMvUpsell =
+        json["is_eligible_for_post_boost_mv_upsell"];
+    isEligibleForRequestMessage = json["is_eligible_for_request_message"];
+    isEligibleToDisplayDiverseOwnedBusinessInfo =
+        json["is_eligible_to_display_diverse_owned_business_info"];
+    isFavorite = json["is_favorite"];
+    isFavoriteForClips = json["is_favorite_for_clips"];
+    isFavoriteForHighlights = json["is_favorite_for_highlights"];
+    isFavoriteForIgtv = json["is_favorite_for_igtv"];
+    isFavoriteForStories = json["is_favorite_for_stories"];
+    isInCanada = json["is_in_canada"];
+    isInterestAccount = json["is_interest_account"];
+    isLegacyVerifiedMaxProfilePicEditReached =
+        json["is_legacy_verified_max_profile_pic_edit_reached"];
+    isMemorialized = json["is_memorialized"];
+    isMetaVerifiedRelatedAccountsDisplayEnabled =
+        json["is_meta_verified_related_accounts_display_enabled"];
+    isMv4BApplicationMaturedForProfileEdit =
+        json["is_mv4b_application_matured_for_profile_edit"];
+    isMv4BBizAssetProfileLocked = json["is_mv4b_biz_asset_profile_locked"];
+    isMv4BMaxProfileEditReached = json["is_mv4b_max_profile_edit_reached"];
+    isNewToInstagram = json["is_new_to_instagram"];
+    isOpalEnabled = json["is_opal_enabled"];
+    isOpenToCollab = json["is_open_to_collab"];
+    isOregonCustomGenderConsented = json["is_oregon_custom_gender_consented"];
+    isParentingAccount = json["is_parenting_account"];
+    isPotentialBusiness = json["is_potential_business"];
+    isPrivate = json["is_private"];
+    isProfileAudioCallEnabled = json["is_profile_audio_call_enabled"];
+    isProfileBroadcastSharingEnabled =
+        json["is_profile_broadcast_sharing_enabled"];
+    isProfilePictureExpansionEnabled =
+        json["is_profile_picture_expansion_enabled"];
+    isReconAdCtaOnProfileEligibleWithViewer =
+        json["is_recon_ad_cta_on_profile_eligible_with_viewer"];
+    isRegulatedC18 = json["is_regulated_c18"];
+    isRegulatedNewsInViewerLocation =
+        json["is_regulated_news_in_viewer_location"];
+    isRemixSettingEnabledForPosts = json["is_remix_setting_enabled_for_posts"];
+    isRemixSettingEnabledForReels = json["is_remix_setting_enabled_for_reels"];
+    isSecondaryAccountCreation = json["is_secondary_account_creation"];
+    isStoriesTeaserMuted = json["is_stories_teaser_muted"];
+    isSupervisionFeaturesEnabled = json["is_supervision_features_enabled"];
+    isVerified = json["is_verified"];
+    isWhatsappLinked = json["is_whatsapp_linked"];
+    latestBestiesReelMedia = json["latest_besties_reel_media"];
+    latestReelMedia = json["latest_reel_media"];
+    liveSubscriptionStatus = json["live_subscription_status"];
+    locationData = json["location_data"] == null
+        ? null
+        : LocationData.fromJson(json["location_data"]);
+    mediaCount = json["media_count"];
+    metaVerifiedBenefitsInfo = json["meta_verified_benefits_info"] == null
+        ? null
+        : MetaVerifiedBenefitsInfo.fromJson(
+            json["meta_verified_benefits_info"]);
+    metaVerifiedRelatedAccountsCount =
+        json["meta_verified_related_accounts_count"];
+    nametag =
+        json["nametag"] == null ? null : Nametag.fromJson(json["nametag"]);
+    nonproCanMaybeSeeProfileHypercard =
+        json["nonpro_can_maybe_see_profile_hypercard"];
+    notMetaVerifiedFrictionInfo =
+        json["not_meta_verified_friction_info"] == null
+            ? null
+            : NotMetaVerifiedFrictionInfo.fromJson(
+                json["not_meta_verified_friction_info"]);
+    openExternalUrlWithInAppBrowser =
+        json["open_external_url_with_in_app_browser"];
+    pageId = json["page_id"];
+    pageName = json["page_name"];
+    pinnedChannelsInfo = json["pinned_channels_info"] == null
+        ? null
+        : PinnedChannelsInfo.fromJson(json["pinned_channels_info"]);
+    primaryProfileLinkType = json["primary_profile_link_type"];
+    professionalConversionSuggestedAccountType =
+        json["professional_conversion_suggested_account_type"];
+    profileContext = json["profile_context"];
+    profileContextFacepileUsers = json["profile_context_facepile_users"] ?? [];
+    profileContextLinksWithUserIds =
+        json["profile_context_links_with_user_ids"] ?? [];
+    profilePicGenaiToolInfo = json["profile_pic_genai_tool_info"] ?? [];
+    profilePicUrl = json["profile_pic_url"];
+    profilePicUrlHd = json["profile_pic_url_hd"];
+    profileReelsSortingEligibility = json["profile_reels_sorting_eligibility"];
+    profileType = json["profile_type"];
+    pronouns = json["pronouns"] ?? [];
+    publicEmail = json["public_email"];
+    publicPhoneCountryCode = json["public_phone_country_code"];
+    publicPhoneNumber = json["public_phone_number"];
+    reconFeatures = json["recon_features"] == null
+        ? null
+        : ReconFeatures.fromJson(json["recon_features"]);
+    recsFromFriends = json["recs_from_friends"] == null
+        ? null
+        : RecsFromFriends.fromJson(json["recs_from_friends"]);
+    relevantNewsRegulationLocations =
+        json["relevant_news_regulation_locations"] ?? [];
+    removeMessageEntrypoint = json["remove_message_entrypoint"];
+    showAccountTransparencyDetails = json["show_account_transparency_details"];
+    showBlueBadgeOnMainProfile = json["show_blue_badge_on_main_profile"];
+    showPostInsightsEntryPoint = json["show_post_insights_entry_point"];
+    showSchoolsBadge = json["show_schools_badge"];
+    spamFollowerSettingEnabled = json["spam_follower_setting_enabled"];
+    textAppLastVisitedTime = json["text_app_last_visited_time"];
+    textPostAppBadgeLabel = json["text_post_app_badge_label"];
+    textPostNewPostCount = json["text_post_new_post_count"];
+    thirdPartyDownloadsEnabled = json["third_party_downloads_enabled"];
+    threadsProfileGlyphUrl = json["threads_profile_glyph_url"];
+    totalArEffects = json["total_ar_effects"];
+    totalIgtvVideos = json["total_igtv_videos"];
+    transparencyProductEnabled = json["transparency_product_enabled"];
+    upcomingEvents = json["upcoming_events"] ?? [];
+    username = json["username"];
+    viewsOnGridStatus = json["views_on_grid_status"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "about": about,
-        "account_badges": List<dynamic>.from(accountBadges.map((x) => x)),
-        "account_category": accountCategory,
-        "account_type": accountType,
-        "active_standalone_fundraisers": activeStandaloneFundraisers.toJson(),
-        "additional_business_addresses":
-            List<dynamic>.from(additionalBusinessAddresses.map((x) => x)),
-        "adjusted_banners_order":
-            List<dynamic>.from(adjustedBannersOrder.map((x) => x)),
-        "ads_incentive_expiration_date": adsIncentiveExpirationDate,
-        "ads_page_id": adsPageId,
-        "ads_page_name": adsPageName,
-        "auto_expand_chaining": autoExpandChaining,
-        "avatar_status": avatarStatus.toJson(),
-        "bio_links": List<dynamic>.from(bioLinks.map((x) => x)),
-        "biography": biography,
-        "biography_email": biographyEmail,
-        "biography_with_entities": biographyWithEntities.toJson(),
-        "birthday_today_visibility_for_viewer":
-            birthdayTodayVisibilityForViewer,
-        "business_contact_method": businessContactMethod,
-        "can_add_fb_group_link_on_profile": canAddFbGroupLinkOnProfile,
-        "can_hide_category": canHideCategory,
-        "can_hide_public_contacts": canHidePublicContacts,
-        "can_use_affiliate_partnership_messaging_as_brand":
-            canUseAffiliatePartnershipMessagingAsBrand,
-        "can_use_affiliate_partnership_messaging_as_creator":
-            canUseAffiliatePartnershipMessagingAsCreator,
-        "can_use_branded_content_discovery_as_brand":
-            canUseBrandedContentDiscoveryAsBrand,
-        "can_use_branded_content_discovery_as_creator":
-            canUseBrandedContentDiscoveryAsCreator,
-        "can_use_paid_partnership_messaging_as_creator":
-            canUsePaidPartnershipMessagingAsCreator,
-        "category": category,
-        "category_id": categoryId,
-        "chaining_results":
-            List<dynamic>.from(chainingResults.map((x) => x.toJson())),
-        "chaining_suggestions":
-            List<dynamic>.from(chainingSuggestions.map((x) => x.toJson())),
-        "chaining_upsell_cards":
-            List<dynamic>.from(chainingUpsellCards.map((x) => x)),
-        "contact_phone_number": contactPhoneNumber,
-        "creator_shopping_info": creatorShoppingInfo.toJson(),
-        "current_catalog_id": currentCatalogId,
-        "direct_messaging": directMessaging,
-        "enable_add_school_in_edit_profile": enableAddSchoolInEditProfile,
-        "existing_user_age_collection_enabled":
-            existingUserAgeCollectionEnabled,
-        "external_url": externalUrl,
-        "fan_club_info": fanClubInfo.toJson(),
-        "fbid_v2": fbidV2,
-        "feed_post_reshare_disabled": feedPostReshareDisabled,
-        "follow_friction_type": followFrictionType,
-        "follower_count": followerCount,
-        "following_count": followingCount,
-        "full_name": fullName,
-        "has_anonymous_profile_picture": hasAnonymousProfilePicture,
-        "has_biography_translation": hasBiographyTranslation,
-        "has_chaining": hasChaining,
-        "has_chains": hasChains,
-        "has_collab_collections": hasCollabCollections,
-        "has_ever_selected_topics": hasEverSelectedTopics,
-        "has_exclusive_feed_content": hasExclusiveFeedContent,
-        "has_fan_club_subscriptions": hasFanClubSubscriptions,
-        "has_gen_ai_personas_for_profile_banner":
-            hasGenAiPersonasForProfileBanner,
-        "has_guides": hasGuides,
-        "has_highlight_reels": hasHighlightReels,
-        "has_ig_profile": hasIgProfile,
-        "has_legacy_bb_pending_profile_picture_update":
-            hasLegacyBbPendingProfilePictureUpdate,
-        "has_music_on_profile": hasMusicOnProfile,
-        "has_mv4b_pending_profile_picture_update":
-            hasMv4BPendingProfilePictureUpdate,
-        "has_nme_badge": hasNmeBadge,
-        "has_private_collections": hasPrivateCollections,
-        "has_public_tab_threads": hasPublicTabThreads,
-        "has_videos": hasVideos,
-        "has_views_fetching": hasViewsFetching,
-        "hd_profile_pic_url_info": hdProfilePicUrlInfo.toJson(),
-        "hd_profile_pic_versions":
-            List<dynamic>.from(hdProfilePicVersions.map((x) => x.toJson())),
-        "highlight_reshare_disabled": highlightReshareDisabled,
-        "highlights_tray_type": highlightsTrayType,
-        "id": id,
-        "include_direct_blacklist_status": includeDirectBlacklistStatus,
-        "instagram_pk": instagramPk,
-        "dynamicerop_messaging_user_fbid": dynamiceropMessagingUserFbid,
-        "is_active_on_text_post_app": isActiveOnTextPostApp,
-        "is_auto_confirm_enabled_for_all_reciprocal_follow_requests":
-            isAutoConfirmEnabledForAllReciprocalFollowRequests,
-        "is_bestie": isBestie,
-        "is_business": isBusiness,
-        "is_call_to_action_enabled": isCallToActionEnabled,
-        "is_category_tappable": isCategoryTappable,
-        "is_creator_agent_enabled": isCreatorAgentEnabled,
-        "is_direct_roll_call_enabled": isDirectRollCallEnabled,
-        "is_eligible_for_diverse_owned_business_info":
-            isEligibleForDiverseOwnedBusinessInfo,
-        "is_eligible_for_meta_verified_enhanced_link_sheet":
-            isEligibleForMetaVerifiedEnhancedLinkSheet,
-        "is_eligible_for_meta_verified_enhanced_link_sheet_consumption":
-            isEligibleForMetaVerifiedEnhancedLinkSheetConsumption,
-        "is_eligible_for_meta_verified_label": isEligibleForMetaVerifiedLabel,
-        "is_eligible_for_meta_verified_links_in_reels":
-            isEligibleForMetaVerifiedLinksInReels,
-        "is_eligible_for_meta_verified_multiple_addresses_consumption":
-            isEligibleForMetaVerifiedMultipleAddressesConsumption,
-        "is_eligible_for_meta_verified_multiple_addresses_creation":
-            isEligibleForMetaVerifiedMultipleAddressesCreation,
-        "is_eligible_for_meta_verified_related_accounts":
-            isEligibleForMetaVerifiedRelatedAccounts,
-        "is_eligible_for_post_boost_mv_upsell": isEligibleForPostBoostMvUpsell,
-        "is_eligible_for_request_message": isEligibleForRequestMessage,
-        "is_eligible_to_display_diverse_owned_business_info":
-            isEligibleToDisplayDiverseOwnedBusinessInfo,
-        "is_favorite": isFavorite,
-        "is_favorite_for_clips": isFavoriteForClips,
-        "is_favorite_for_highlights": isFavoriteForHighlights,
-        "is_favorite_for_igtv": isFavoriteForIgtv,
-        "is_favorite_for_stories": isFavoriteForStories,
-        "is_in_canada": isInCanada,
-        "is_dynamicerest_account": isdynamicerestAccount,
-        "is_legacy_verified_max_profile_pic_edit_reached":
-            isLegacyVerifiedMaxProfilePicEditReached,
-        "is_memorialized": isMemorialized,
-        "is_meta_verified_related_accounts_display_enabled":
-            isMetaVerifiedRelatedAccountsDisplayEnabled,
-        "is_mv4b_application_matured_for_profile_edit":
-            isMv4BApplicationMaturedForProfileEdit,
-        "is_mv4b_biz_asset_profile_locked": isMv4BBizAssetProfileLocked,
-        "is_mv4b_max_profile_edit_reached": isMv4BMaxProfileEditReached,
-        "is_new_to_instagram": isNewToInstagram,
-        "is_opal_enabled": isOpalEnabled,
-        "is_open_to_collab": isOpenToCollab,
-        "is_oregon_custom_gender_consented": isOregonCustomGenderConsented,
-        "is_parenting_account": isParentingAccount,
-        "is_potential_business": isPotentialBusiness,
-        "is_private": isPrivate,
-        "is_profile_audio_call_enabled": isProfileAudioCallEnabled,
-        "is_profile_broadcast_sharing_enabled":
-            isProfileBroadcastSharingEnabled,
-        "is_profile_picture_expansion_enabled":
-            isProfilePictureExpansionEnabled,
-        "is_recon_ad_cta_on_profile_eligible_with_viewer":
-            isReconAdCtaOnProfileEligibleWithViewer,
-        "is_regulated_c18": isRegulatedC18,
-        "is_regulated_news_in_viewer_location": isRegulatedNewsInViewerLocation,
-        "is_remix_setting_enabled_for_posts": isRemixSettingEnabledForPosts,
-        "is_remix_setting_enabled_for_reels": isRemixSettingEnabledForReels,
-        "is_secondary_account_creation": isSecondaryAccountCreation,
-        "is_stories_teaser_muted": isStoriesTeaserMuted,
-        "is_supervision_features_enabled": isSupervisionFeaturesEnabled,
-        "is_verified": isVerified,
-        "is_whatsapp_linked": isWhatsappLinked,
-        "latest_besties_reel_media": latestBestiesReelMedia,
-        "latest_reel_media": latestReelMedia,
-        "live_subscription_status": liveSubscriptionStatus,
-        "location_data": locationData.toJson(),
-        "media_count": mediaCount,
-        "merchant_checkout_style": merchantCheckoutStyle,
-        "meta_verified_benefits_info": metaVerifiedBenefitsInfo.toJson(),
-        "meta_verified_related_accounts_count":
-            metaVerifiedRelatedAccountsCount,
-        "nametag": nametag.toJson(),
-        "nonpro_can_maybe_see_profile_hypercard":
-            nonproCanMaybeSeeProfileHypercard,
-        "not_meta_verified_friction_info": notMetaVerifiedFrictionInfo.toJson(),
-        "open_external_url_with_in_app_browser":
-            openExternalUrlWithInAppBrowser,
-        "page_id": pageId,
-        "page_name": pageName,
-        "pinned_channels_info": pinnedChannelsInfo.toJson(),
-        "primary_profile_link_type": primaryProfileLinkType,
-        "professional_conversion_suggested_account_type":
-            professionalConversionSuggestedAccountType,
-        "profile_context": profileContext,
-        "profile_context_facepile_users":
-            List<dynamic>.from(profileContextFacepileUsers.map((x) => x)),
-        "profile_context_links_with_user_ids":
-            List<dynamic>.from(profileContextLinksWithUserIds.map((x) => x)),
-        "profile_pic_genai_tool_info":
-            List<dynamic>.from(profilePicGenaiToolInfo.map((x) => x)),
-        "profile_pic_id": profilePicId,
-        "profile_pic_url": profilePicUrl,
-        "profile_pic_url_hd": profilePicUrlHd,
-        "profile_reels_sorting_eligibility": profileReelsSortingEligibility,
-        "profile_type": profileType,
-        "pronouns": List<dynamic>.from(pronouns.map((x) => x)),
-        "public_email": publicEmail,
-        "public_phone_country_code": publicPhoneCountryCode,
-        "public_phone_number": publicPhoneNumber,
-        "recon_features": reconFeatures.toJson(),
-        "recs_from_friends": recsFromFriends.toJson(),
-        "relevant_news_regulation_locations":
-            List<dynamic>.from(relevantNewsRegulationLocations.map((x) => x)),
-        "remove_message_entrypodynamic": removeMessageEntrypodynamic,
-        "seller_shoppable_feed_type": sellerShoppableFeedType,
-        "show_account_transparency_details": showAccountTransparencyDetails,
-        "show_blue_badge_on_main_profile": showBlueBadgeOnMainProfile,
-        "show_post_insights_entry_podynamic": showPostInsightsEntryPodynamic,
-        "show_schools_badge": showSchoolsBadge,
-        "show_shoppable_feed": showShoppableFeed,
-        "spam_follower_setting_enabled": spamFollowerSettingEnabled,
-        "text_app_last_visited_time": textAppLastVisitedTime,
-        "text_post_app_badge_label": textPostAppBadgeLabel,
-        "text_post_new_post_count": textPostNewPostCount,
-        "third_party_downloads_enabled": thirdPartyDownloadsEnabled,
-        "threads_profile_glyph_url": threadsProfileGlyphUrl,
-        "total_ar_effects": totalArEffects,
-        "total_igtv_videos": totalIgtvVideos,
-        "transparency_product_enabled": transparencyProductEnabled,
-        "upcoming_events": List<dynamic>.from(upcomingEvents.map((x) => x)),
-        "username": username,
-        "views_on_grid_status": viewsOnGridStatus,
-      };
+  static List<Data> fromList(List<Map<String, dynamic>> list) {
+    return list.map(Data.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["about"] = about;
+    if (accountBadges != null) {
+      _data["account_badges"] = accountBadges;
+    }
+    _data["account_category"] = accountCategory;
+    _data["account_type"] = accountType;
+    if (activeStandaloneFundraisers != null) {
+      _data["active_standalone_fundraisers"] =
+          activeStandaloneFundraisers?.toJson();
+    }
+    if (additionalBusinessAddresses != null) {
+      _data["additional_business_addresses"] = additionalBusinessAddresses;
+    }
+    if (adjustedBannersOrder != null) {
+      _data["adjusted_banners_order"] = adjustedBannersOrder;
+    }
+    _data["ads_incentive_expiration_date"] = adsIncentiveExpirationDate;
+    _data["ads_page_id"] = adsPageId;
+    _data["ads_page_name"] = adsPageName;
+    _data["auto_expand_chaining"] = autoExpandChaining;
+    if (avatarStatus != null) {
+      _data["avatar_status"] = avatarStatus?.toJson();
+    }
+    if (bioLinks != null) {
+      _data["bio_links"] = bioLinks?.map((e) => e.toJson()).toList();
+    }
+    _data["biography"] = biography;
+    _data["biography_email"] = biographyEmail;
+    if (biographyWithEntities != null) {
+      _data["biography_with_entities"] = biographyWithEntities?.toJson();
+    }
+    _data["birthday_today_visibility_for_viewer"] =
+        birthdayTodayVisibilityForViewer;
+    _data["business_contact_method"] = businessContactMethod;
+    _data["can_add_fb_group_link_on_profile"] = canAddFbGroupLinkOnProfile;
+    _data["can_hide_category"] = canHideCategory;
+    _data["can_hide_public_contacts"] = canHidePublicContacts;
+    _data["can_use_affiliate_partnership_messaging_as_brand"] =
+        canUseAffiliatePartnershipMessagingAsBrand;
+    _data["can_use_affiliate_partnership_messaging_as_creator"] =
+        canUseAffiliatePartnershipMessagingAsCreator;
+    _data["can_use_branded_content_discovery_as_brand"] =
+        canUseBrandedContentDiscoveryAsBrand;
+    _data["can_use_branded_content_discovery_as_creator"] =
+        canUseBrandedContentDiscoveryAsCreator;
+    _data["can_use_paid_partnership_messaging_as_creator"] =
+        canUsePaidPartnershipMessagingAsCreator;
+    _data["category"] = category;
+    _data["category_id"] = categoryId;
+    if (chainingResults != null) {
+      _data["chaining_results"] =
+          chainingResults?.map((e) => e.toJson()).toList();
+    }
+    if (chainingSuggestions != null) {
+      _data["chaining_suggestions"] =
+          chainingSuggestions?.map((e) => e.toJson()).toList();
+    }
+    if (chainingUpsellCards != null) {
+      _data["chaining_upsell_cards"] = chainingUpsellCards;
+    }
+    _data["contact_phone_number"] = contactPhoneNumber;
+    _data["current_catalog_id"] = currentCatalogId;
+    _data["direct_messaging"] = directMessaging;
+    _data["enable_add_school_in_edit_profile"] = enableAddSchoolInEditProfile;
+    _data["existing_user_age_collection_enabled"] =
+        existingUserAgeCollectionEnabled;
+    _data["external_lynx_url"] = externalLynxUrl;
+    _data["external_url"] = externalUrl;
+    if (fanClubInfo != null) {
+      _data["fan_club_info"] = fanClubInfo?.toJson();
+    }
+    _data["fbid_v2"] = fbidV2;
+    _data["feed_post_reshare_disabled"] = feedPostReshareDisabled;
+    _data["follow_friction_type"] = followFrictionType;
+    _data["follower_count"] = followerCount;
+    _data["following_count"] = followingCount;
+    _data["full_name"] = fullName;
+    _data["has_anonymous_profile_picture"] = hasAnonymousProfilePicture;
+    _data["has_biography_translation"] = hasBiographyTranslation;
+    _data["has_chaining"] = hasChaining;
+    _data["has_chains"] = hasChains;
+    _data["has_collab_collections"] = hasCollabCollections;
+    _data["has_ever_selected_topics"] = hasEverSelectedTopics;
+    _data["has_exclusive_feed_content"] = hasExclusiveFeedContent;
+    _data["has_fan_club_subscriptions"] = hasFanClubSubscriptions;
+    _data["has_gen_ai_personas_for_profile_banner"] =
+        hasGenAiPersonasForProfileBanner;
+    _data["has_guides"] = hasGuides;
+    _data["has_highlight_reels"] = hasHighlightReels;
+    _data["has_ig_profile"] = hasIgProfile;
+    _data["has_legacy_bb_pending_profile_picture_update"] =
+        hasLegacyBbPendingProfilePictureUpdate;
+    _data["has_music_on_profile"] = hasMusicOnProfile;
+    _data["has_mv4b_pending_profile_picture_update"] =
+        hasMv4BPendingProfilePictureUpdate;
+    _data["has_nme_badge"] = hasNmeBadge;
+    _data["has_private_collections"] = hasPrivateCollections;
+    _data["has_public_tab_threads"] = hasPublicTabThreads;
+    _data["has_videos"] = hasVideos;
+    _data["has_views_fetching"] = hasViewsFetching;
+    if (hdProfilePicUrlInfo != null) {
+      _data["hd_profile_pic_url_info"] = hdProfilePicUrlInfo?.toJson();
+    }
+    if (hdProfilePicVersions != null) {
+      _data["hd_profile_pic_versions"] =
+          hdProfilePicVersions?.map((e) => e.toJson()).toList();
+    }
+    _data["highlight_reshare_disabled"] = highlightReshareDisabled;
+    _data["highlights_tray_type"] = highlightsTrayType;
+    _data["id"] = id;
+    _data["include_direct_blacklist_status"] = includeDirectBlacklistStatus;
+    _data["instagram_pk"] = instagramPk;
+    _data["interop_messaging_user_fbid"] = interopMessagingUserFbid;
+    _data["is_active_on_text_post_app"] = isActiveOnTextPostApp;
+    _data["is_auto_confirm_enabled_for_all_reciprocal_follow_requests"] =
+        isAutoConfirmEnabledForAllReciprocalFollowRequests;
+    _data["is_bestie"] = isBestie;
+    _data["is_business"] = isBusiness;
+    _data["is_call_to_action_enabled"] = isCallToActionEnabled;
+    _data["is_category_tappable"] = isCategoryTappable;
+    _data["is_creator_agent_enabled"] = isCreatorAgentEnabled;
+    _data["is_direct_roll_call_enabled"] = isDirectRollCallEnabled;
+    _data["is_eligible_for_diverse_owned_business_info"] =
+        isEligibleForDiverseOwnedBusinessInfo;
+    _data["is_eligible_for_meta_verified_enhanced_link_sheet"] =
+        isEligibleForMetaVerifiedEnhancedLinkSheet;
+    _data["is_eligible_for_meta_verified_enhanced_link_sheet_consumption"] =
+        isEligibleForMetaVerifiedEnhancedLinkSheetConsumption;
+    _data["is_eligible_for_meta_verified_label"] =
+        isEligibleForMetaVerifiedLabel;
+    _data["is_eligible_for_meta_verified_links_in_reels"] =
+        isEligibleForMetaVerifiedLinksInReels;
+    _data["is_eligible_for_meta_verified_multiple_addresses_consumption"] =
+        isEligibleForMetaVerifiedMultipleAddressesConsumption;
+    _data["is_eligible_for_meta_verified_multiple_addresses_creation"] =
+        isEligibleForMetaVerifiedMultipleAddressesCreation;
+    _data["is_eligible_for_meta_verified_related_accounts"] =
+        isEligibleForMetaVerifiedRelatedAccounts;
+    _data["is_eligible_for_post_boost_mv_upsell"] =
+        isEligibleForPostBoostMvUpsell;
+    _data["is_eligible_for_request_message"] = isEligibleForRequestMessage;
+    _data["is_eligible_to_display_diverse_owned_business_info"] =
+        isEligibleToDisplayDiverseOwnedBusinessInfo;
+    _data["is_favorite"] = isFavorite;
+    _data["is_favorite_for_clips"] = isFavoriteForClips;
+    _data["is_favorite_for_highlights"] = isFavoriteForHighlights;
+    _data["is_favorite_for_igtv"] = isFavoriteForIgtv;
+    _data["is_favorite_for_stories"] = isFavoriteForStories;
+    _data["is_in_canada"] = isInCanada;
+    _data["is_interest_account"] = isInterestAccount;
+    _data["is_legacy_verified_max_profile_pic_edit_reached"] =
+        isLegacyVerifiedMaxProfilePicEditReached;
+    _data["is_memorialized"] = isMemorialized;
+    _data["is_meta_verified_related_accounts_display_enabled"] =
+        isMetaVerifiedRelatedAccountsDisplayEnabled;
+    _data["is_mv4b_application_matured_for_profile_edit"] =
+        isMv4BApplicationMaturedForProfileEdit;
+    _data["is_mv4b_biz_asset_profile_locked"] = isMv4BBizAssetProfileLocked;
+    _data["is_mv4b_max_profile_edit_reached"] = isMv4BMaxProfileEditReached;
+    _data["is_new_to_instagram"] = isNewToInstagram;
+    _data["is_opal_enabled"] = isOpalEnabled;
+    _data["is_open_to_collab"] = isOpenToCollab;
+    _data["is_oregon_custom_gender_consented"] = isOregonCustomGenderConsented;
+    _data["is_parenting_account"] = isParentingAccount;
+    _data["is_potential_business"] = isPotentialBusiness;
+    _data["is_private"] = isPrivate;
+    _data["is_profile_audio_call_enabled"] = isProfileAudioCallEnabled;
+    _data["is_profile_broadcast_sharing_enabled"] =
+        isProfileBroadcastSharingEnabled;
+    _data["is_profile_picture_expansion_enabled"] =
+        isProfilePictureExpansionEnabled;
+    _data["is_recon_ad_cta_on_profile_eligible_with_viewer"] =
+        isReconAdCtaOnProfileEligibleWithViewer;
+    _data["is_regulated_c18"] = isRegulatedC18;
+    _data["is_regulated_news_in_viewer_location"] =
+        isRegulatedNewsInViewerLocation;
+    _data["is_remix_setting_enabled_for_posts"] = isRemixSettingEnabledForPosts;
+    _data["is_remix_setting_enabled_for_reels"] = isRemixSettingEnabledForReels;
+    _data["is_secondary_account_creation"] = isSecondaryAccountCreation;
+    _data["is_stories_teaser_muted"] = isStoriesTeaserMuted;
+    _data["is_supervision_features_enabled"] = isSupervisionFeaturesEnabled;
+    _data["is_verified"] = isVerified;
+    _data["is_whatsapp_linked"] = isWhatsappLinked;
+    _data["latest_besties_reel_media"] = latestBestiesReelMedia;
+    _data["latest_reel_media"] = latestReelMedia;
+    _data["live_subscription_status"] = liveSubscriptionStatus;
+    if (locationData != null) {
+      _data["location_data"] = locationData?.toJson();
+    }
+    _data["media_count"] = mediaCount;
+    if (metaVerifiedBenefitsInfo != null) {
+      _data["meta_verified_benefits_info"] = metaVerifiedBenefitsInfo?.toJson();
+    }
+    _data["meta_verified_related_accounts_count"] =
+        metaVerifiedRelatedAccountsCount;
+    if (nametag != null) {
+      _data["nametag"] = nametag?.toJson();
+    }
+    _data["nonpro_can_maybe_see_profile_hypercard"] =
+        nonproCanMaybeSeeProfileHypercard;
+    if (notMetaVerifiedFrictionInfo != null) {
+      _data["not_meta_verified_friction_info"] =
+          notMetaVerifiedFrictionInfo?.toJson();
+    }
+    _data["open_external_url_with_in_app_browser"] =
+        openExternalUrlWithInAppBrowser;
+    _data["page_id"] = pageId;
+    _data["page_name"] = pageName;
+    if (pinnedChannelsInfo != null) {
+      _data["pinned_channels_info"] = pinnedChannelsInfo?.toJson();
+    }
+    _data["primary_profile_link_type"] = primaryProfileLinkType;
+    _data["professional_conversion_suggested_account_type"] =
+        professionalConversionSuggestedAccountType;
+    _data["profile_context"] = profileContext;
+    if (profileContextFacepileUsers != null) {
+      _data["profile_context_facepile_users"] = profileContextFacepileUsers;
+    }
+    if (profileContextLinksWithUserIds != null) {
+      _data["profile_context_links_with_user_ids"] =
+          profileContextLinksWithUserIds;
+    }
+    if (profilePicGenaiToolInfo != null) {
+      _data["profile_pic_genai_tool_info"] = profilePicGenaiToolInfo;
+    }
+    _data["profile_pic_url"] = profilePicUrl;
+    _data["profile_pic_url_hd"] = profilePicUrlHd;
+    _data["profile_reels_sorting_eligibility"] = profileReelsSortingEligibility;
+    _data["profile_type"] = profileType;
+    if (pronouns != null) {
+      _data["pronouns"] = pronouns;
+    }
+    _data["public_email"] = publicEmail;
+    _data["public_phone_country_code"] = publicPhoneCountryCode;
+    _data["public_phone_number"] = publicPhoneNumber;
+    if (reconFeatures != null) {
+      _data["recon_features"] = reconFeatures?.toJson();
+    }
+    if (recsFromFriends != null) {
+      _data["recs_from_friends"] = recsFromFriends?.toJson();
+    }
+    if (relevantNewsRegulationLocations != null) {
+      _data["relevant_news_regulation_locations"] =
+          relevantNewsRegulationLocations;
+    }
+    _data["remove_message_entrypoint"] = removeMessageEntrypoint;
+    _data["show_account_transparency_details"] = showAccountTransparencyDetails;
+    _data["show_blue_badge_on_main_profile"] = showBlueBadgeOnMainProfile;
+    _data["show_post_insights_entry_point"] = showPostInsightsEntryPoint;
+    _data["show_schools_badge"] = showSchoolsBadge;
+    _data["spam_follower_setting_enabled"] = spamFollowerSettingEnabled;
+    _data["text_app_last_visited_time"] = textAppLastVisitedTime;
+    _data["text_post_app_badge_label"] = textPostAppBadgeLabel;
+    _data["text_post_new_post_count"] = textPostNewPostCount;
+    _data["third_party_downloads_enabled"] = thirdPartyDownloadsEnabled;
+    _data["threads_profile_glyph_url"] = threadsProfileGlyphUrl;
+    _data["total_ar_effects"] = totalArEffects;
+    _data["total_igtv_videos"] = totalIgtvVideos;
+    _data["transparency_product_enabled"] = transparencyProductEnabled;
+    if (upcomingEvents != null) {
+      _data["upcoming_events"] = upcomingEvents;
+    }
+    _data["username"] = username;
+    _data["views_on_grid_status"] = viewsOnGridStatus;
+    return _data;
+  }
 }
 
-class ActiveStandaloneFundraisers {
-  List<dynamic> fundraisers;
-  dynamic totalCount;
+class RecsFromFriends {
+  bool? enableRecsFromFriends;
+  String? recsFromFriendsEntryPointType;
 
-  ActiveStandaloneFundraisers({
-    required this.fundraisers,
-    required this.totalCount,
-  });
+  RecsFromFriends(
+      {this.enableRecsFromFriends, this.recsFromFriendsEntryPointType});
 
-  factory ActiveStandaloneFundraisers.fromJson(Map<dynamic, dynamic> json) =>
-      ActiveStandaloneFundraisers(
-        fundraisers: List<dynamic>.from(json["fundraisers"].map((x) => x)),
-        totalCount: json["total_count"],
-      );
+  RecsFromFriends.fromJson(Map<String, dynamic> json) {
+    enableRecsFromFriends = json["enable_recs_from_friends"];
+    recsFromFriendsEntryPointType = json["recs_from_friends_entry_point_type"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "fundraisers": List<dynamic>.from(fundraisers.map((x) => x)),
-        "total_count": totalCount,
-      };
+  static List<RecsFromFriends> fromList(List<Map<String, dynamic>> list) {
+    return list.map(RecsFromFriends.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["enable_recs_from_friends"] = enableRecsFromFriends;
+    _data["recs_from_friends_entry_point_type"] = recsFromFriendsEntryPointType;
+    return _data;
+  }
 }
 
-class AvatarStatus {
-  dynamic hasAvatar;
+class ReconFeatures {
+  bool? enableReconCta;
 
-  AvatarStatus({
-    required this.hasAvatar,
-  });
+  ReconFeatures({this.enableReconCta});
 
-  factory AvatarStatus.fromJson(Map<dynamic, dynamic> json) => AvatarStatus(
-        hasAvatar: json["has_avatar"],
-      );
+  ReconFeatures.fromJson(Map<String, dynamic> json) {
+    enableReconCta = json["enable_recon_cta"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "has_avatar": hasAvatar,
-      };
+  static List<ReconFeatures> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ReconFeatures.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["enable_recon_cta"] = enableReconCta;
+    return _data;
+  }
 }
 
-class BiographyWithEntities {
-  List<Entity> entities;
-  dynamic rawText;
+class PinnedChannelsInfo {
+  bool? hasPublicChannels;
+  List<dynamic>? pinnedChannelsList;
 
-  BiographyWithEntities({
-    required this.entities,
-    required this.rawText,
-  });
+  PinnedChannelsInfo({this.hasPublicChannels, this.pinnedChannelsList});
 
-  factory BiographyWithEntities.fromJson(Map<dynamic, dynamic> json) =>
-      BiographyWithEntities(
-        entities:
-            List<Entity>.from(json["entities"].map((x) => Entity.fromJson(x))),
-        rawText: json["raw_text"],
-      );
+  PinnedChannelsInfo.fromJson(Map<String, dynamic> json) {
+    hasPublicChannels = json["has_public_channels"];
+    pinnedChannelsList = json["pinned_channels_list"] ?? [];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "entities": List<dynamic>.from(entities.map((x) => x.toJson())),
-        "raw_text": rawText,
-      };
+  static List<PinnedChannelsInfo> fromList(List<Map<String, dynamic>> list) {
+    return list.map(PinnedChannelsInfo.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["has_public_channels"] = hasPublicChannels;
+    if (pinnedChannelsList != null) {
+      _data["pinned_channels_list"] = pinnedChannelsList;
+    }
+    return _data;
+  }
 }
 
-class Entity {
-  User user;
+class NotMetaVerifiedFrictionInfo {
+  bool? isEligibleForLabelFriction;
+  String? labelFrictionContent;
 
-  Entity({
-    required this.user,
-  });
+  NotMetaVerifiedFrictionInfo(
+      {this.isEligibleForLabelFriction, this.labelFrictionContent});
 
-  factory Entity.fromJson(Map<dynamic, dynamic> json) => Entity(
-        user: User.fromJson(json["user"]),
-      );
+  NotMetaVerifiedFrictionInfo.fromJson(Map<String, dynamic> json) {
+    isEligibleForLabelFriction = json["is_eligible_for_label_friction"];
+    labelFrictionContent = json["label_friction_content"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "user": user.toJson(),
-      };
+  static List<NotMetaVerifiedFrictionInfo> fromList(
+      List<Map<String, dynamic>> list) {
+    return list.map(NotMetaVerifiedFrictionInfo.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["is_eligible_for_label_friction"] = isEligibleForLabelFriction;
+    _data["label_friction_content"] = labelFrictionContent;
+    return _data;
+  }
 }
 
-class User {
-  dynamic id;
-  dynamic username;
+class Nametag {
+  List<int>? availableThemeColors;
+  String? backgroundImageUrl;
+  String? emoji;
+  dynamic emojiColor;
+  dynamic gradient;
+  bool? isBackgroundImageBlurred;
+  dynamic mode;
+  dynamic selectedThemeColor;
+  dynamic selfieSticker;
+  String? selfieUrl;
+  ThemeColor? themeColor;
 
-  User({
-    required this.id,
-    required this.username,
-  });
+  Nametag(
+      {this.availableThemeColors,
+      this.backgroundImageUrl,
+      this.emoji,
+      this.emojiColor,
+      this.gradient,
+      this.isBackgroundImageBlurred,
+      this.mode,
+      this.selectedThemeColor,
+      this.selfieSticker,
+      this.selfieUrl,
+      this.themeColor});
 
-  factory User.fromJson(Map<dynamic, dynamic> json) => User(
-        id: json["id"],
-        username: json["username"],
-      );
+  Nametag.fromJson(Map<String, dynamic> json) {
+    availableThemeColors = json["available_theme_colors"] == null
+        ? null
+        : List<int>.from(json["available_theme_colors"]);
+    backgroundImageUrl = json["background_image_url"];
+    emoji = json["emoji"];
+    emojiColor = json["emoji_color"];
+    gradient = json["gradient"];
+    isBackgroundImageBlurred = json["is_background_image_blurred"];
+    mode = json["mode"];
+    selectedThemeColor = json["selected_theme_color"];
+    selfieSticker = json["selfie_sticker"];
+    selfieUrl = json["selfie_url"];
+    themeColor = json["theme_color"] == null
+        ? null
+        : ThemeColor.fromJson(json["theme_color"]);
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "id": id,
-        "username": username,
-      };
+  static List<Nametag> fromList(List<Map<String, dynamic>> list) {
+    return list.map(Nametag.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (availableThemeColors != null) {
+      _data["available_theme_colors"] = availableThemeColors;
+    }
+    _data["background_image_url"] = backgroundImageUrl;
+    _data["emoji"] = emoji;
+    _data["emoji_color"] = emojiColor;
+    _data["gradient"] = gradient;
+    _data["is_background_image_blurred"] = isBackgroundImageBlurred;
+    _data["mode"] = mode;
+    _data["selected_theme_color"] = selectedThemeColor;
+    _data["selfie_sticker"] = selfieSticker;
+    _data["selfie_url"] = selfieUrl;
+    if (themeColor != null) {
+      _data["theme_color"] = themeColor?.toJson();
+    }
+    return _data;
+  }
 }
 
-class Chaining {
-  ChainingInfo chainingInfo;
-  dynamic fullName;
-  dynamic id;
-  dynamic isPrivate;
-  dynamic isVerified;
-  dynamic profileChainingSecondaryLabel;
-  dynamic profilePicId;
-  dynamic profilePicUrl;
-  dynamic socialContext;
-  dynamic username;
+class ThemeColor {
+  List<AvailableThemeColors>? availableThemeColors;
+  SelectedThemeColor? selectedThemeColor;
 
-  Chaining({
-    required this.chainingInfo,
-    required this.fullName,
-    required this.id,
-    required this.isPrivate,
-    required this.isVerified,
-    required this.profileChainingSecondaryLabel,
-    this.profilePicId,
-    this.profilePicUrl,
-    required this.socialContext,
-    required this.username,
-  });
+  ThemeColor({this.availableThemeColors, this.selectedThemeColor});
 
-  factory Chaining.fromJson(Map<dynamic, dynamic> json) => Chaining(
-        chainingInfo: ChainingInfo.fromJson(json["chaining_info"]),
-        fullName: json["full_name"],
-        id: json["id"],
-        isPrivate: json["is_private"],
-        isVerified: json["is_verified"],
-        profileChainingSecondaryLabel: json["profile_chaining_secondary_label"],
-        profilePicId: json["profile_pic_id"],
-        profilePicUrl: json["profile_pic_url"],
-        socialContext: json["social_context"],
-        username: json["username"],
-      );
+  ThemeColor.fromJson(Map<String, dynamic> json) {
+    availableThemeColors = json["available_theme_colors"] == null
+        ? null
+        : (json["available_theme_colors"] as List)
+            .map((e) => AvailableThemeColors.fromJson(e))
+            .toList();
+    selectedThemeColor = json["selected_theme_color"] == null
+        ? null
+        : SelectedThemeColor.fromJson(json["selected_theme_color"]);
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "chaining_info": chainingInfo.toJson(),
-        "full_name": fullName,
-        "id": id,
-        "is_private": isPrivate,
-        "is_verified": isVerified,
-        "profile_chaining_secondary_label": profileChainingSecondaryLabel,
-        "profile_pic_id": profilePicId,
-        "profile_pic_url": profilePicUrl,
-        "social_context": socialContext,
-        "username": username,
-      };
+  static List<ThemeColor> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ThemeColor.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (availableThemeColors != null) {
+      _data["available_theme_colors"] =
+          availableThemeColors?.map((e) => e.toJson()).toList();
+    }
+    if (selectedThemeColor != null) {
+      _data["selected_theme_color"] = selectedThemeColor?.toJson();
+    }
+    return _data;
+  }
 }
 
-class ChainingInfo {
-  dynamic algorithm;
-  dynamic sources;
+class SelectedThemeColor {
+  String? displayLabel;
+  dynamic intValue;
 
-  ChainingInfo({
-    required this.algorithm,
-    required this.sources,
-  });
+  SelectedThemeColor({this.displayLabel, this.intValue});
 
-  factory ChainingInfo.fromJson(Map<dynamic, dynamic> json) => ChainingInfo(
-        algorithm: json["algorithm"],
-        sources: json["sources"],
-      );
+  SelectedThemeColor.fromJson(Map<String, dynamic> json) {
+    displayLabel = json["display_label"];
+    intValue = json["int_value"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "algorithm": algorithm,
-        "sources": sources,
-      };
+  static List<SelectedThemeColor> fromList(List<Map<String, dynamic>> list) {
+    return list.map(SelectedThemeColor.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["display_label"] = displayLabel;
+    _data["int_value"] = intValue;
+    return _data;
+  }
 }
 
-class CreatorShoppingInfo {
-  List<dynamic> linkedMerchantAccounts;
+class AvailableThemeColors {
+  String? displayLabel;
+  dynamic intValue;
 
-  CreatorShoppingInfo({
-    required this.linkedMerchantAccounts,
-  });
+  AvailableThemeColors({this.displayLabel, this.intValue});
 
-  factory CreatorShoppingInfo.fromJson(Map<dynamic, dynamic> json) =>
-      CreatorShoppingInfo(
-        linkedMerchantAccounts:
-            List<dynamic>.from(json["linked_merchant_accounts"].map((x) => x)),
-      );
+  AvailableThemeColors.fromJson(Map<String, dynamic> json) {
+    displayLabel = json["display_label"];
+    intValue = json["int_value"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "linked_merchant_accounts":
-            List<dynamic>.from(linkedMerchantAccounts.map((x) => x)),
-      };
+  static List<AvailableThemeColors> fromList(List<Map<String, dynamic>> list) {
+    return list.map(AvailableThemeColors.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["display_label"] = displayLabel;
+    _data["int_value"] = intValue;
+    return _data;
+  }
+}
+
+class MetaVerifiedBenefitsInfo {
+  bool? isEligibleForMetaVerifiedContentProtection;
+
+  MetaVerifiedBenefitsInfo({this.isEligibleForMetaVerifiedContentProtection});
+
+  MetaVerifiedBenefitsInfo.fromJson(Map<String, dynamic> json) {
+    isEligibleForMetaVerifiedContentProtection =
+        json["is_eligible_for_meta_verified_content_protection"];
+  }
+
+  static List<MetaVerifiedBenefitsInfo> fromList(
+      List<Map<String, dynamic>> list) {
+    return list.map(MetaVerifiedBenefitsInfo.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["is_eligible_for_meta_verified_content_protection"] =
+        isEligibleForMetaVerifiedContentProtection;
+    return _data;
+  }
+}
+
+class LocationData {
+  String? addressStreet;
+  dynamic cityId;
+  String? cityName;
+  String? instagramLocationId;
+  dynamic latitude;
+  dynamic longitude;
+  String? zip;
+
+  LocationData(
+      {this.addressStreet,
+      this.cityId,
+      this.cityName,
+      this.instagramLocationId,
+      this.latitude,
+      this.longitude,
+      this.zip});
+
+  LocationData.fromJson(Map<String, dynamic> json) {
+    addressStreet = json["address_street"];
+    cityId = json["city_id"];
+    cityName = json["city_name"];
+    instagramLocationId = json["instagram_location_id"];
+    latitude = json["latitude"];
+    longitude = json["longitude"];
+    zip = json["zip"];
+  }
+
+  static List<LocationData> fromList(List<Map<String, dynamic>> list) {
+    return list.map(LocationData.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["address_street"] = addressStreet;
+    _data["city_id"] = cityId;
+    _data["city_name"] = cityName;
+    _data["instagram_location_id"] = instagramLocationId;
+    _data["latitude"] = latitude;
+    _data["longitude"] = longitude;
+    _data["zip"] = zip;
+    return _data;
+  }
+}
+
+class HdProfilePicVersions {
+  dynamic height;
+  String? url;
+  dynamic width;
+
+  HdProfilePicVersions({this.height, this.url, this.width});
+
+  HdProfilePicVersions.fromJson(Map<String, dynamic> json) {
+    height = json["height"];
+    url = json["url"];
+    width = json["width"];
+  }
+
+  static List<HdProfilePicVersions> fromList(List<Map<String, dynamic>> list) {
+    return list.map(HdProfilePicVersions.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["height"] = height;
+    _data["url"] = url;
+    _data["width"] = width;
+    return _data;
+  }
+}
+
+class HdProfilePicUrlInfo {
+  dynamic height;
+  String? url;
+  dynamic width;
+
+  HdProfilePicUrlInfo({this.height, this.url, this.width});
+
+  HdProfilePicUrlInfo.fromJson(Map<String, dynamic> json) {
+    height = json["height"];
+    url = json["url"];
+    width = json["width"];
+  }
+
+  static List<HdProfilePicUrlInfo> fromList(List<Map<String, dynamic>> list) {
+    return list.map(HdProfilePicUrlInfo.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["height"] = height;
+    _data["url"] = url;
+    _data["width"] = width;
+    return _data;
+  }
 }
 
 class FanClubInfo {
@@ -1042,319 +1272,396 @@ class FanClubInfo {
   dynamic largestPublicBcId;
   dynamic subscriberCount;
 
-  FanClubInfo({
-    required this.autosaveToExclusiveHighlight,
-    required this.connectedMemberCount,
-    required this.fanClubId,
-    required this.fanClubName,
-    required this.fanConsiderationPageRevampEligiblity,
-    required this.hasCreatedSsc,
-    required this.hasEnoughSubscribersForSsc,
-    required this.isFanClubGiftingEligible,
-    required this.isFanClubReferralEligible,
-    required this.isFreeTrialEligible,
-    required this.largestPublicBcId,
-    required this.subscriberCount,
-  });
+  FanClubInfo(
+      {this.autosaveToExclusiveHighlight,
+      this.connectedMemberCount,
+      this.fanClubId,
+      this.fanClubName,
+      this.fanConsiderationPageRevampEligiblity,
+      this.hasCreatedSsc,
+      this.hasEnoughSubscribersForSsc,
+      this.isFanClubGiftingEligible,
+      this.isFanClubReferralEligible,
+      this.isFreeTrialEligible,
+      this.largestPublicBcId,
+      this.subscriberCount});
 
-  factory FanClubInfo.fromJson(Map<dynamic, dynamic> json) => FanClubInfo(
-        autosaveToExclusiveHighlight: json["autosave_to_exclusive_highlight"],
-        connectedMemberCount: json["connected_member_count"],
-        fanClubId: json["fan_club_id"],
-        fanClubName: json["fan_club_name"],
-        fanConsiderationPageRevampEligiblity:
-            json["fan_consideration_page_revamp_eligiblity"],
-        hasCreatedSsc: json["has_created_ssc"],
-        hasEnoughSubscribersForSsc: json["has_enough_subscribers_for_ssc"],
-        isFanClubGiftingEligible: json["is_fan_club_gifting_eligible"],
-        isFanClubReferralEligible: json["is_fan_club_referral_eligible"],
-        isFreeTrialEligible: json["is_free_trial_eligible"],
-        largestPublicBcId: json["largest_public_bc_id"],
-        subscriberCount: json["subscriber_count"],
-      );
+  FanClubInfo.fromJson(Map<String, dynamic> json) {
+    autosaveToExclusiveHighlight = json["autosave_to_exclusive_highlight"];
+    connectedMemberCount = json["connected_member_count"];
+    fanClubId = json["fan_club_id"];
+    fanClubName = json["fan_club_name"];
+    fanConsiderationPageRevampEligiblity =
+        json["fan_consideration_page_revamp_eligiblity"];
+    hasCreatedSsc = json["has_created_ssc"];
+    hasEnoughSubscribersForSsc = json["has_enough_subscribers_for_ssc"];
+    isFanClubGiftingEligible = json["is_fan_club_gifting_eligible"];
+    isFanClubReferralEligible = json["is_fan_club_referral_eligible"];
+    isFreeTrialEligible = json["is_free_trial_eligible"];
+    largestPublicBcId = json["largest_public_bc_id"];
+    subscriberCount = json["subscriber_count"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "autosave_to_exclusive_highlight": autosaveToExclusiveHighlight,
-        "connected_member_count": connectedMemberCount,
-        "fan_club_id": fanClubId,
-        "fan_club_name": fanClubName,
-        "fan_consideration_page_revamp_eligiblity":
-            fanConsiderationPageRevampEligiblity,
-        "has_created_ssc": hasCreatedSsc,
-        "has_enough_subscribers_for_ssc": hasEnoughSubscribersForSsc,
-        "is_fan_club_gifting_eligible": isFanClubGiftingEligible,
-        "is_fan_club_referral_eligible": isFanClubReferralEligible,
-        "is_free_trial_eligible": isFreeTrialEligible,
-        "largest_public_bc_id": largestPublicBcId,
-        "subscriber_count": subscriberCount,
-      };
+  static List<FanClubInfo> fromList(List<Map<String, dynamic>> list) {
+    return list.map(FanClubInfo.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["autosave_to_exclusive_highlight"] = autosaveToExclusiveHighlight;
+    _data["connected_member_count"] = connectedMemberCount;
+    _data["fan_club_id"] = fanClubId;
+    _data["fan_club_name"] = fanClubName;
+    _data["fan_consideration_page_revamp_eligiblity"] =
+        fanConsiderationPageRevampEligiblity;
+    _data["has_created_ssc"] = hasCreatedSsc;
+    _data["has_enough_subscribers_for_ssc"] = hasEnoughSubscribersForSsc;
+    _data["is_fan_club_gifting_eligible"] = isFanClubGiftingEligible;
+    _data["is_fan_club_referral_eligible"] = isFanClubReferralEligible;
+    _data["is_free_trial_eligible"] = isFreeTrialEligible;
+    _data["largest_public_bc_id"] = largestPublicBcId;
+    _data["subscriber_count"] = subscriberCount;
+    return _data;
+  }
 }
 
-class HdProfilePic {
-  dynamic height;
-  dynamic url;
-  dynamic width;
+class ChainingSuggestions {
+  ChainingInfo1? chainingInfo;
+  String? fullName;
+  String? id;
+  bool? isPrivate;
+  bool? isVerified;
+  String? profileChainingSecondaryLabel;
+  String? profilePicUrl;
+  String? socialContext;
+  String? username;
 
-  HdProfilePic({
-    required this.height,
-    required this.url,
-    required this.width,
-  });
+  ChainingSuggestions(
+      {this.chainingInfo,
+      this.fullName,
+      this.id,
+      this.isPrivate,
+      this.isVerified,
+      this.profileChainingSecondaryLabel,
+      this.profilePicUrl,
+      this.socialContext,
+      this.username});
 
-  factory HdProfilePic.fromJson(Map<dynamic, dynamic> json) => HdProfilePic(
-        height: json["height"],
-        url: json["url"],
-        width: json["width"],
-      );
+  ChainingSuggestions.fromJson(Map<String, dynamic> json) {
+    chainingInfo = json["chaining_info"] == null
+        ? null
+        : ChainingInfo1.fromJson(json["chaining_info"]);
+    fullName = json["full_name"];
+    id = json["id"];
+    isPrivate = json["is_private"];
+    isVerified = json["is_verified"];
+    profileChainingSecondaryLabel = json["profile_chaining_secondary_label"];
+    profilePicUrl = json["profile_pic_url"];
+    socialContext = json["social_context"];
+    username = json["username"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "height": height,
-        "url": url,
-        "width": width,
-      };
+  static List<ChainingSuggestions> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ChainingSuggestions.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (chainingInfo != null) {
+      _data["chaining_info"] = chainingInfo?.toJson();
+    }
+    _data["full_name"] = fullName;
+    _data["id"] = id;
+    _data["is_private"] = isPrivate;
+    _data["is_verified"] = isVerified;
+    _data["profile_chaining_secondary_label"] = profileChainingSecondaryLabel;
+    _data["profile_pic_url"] = profilePicUrl;
+    _data["social_context"] = socialContext;
+    _data["username"] = username;
+    return _data;
+  }
 }
 
-class LocationData {
-  dynamic addressStreet;
-  dynamic cityId;
-  dynamic cityName;
-  dynamic instagramLocationId;
-  dynamic latitude;
-  dynamic longitude;
-  dynamic zip;
+class ChainingInfo1 {
+  dynamic algorithm;
+  String? sources;
 
-  LocationData({
-    required this.addressStreet,
-    required this.cityId,
-    required this.cityName,
-    required this.instagramLocationId,
-    required this.latitude,
-    required this.longitude,
-    required this.zip,
-  });
+  ChainingInfo1({this.algorithm, this.sources});
 
-  factory LocationData.fromJson(Map<dynamic, dynamic> json) => LocationData(
-        addressStreet: json["address_street"],
-        cityId: json["city_id"],
-        cityName: json["city_name"],
-        instagramLocationId: json["instagram_location_id"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
-        zip: json["zip"],
-      );
+  ChainingInfo1.fromJson(Map<String, dynamic> json) {
+    algorithm = json["algorithm"];
+    sources = json["sources"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "address_street": addressStreet,
-        "city_id": cityId,
-        "city_name": cityName,
-        "instagram_location_id": instagramLocationId,
-        "latitude": latitude,
-        "longitude": longitude,
-        "zip": zip,
-      };
+  static List<ChainingInfo1> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ChainingInfo1.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["algorithm"] = algorithm;
+    _data["sources"] = sources;
+    return _data;
+  }
 }
 
-class MetaVerifiedBenefitsInfo {
-  dynamic isEligibleForMetaVerifiedContentProtection;
+class ChainingResults {
+  ChainingInfo? chainingInfo;
+  String? fullName;
+  String? id;
+  bool? isPrivate;
+  bool? isVerified;
+  String? profileChainingSecondaryLabel;
+  String? profilePicUrl;
+  String? socialContext;
+  String? username;
 
-  MetaVerifiedBenefitsInfo({
-    required this.isEligibleForMetaVerifiedContentProtection,
-  });
+  ChainingResults(
+      {this.chainingInfo,
+      this.fullName,
+      this.id,
+      this.isPrivate,
+      this.isVerified,
+      this.profileChainingSecondaryLabel,
+      this.profilePicUrl,
+      this.socialContext,
+      this.username});
 
-  factory MetaVerifiedBenefitsInfo.fromJson(Map<dynamic, dynamic> json) =>
-      MetaVerifiedBenefitsInfo(
-        isEligibleForMetaVerifiedContentProtection:
-            json["is_eligible_for_meta_verified_content_protection"],
-      );
+  ChainingResults.fromJson(Map<String, dynamic> json) {
+    chainingInfo = json["chaining_info"] == null
+        ? null
+        : ChainingInfo.fromJson(json["chaining_info"]);
+    fullName = json["full_name"];
+    id = json["id"];
+    isPrivate = json["is_private"];
+    isVerified = json["is_verified"];
+    profileChainingSecondaryLabel = json["profile_chaining_secondary_label"];
+    profilePicUrl = json["profile_pic_url"];
+    socialContext = json["social_context"];
+    username = json["username"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "is_eligible_for_meta_verified_content_protection":
-            isEligibleForMetaVerifiedContentProtection,
-      };
+  static List<ChainingResults> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ChainingResults.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (chainingInfo != null) {
+      _data["chaining_info"] = chainingInfo?.toJson();
+    }
+    _data["full_name"] = fullName;
+    _data["id"] = id;
+    _data["is_private"] = isPrivate;
+    _data["is_verified"] = isVerified;
+    _data["profile_chaining_secondary_label"] = profileChainingSecondaryLabel;
+    _data["profile_pic_url"] = profilePicUrl;
+    _data["social_context"] = socialContext;
+    _data["username"] = username;
+    return _data;
+  }
 }
 
-class Nametag {
-  List<dynamic> availableThemeColors;
-  dynamic backgroundImageUrl;
-  dynamic emoji;
-  dynamic emojiColor;
-  dynamic gradient;
-  dynamic isBackgroundImageBlurred;
-  dynamic mode;
-  dynamic selectedThemeColor;
-  dynamic selfieSticker;
-  dynamic selfieUrl;
-  ThemeColor themeColor;
+class ChainingInfo {
+  dynamic algorithm;
+  String? sources;
 
-  Nametag({
-    required this.availableThemeColors,
-    required this.backgroundImageUrl,
-    required this.emoji,
-    required this.emojiColor,
-    required this.gradient,
-    required this.isBackgroundImageBlurred,
-    required this.mode,
-    required this.selectedThemeColor,
-    required this.selfieSticker,
-    required this.selfieUrl,
-    required this.themeColor,
-  });
+  ChainingInfo({this.algorithm, this.sources});
 
-  factory Nametag.fromJson(Map<dynamic, dynamic> json) => Nametag(
-        availableThemeColors:
-            List<dynamic>.from(json["available_theme_colors"].map((x) => x)),
-        backgroundImageUrl: json["background_image_url"],
-        emoji: json["emoji"],
-        emojiColor: json["emoji_color"],
-        gradient: json["gradient"],
-        isBackgroundImageBlurred: json["is_background_image_blurred"],
-        mode: json["mode"],
-        selectedThemeColor: json["selected_theme_color"],
-        selfieSticker: json["selfie_sticker"],
-        selfieUrl: json["selfie_url"],
-        themeColor: ThemeColor.fromJson(json["theme_color"]),
-      );
+  ChainingInfo.fromJson(Map<String, dynamic> json) {
+    algorithm = json["algorithm"];
+    sources = json["sources"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "available_theme_colors":
-            List<dynamic>.from(availableThemeColors.map((x) => x)),
-        "background_image_url": backgroundImageUrl,
-        "emoji": emoji,
-        "emoji_color": emojiColor,
-        "gradient": gradient,
-        "is_background_image_blurred": isBackgroundImageBlurred,
-        "mode": mode,
-        "selected_theme_color": selectedThemeColor,
-        "selfie_sticker": selfieSticker,
-        "selfie_url": selfieUrl,
-        "theme_color": themeColor.toJson(),
-      };
+  static List<ChainingInfo> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ChainingInfo.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["algorithm"] = algorithm;
+    _data["sources"] = sources;
+    return _data;
+  }
 }
 
-class ThemeColor {
-  List<SelectedThemeColorElement> availableThemeColors;
-  SelectedThemeColorElement selectedThemeColor;
+class BiographyWithEntities {
+  List<Entities>? entities;
+  String? rawText;
 
-  ThemeColor({
-    required this.availableThemeColors,
-    required this.selectedThemeColor,
-  });
+  BiographyWithEntities({this.entities, this.rawText});
 
-  factory ThemeColor.fromJson(Map<dynamic, dynamic> json) => ThemeColor(
-        availableThemeColors: List<SelectedThemeColorElement>.from(
-            json["available_theme_colors"]
-                .map((x) => SelectedThemeColorElement.fromJson(x))),
-        selectedThemeColor:
-            SelectedThemeColorElement.fromJson(json["selected_theme_color"]),
-      );
+  BiographyWithEntities.fromJson(Map<String, dynamic> json) {
+    entities = json["entities"] == null
+        ? null
+        : (json["entities"] as List).map((e) => Entities.fromJson(e)).toList();
+    rawText = json["raw_text"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "available_theme_colors":
-            List<dynamic>.from(availableThemeColors.map((x) => x.toJson())),
-        "selected_theme_color": selectedThemeColor.toJson(),
-      };
+  static List<BiographyWithEntities> fromList(List<Map<String, dynamic>> list) {
+    return list.map(BiographyWithEntities.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (entities != null) {
+      _data["entities"] = entities?.map((e) => e.toJson()).toList();
+    }
+    _data["raw_text"] = rawText;
+    return _data;
+  }
 }
 
-class SelectedThemeColorElement {
-  dynamic displayLabel;
-  dynamic dynamicValue;
+class Entities {
+  User? user;
 
-  SelectedThemeColorElement({
-    required this.displayLabel,
-    required this.dynamicValue,
-  });
+  Entities({this.user});
 
-  factory SelectedThemeColorElement.fromJson(Map<dynamic, dynamic> json) =>
-      SelectedThemeColorElement(
-        displayLabel: json["display_label"],
-        dynamicValue: json["dynamic_value"],
-      );
+  Entities.fromJson(Map<String, dynamic> json) {
+    user = json["user"] == null ? null : User.fromJson(json["user"]);
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "display_label": displayLabel,
-        "dynamic_value": dynamicValue,
-      };
+  static List<Entities> fromList(List<Map<String, dynamic>> list) {
+    return list.map(Entities.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (user != null) {
+      _data["user"] = user?.toJson();
+    }
+    return _data;
+  }
 }
 
-class NotMetaVerifiedFrictionInfo {
-  dynamic isEligibleForLabelFriction;
-  dynamic labelFrictionContent;
+class User {
+  String? id;
+  String? username;
 
-  NotMetaVerifiedFrictionInfo({
-    required this.isEligibleForLabelFriction,
-    required this.labelFrictionContent,
-  });
+  User({this.id, this.username});
 
-  factory NotMetaVerifiedFrictionInfo.fromJson(Map<dynamic, dynamic> json) =>
-      NotMetaVerifiedFrictionInfo(
-        isEligibleForLabelFriction: json["is_eligible_for_label_friction"],
-        labelFrictionContent: json["label_friction_content"],
-      );
+  User.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    username = json["username"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "is_eligible_for_label_friction": isEligibleForLabelFriction,
-        "label_friction_content": labelFrictionContent,
-      };
+  static List<User> fromList(List<Map<String, dynamic>> list) {
+    return list.map(User.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["id"] = id;
+    _data["username"] = username;
+    return _data;
+  }
 }
 
-class PinnedChannelsInfo {
-  dynamic hasPublicChannels;
-  List<dynamic> pinnedChannelsList;
+class BioLinks {
+  String? iconUrl;
+  String? imageUrl;
+  bool? isPinned;
+  bool? isVerified;
+  dynamic linkId;
+  String? linkType;
+  String? lynxUrl;
+  String? mediaType;
+  bool? openExternalUrlWithInAppBrowser;
+  String? title;
+  String? url;
 
-  PinnedChannelsInfo({
-    required this.hasPublicChannels,
-    required this.pinnedChannelsList,
-  });
+  BioLinks(
+      {this.iconUrl,
+      this.imageUrl,
+      this.isPinned,
+      this.isVerified,
+      this.linkId,
+      this.linkType,
+      this.lynxUrl,
+      this.mediaType,
+      this.openExternalUrlWithInAppBrowser,
+      this.title,
+      this.url});
 
-  factory PinnedChannelsInfo.fromJson(Map<dynamic, dynamic> json) =>
-      PinnedChannelsInfo(
-        hasPublicChannels: json["has_public_channels"],
-        pinnedChannelsList:
-            List<dynamic>.from(json["pinned_channels_list"].map((x) => x)),
-      );
+  BioLinks.fromJson(Map<String, dynamic> json) {
+    iconUrl = json["icon_url"];
+    imageUrl = json["image_url"];
+    isPinned = json["is_pinned"];
+    isVerified = json["is_verified"];
+    linkId = json["link_id"];
+    linkType = json["link_type"];
+    lynxUrl = json["lynx_url"];
+    mediaType = json["media_type"];
+    openExternalUrlWithInAppBrowser =
+        json["open_external_url_with_in_app_browser"];
+    title = json["title"];
+    url = json["url"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "has_public_channels": hasPublicChannels,
-        "pinned_channels_list":
-            List<dynamic>.from(pinnedChannelsList.map((x) => x)),
-      };
+  static List<BioLinks> fromList(List<Map<String, dynamic>> list) {
+    return list.map(BioLinks.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["icon_url"] = iconUrl;
+    _data["image_url"] = imageUrl;
+    _data["is_pinned"] = isPinned;
+    _data["is_verified"] = isVerified;
+    _data["link_id"] = linkId;
+    _data["link_type"] = linkType;
+    _data["lynx_url"] = lynxUrl;
+    _data["media_type"] = mediaType;
+    _data["open_external_url_with_in_app_browser"] =
+        openExternalUrlWithInAppBrowser;
+    _data["title"] = title;
+    _data["url"] = url;
+    return _data;
+  }
 }
 
-class ReconFeatures {
-  dynamic enableReconCta;
+class AvatarStatus {
+  bool? hasAvatar;
 
-  ReconFeatures({
-    required this.enableReconCta,
-  });
+  AvatarStatus({this.hasAvatar});
 
-  factory ReconFeatures.fromJson(Map<dynamic, dynamic> json) => ReconFeatures(
-        enableReconCta: json["enable_recon_cta"],
-      );
+  AvatarStatus.fromJson(Map<String, dynamic> json) {
+    hasAvatar = json["has_avatar"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "enable_recon_cta": enableReconCta,
-      };
+  static List<AvatarStatus> fromList(List<Map<String, dynamic>> list) {
+    return list.map(AvatarStatus.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["has_avatar"] = hasAvatar;
+    return _data;
+  }
 }
 
-class RecsFromFriends {
-  dynamic enableRecsFromFriends;
-  dynamic recsFromFriendsEntryPodynamicType;
+class ActiveStandaloneFundraisers {
+  List<dynamic>? fundraisers;
+  dynamic totalCount;
 
-  RecsFromFriends({
-    required this.enableRecsFromFriends,
-    required this.recsFromFriendsEntryPodynamicType,
-  });
+  ActiveStandaloneFundraisers({this.fundraisers, this.totalCount});
 
-  factory RecsFromFriends.fromJson(Map<dynamic, dynamic> json) =>
-      RecsFromFriends(
-        enableRecsFromFriends: json["enable_recs_from_friends"],
-        recsFromFriendsEntryPodynamicType:
-            json["recs_from_friends_entry_podynamic_type"],
-      );
+  ActiveStandaloneFundraisers.fromJson(Map<String, dynamic> json) {
+    fundraisers = json["fundraisers"] ?? [];
+    totalCount = json["total_count"];
+  }
 
-  Map<dynamic, dynamic> toJson() => {
-        "enable_recs_from_friends": enableRecsFromFriends,
-        "recs_from_friends_entry_podynamic_type":
-            recsFromFriendsEntryPodynamicType,
-      };
+  static List<ActiveStandaloneFundraisers> fromList(
+      List<Map<String, dynamic>> list) {
+    return list.map(ActiveStandaloneFundraisers.fromJson).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (fundraisers != null) {
+      _data["fundraisers"] = fundraisers;
+    }
+    _data["total_count"] = totalCount;
+    return _data;
+  }
 }

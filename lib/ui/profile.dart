@@ -148,7 +148,7 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           children: [
                             Text(
-                              data.data.username.toString(),
+                              data.data!.username.toString(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
@@ -191,8 +191,8 @@ class _ProfileState extends State<Profile> {
                                     shape: BoxShape.circle),
                                 child: CircleAvatar(
                                   radius: 48,
-                                  backgroundImage:
-                                      NetworkImage(data.data.profilePicUrl.toString()),
+                                  backgroundImage: NetworkImage(
+                                      data.data!.profilePicUrl.toString()),
                                 ),
                               ),
                               SizedBox(
@@ -220,7 +220,7 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data.data.fullName.toString(),
+                                data.data!.fullName.toString(),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 14),
                               ),
@@ -239,7 +239,7 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      data.data.followerCount.toString(),
+                                      data.data!.followerCount.toString(),
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
                                     ),
@@ -256,7 +256,7 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      data.data.followingCount.toString(),
+                                      data.data!.followingCount.toString(),
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
                                     ),

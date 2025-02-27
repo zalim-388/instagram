@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,29 +35,34 @@ class _HomepageState extends State<Homepage> {
   ];
 
   int currentindex = 0;
-
+  int likeCount = 0;
   bool favorite = false;
 
   void isfavorite() {
-  setState(() {
-    favorite = !favorite;
-  });
-}
-List<Widget> imageSliders = [];
+    setState(() {
+      favorite = !favorite;
+    });
+  }
 
-@override
-void initState() {
-  super.initState();
-  BlocProvider.of<SearchReelBloc>(context).add(fetchSearchReel());
-  // imageSliders = imgList
-  //     .map((item) => ClipRRect(
-  //           child: Image.network(
-  //             item,
-  //             fit: BoxFit.cover,
-  //           ),
-  //         ))
-  //     .toList();
-}
+  void updateLikeCount() {
+    BlocProvider.of<SearchReelBloc>(context).add(UpdateLikeEvent());
+  }
+
+  List<Widget> imageSliders = [];
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<SearchReelBloc>(context).add(fetchSearchReel());
+    // imageSliders = imgList
+    //     .map((item) => ClipRRect(
+    //           child: Image.network(
+    //             item,
+    //             fit: BoxFit.cover,
+    //           ),
+    //         ))
+    //     .toList();
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,14 +229,13 @@ void initState() {
                           ],
                         ),
                         CarouselSlider(
-                          items:[
-                            Image.network(
-                              data.data.items[0].carouselMedia
-                                  .toString(),
+                          items: data.data.items[0].carouselMedia!
+                              .map<Widget>((url) {
+                            return Image.network(
+                              data.data.items[0].carouselMedia!.toString(),
                               fit: BoxFit.cover,
-                            ),
-                          ],
-                     
+                            );
+                          }).toList(),
                           options: CarouselOptions(
                             onPageChanged: (index, reason) {
                               setState(() {
@@ -249,16 +250,29 @@ void initState() {
                         Row(
                           children: [
                             IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  favorite
-                                      ? Icons.favorite
-                                      : Icons.favorite_border_outlined,
-                                  color: favorite ? Colors.red : Colors.white,
-                                  size: 25,
-                                )),
+                              onPressed: () {
+                                setState(() {
+                                  favorite = !favorite;
+                                  if (favorite) {
+                                    data.data.items[0].likeCount =
+                                        (data.data.items[0].likeCount ?? 0) + 0;
+                                  } else {
+                                    data.data.items[0].likeCount =
+                                        (data.data.items[0].likeCount ?? 1) - 1;
+                                  }
+                                });
+                                updateLikeCount();
+                              },
+                              icon: Icon(
+                                favorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border_outlined,
+                                color: favorite ? Colors.red : Colors.white,
+                                size: 25,
+                              ),
+                            ),
                             Text(
-                              data.data.items[0].likeCount.toString(),
+                              data.data.items[0].likeCount?.toString() ?? '',
                               style: TextStyle(color: Colors.white),
                             ),
                             IconButton(
@@ -289,8 +303,10 @@ void initState() {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: imgList.map((url) {
-                                int index = imgList.indexOf(url);
+                              children: data.data.items[0].carouselMedia!
+                                  .map<Widget>((url) {
+                                int index = data.data.items[0].carouselMedia!
+                                    .indexOf(url);
                                 return Container(
                                   width: 6.0,
                                   height: 6.0,
@@ -337,8 +353,8 @@ void initState() {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            // 'trentarnold66 ChristmasNumber 1 #YNWA ',
-                            data.data.items[0].caption.toString(),
+                            'trentarnold66 ChristmasNumber 1 #YNWA ',
+                            // data.data.items[0].caption.toString(),
                             style: TextStyle(color: Colors.white, fontSize: 13),
                           ),
                         ),
@@ -402,7 +418,247 @@ void initState() {
                           'assets/image/imagesvoltaxMediaLibrarymmsportl.png',
                           // data.data.items[0].carouselMedia.toString(),
                           fit: BoxFit.cover,
-                        )
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  favorite = !favorite;
+                                  if (favorite) {
+                                    data.data.items[0].likeCount =
+                                        (data.data.items[0].likeCount ?? 0) + 0;
+                                  } else {
+                                    data.data.items[0].likeCount =
+                                        (data.data.items[0].likeCount ?? 1) - 1;
+                                  }
+                                });
+                                updateLikeCount();
+                              },
+                              icon: Icon(
+                                favorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border_outlined,
+                                color: favorite ? Colors.red : Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                            Text(
+                              data.data.items[0].likeCount?.toString() ?? '',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.chat_bubble_outline_outlined,
+                                  color: Colors.white,
+                                  size: 25,
+                                )),
+                            Text(
+                              data.data.items[0].commentCount.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Transform.rotate(
+                              angle: -0.5,
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.send_outlined,
+                                    color: Colors.white,
+                                    size: 25,
+                                  )),
+                            ),
+                            // Text(data.data.items[0].shareCountDisabled.toString(),
+                            //     style: TextStyle(color: Colors.white)),
+                            SizedBox(
+                              width: 20.w,
+                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: data.data.items[0].carouselMedia!
+                            //       .map<Widget>((url) {
+                            //     int index = data.data.items[0].carouselMedia!
+                            //         .indexOf(url);
+                            //     return Container(
+                            //       width: 6.0,
+                            //       height: 6.0,
+                            //       margin: const EdgeInsets.symmetric(
+                            //           vertical: 10.0, horizontal: 2.0),
+                            //       decoration: BoxDecoration(
+                            //         shape: BoxShape.circle,
+                            //         color: currentindex == index
+                            //             ? Colors.blue
+                            //             : Colors.white,
+                            //       ),
+                            //     );
+                            //   }).toList(),
+                            // ),
+                            SizedBox(
+                              width: 90.w,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.bookmark_outline_sharp,
+                                  size: 25,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                        Text(data.data.items[0].takenAtDate.year.isOdd
+                            .toString()),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                                radius: 20,
+                                backgroundImage: NetworkImage(data.data.items[0]
+                                    .taggedUsers[0].user.profilePicUrl)
+                                // AssetImage(
+                                //     'assets/image/liverpool_logo_PNG5.png'),
+                                ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    // 'Liverpoolfc',
+                                    data.data.items[0].taggedUsers[0].user
+                                        .fullName,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  ),
+                                  Text(
+                                    '   Anfield,Liverpool',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 0.w),
+                            Icon(
+                              Icons.verified,
+                              color: Colors.blue,
+                              size: 16,
+                            ),
+                            SizedBox(
+                              width: 175.w,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.more_vert_outlined,
+                                  color: Colors.white,
+                                )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+
+                        Image.network(data.data.items[0].thumbnailUrl),
+                        // Image.asset(
+                        //   'assets/image/imagesvoltaxMediaLibrarymmsportl.png',
+                        //   // data.data.items[0].carouselMedia.toString(),
+                        //   fit: BoxFit.cover,
+                        // ),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  favorite = !favorite;
+                                  if (favorite) {
+                                    data.data.items[0].likeCount =
+                                        (data.data.items[0].likeCount ?? 0) + 0;
+                                  } else {
+                                    data.data.items[0].likeCount =
+                                        (data.data.items[0].likeCount ?? 1) - 1;
+                                  }
+                                });
+                                updateLikeCount();
+                              },
+                              icon: Icon(
+                                favorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border_outlined,
+                                color: favorite ? Colors.red : Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                            Text(
+                              data.data.items[0].likeCount?.toString() ?? '',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.chat_bubble_outline_outlined,
+                                  color: Colors.white,
+                                  size: 25,
+                                )),
+                            Text(
+                              data.data.items[0].commentCount.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Transform.rotate(
+                              angle: -0.5,
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.send_outlined,
+                                    color: Colors.white,
+                                    size: 25,
+                                  )),
+                            ),
+                            // Text(data.data.items[0].shareCountDisabled.toString(),
+                            //     style: TextStyle(color: Colors.white)),
+                            SizedBox(
+                              width: 20.w,
+                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: data.data.items[0].carouselMedia!
+                            //       .map<Widget>((url) {
+                            //     int index = data.data.items[0].carouselMedia!
+                            //         .indexOf(url);
+                            //     return Container(
+                            //       width: 6.0,
+                            //       height: 6.0,
+                            //       margin: const EdgeInsets.symmetric(
+                            //           vertical: 10.0, horizontal: 2.0),
+                            //       decoration: BoxDecoration(
+                            //         shape: BoxShape.circle,
+                            //         color: currentindex == index
+                            //             ? Colors.blue
+                            //             : Colors.white,
+                            //       ),
+                            //     );
+                            //   }).toList(),
+                            // ),
+                            SizedBox(
+                              width: 90.w,
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.bookmark_outline_sharp,
+                                  size: 25,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
+                        Text(data.data.items[0].takenAtDate.year.isOdd
+                            .toString())
                       ]);
                     }
                     return Container();

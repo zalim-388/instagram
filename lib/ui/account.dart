@@ -27,7 +27,6 @@ class _AccountState extends State<Account> {
             SizedBox(
               height: 180.h,
             ),
-           
             BlocBuilder<InstaBloc, InstaState>(builder: (context, state) {
               if (state is InstaBlocLoading) {
                 print('loading...');
@@ -45,71 +44,66 @@ class _AccountState extends State<Account> {
               } else if (state is InstaBlocLoaded) {
                 var data = state.instagram;
 
-                return  
-                Column(
+                return Column(
                   children: [
                     Image.asset(
-                                  'assets/image/Instagram Logo (1).png',
-                                  fit: BoxFit.contain,
-                                  height: 44.h,
-                                  width: 182.w,
-                                ),
-                
-                SizedBox(
-                  height: 40.h,
-                ),
-                Container(
-                  height: 96.h,
-                  width: 96.w,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 3),
-                    shape: BoxShape.circle,
-                  ),
-                  child: CircleAvatar(
-                    radius: 48,
-                    backgroundImage: NetworkImage(data.data.profilePicUrl.toString()),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Text(
-                  data.data.username.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-
-GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
+                      'assets/image/Instagram Logo (1).png',
+                      fit: BoxFit.contain,
+                      height: 44.h,
+                      width: 182.w,
+                    ),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    Container(
+                      height: 96.h,
+                      width: 96.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey, width: 3),
+                        shape: BoxShape.circle,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 44.h,
-                    width: 307.w,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(5),
+                      child: CircleAvatar(
+                        radius: 48,
+                        backgroundImage: NetworkImage(data.data!.profilePicUrl.toString()),
+                      ),
                     ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Log in',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    SizedBox(
+                      height: 15.h,
                     ),
-                  ),
-                ),
-
+                    Text(
+                      data.data!.username.toString(),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Login(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 44.h,
+                        width: 307.w,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Log in',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }
               return Container();
-                
             }),
             SizedBox(
               height: 20.h,
@@ -130,7 +124,7 @@ GestureDetector(
               color: Colors.grey.shade800,
               thickness: 1,
             ),
-              SizedBox(
+            SizedBox(
               height: 15.h,
             ),
             RichText(
