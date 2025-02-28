@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram/bloc/post/post_bloc_bloc.dart';
 import 'package:instagram/bloc/search_reel/search_reel_bloc.dart';
 
 class Homepage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   void updateLikeCount() {
-    BlocProvider.of<SearchReelBloc>(context).add(UpdateLikeEvent());
+    BlocProvider.of<PostBlocBloc>(context).add(UpdateLikeEvent());
   }
 
   List<Widget> imageSliders = [];
@@ -69,7 +70,7 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 15,
+          horizontal: 8,
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 30),
@@ -159,27 +160,27 @@ class _HomepageState extends State<Homepage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                BlocBuilder<SearchReelBloc, SearchReelState>(
+                BlocBuilder<PostBlocBloc, PostBlocState>(
                   builder: (context, state) {
-                    if (state is SearchReelBlocLoading) {
+                    if (state is postBlocLoading) {
                       print('Loading..');
                       return Center(
                         child: CircularProgressIndicator(
                           color: Colors.green,
                         ),
                       );
-                    } else if (state is SearchReelBlocError) {
+                    } else if (state is postBlocError) {
                       return Center(
                         child: Text(
                           'something went worng',
                           style: TextStyle(color: Colors.white),
                         ),
                       );
-                    } else if (state is SearchReelBlocLoaded) {
-                      var data = state.searchreel;
-                      // imgList = data.data.items[0].carouselMedia!
-                      //     .map<String>((item) => item.mediaName.toString())
-                      //     .toList();
+                    } else if (state is postBlocLoaded) {
+                      var data = state.posts;
+
+                      var imageSliders = data.data.items[0].carouselMedia!;
+
                       return Column(children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +219,7 @@ class _HomepageState extends State<Homepage> {
                               size: 16,
                             ),
                             SizedBox(
-                              width: 175.w,
+                              width: 185.w,
                             ),
                             IconButton(
                                 onPressed: () {},
@@ -229,10 +230,9 @@ class _HomepageState extends State<Homepage> {
                           ],
                         ),
                         CarouselSlider(
-                          items: data.data.items[0].carouselMedia!
-                              .map<Widget>((url) {
+                          items: imageSliders.map<Widget>((Media) {
                             return Image.network(
-                              data.data.items[0].carouselMedia!.toString(),
+                              Media.imageVersions.items[2].url,
                               fit: BoxFit.cover,
                             );
                           }).toList(),
@@ -303,10 +303,8 @@ class _HomepageState extends State<Homepage> {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: data.data.items[0].carouselMedia!
-                                  .map<Widget>((url) {
-                                int index = data.data.items[0].carouselMedia!
-                                    .indexOf(url);
+                              children:
+                                  List.generate(imageSliders.length, (index) {
                                 return Container(
                                   width: 6.0,
                                   height: 6.0,
@@ -322,7 +320,7 @@ class _HomepageState extends State<Homepage> {
                               }).toList(),
                             ),
                             SizedBox(
-                              width: 90.w,
+                              width: 105.w,
                             ),
                             IconButton(
                                 onPressed: () {},
@@ -333,42 +331,54 @@ class _HomepageState extends State<Homepage> {
                                 ))
                           ],
                         ),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 10,
-                              backgroundImage: AssetImage(
-                                  'assets/image/liverpool_logo_PNG5.png'),
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text(
-                              'Like by liverpoolfc and others',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
-                            ),
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'trentarnold66 ChristmasNumber 1 #YNWA ',
-                            // data.data.items[0].caption.toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 13),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 10,
+                                    backgroundImage: AssetImage(
+                                        'assets/image/liverpool_logo_PNG5.png'),
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Text(
+                                    'Like by liverpoolfc and others',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'trentarnold66 ChristmasNumber 1 #YNWA ',
+                                  // data.data.items[0].caption.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 13),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '23 December 2024 ',
+                                  style: TextStyle(
+                                      color: Colors.white54, fontSize: 12),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            '23 December 2024 ',
-                            style:
-                                TextStyle(color: Colors.white54, fontSize: 12),
-                          ),
-                        ),
+
                         SizedBox(
                           height: 30.h,
                         ),
@@ -390,7 +400,7 @@ class _HomepageState extends State<Homepage> {
                                         color: Colors.white, fontSize: 14),
                                   ),
                                   Text(
-                                    '   Anfield,Liverpool',
+                                    ' Anfield,Liverpool',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 12),
                                   )
@@ -404,7 +414,7 @@ class _HomepageState extends State<Homepage> {
                               size: 16,
                             ),
                             SizedBox(
-                              width: 175.w,
+                              width: 190.w,
                             ),
                             IconButton(
                                 onPressed: () {},
@@ -494,7 +504,7 @@ class _HomepageState extends State<Homepage> {
                             //   }).toList(),
                             // ),
                             SizedBox(
-                              width: 90.w,
+                              width: 105.w,
                             ),
                             IconButton(
                                 onPressed: () {},
@@ -505,11 +515,36 @@ class _HomepageState extends State<Homepage> {
                                 ))
                           ],
                         ),
-                        Text(data.data.items[0].takenAtDate.year.isOdd
-                            .toString()),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '@Liverpool#YNWA ',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 13),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  '2 December 2025 ',
+                                  style: TextStyle(
+                                      color: Colors.white54, fontSize: 12),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
 
                         SizedBox(
-                          height: 5,
+                          height: 15,
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -533,7 +568,7 @@ class _HomepageState extends State<Homepage> {
                                         color: Colors.white, fontSize: 14),
                                   ),
                                   Text(
-                                    '   Anfield,Liverpool',
+                                    '  Anfield,Liverpool',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 12),
                                   )
@@ -547,7 +582,7 @@ class _HomepageState extends State<Homepage> {
                               size: 16,
                             ),
                             SizedBox(
-                              width: 175.w,
+                              width: 190.w,
                             ),
                             IconButton(
                                 onPressed: () {},
@@ -646,7 +681,7 @@ class _HomepageState extends State<Homepage> {
                             //   }).toList(),
                             // ),
                             SizedBox(
-                              width: 90.w,
+                              width: 105.w,
                             ),
                             IconButton(
                                 onPressed: () {},
@@ -657,8 +692,11 @@ class _HomepageState extends State<Homepage> {
                                 ))
                           ],
                         ),
-                        Text(data.data.items[0].takenAtDate.year.isOdd
-                            .toString())
+                        Padding(
+                          padding: const EdgeInsets.only(right: 180),
+                          child: Text(data.data.items[0].caption?.text ?? '',
+                              style: TextStyle(color: Colors.white)),
+                        )
                       ]);
                     }
                     return Container();

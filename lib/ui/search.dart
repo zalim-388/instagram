@@ -169,7 +169,7 @@ class _SearchState extends State<Search> {
                 );
               } else if (state is SearchReelBlocLoaded) {
                 var data = state.searchreel;
-                data.data.items.shuffle();
+                data.data.additionalData;
                 if (_controller.text.isNotEmpty) {
                   return Expanded(
                       child: GridView.builder(
