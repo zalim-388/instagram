@@ -153,53 +153,48 @@ class _SearchState extends State<Search> {
                   )),
               ],
             );
-          } else {
-            return BlocBuilder<SearchReelBloc, SearchReelState>(
-                builder: (context, state) {
-              if (state is SearchReelBlocLoading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is searchBlocError) {
-                return Center(
-                  child: Text(
-                    'Something went wrong!',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  ),
-                );
-              } else if (state is SearchReelBlocLoaded) {
-                var data = state.searchreel;
-                data.data.additionalData;
-                if (_controller.text.isNotEmpty) {
-                  return Expanded(
-                      child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      childAspectRatio: 1,
-                    ),
-                    itemCount: data.data.items.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: 449.h,
-                        width: 360.w,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  data.data.items[0].thumbnailUrl.toString()),
-                              fit: BoxFit.cover),
-                          shape: BoxShape.rectangle,
-                        ),
-                      );
-                    },
-                  ));
-                }
-              }
+          }return Container();
+          // } else {
+          //   return BlocBuilder<SearchReelBloc, SearchReelState>(
+          //       builder: (context, state) {
+          //     if (state is SearchReelBlocLoading) {
+          //       return Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     } else if (state is searchBlocError) {
+          //       return Center(
+          //         child: Text(
+          //           'Something went wrong!',
+          //           style: TextStyle(color: Colors.white, fontSize: 25),
+          //         ),
+          //       );
+          //     } else if (state is SearchReelBlocLoaded) {
+          //       var data = state.searchreel;
+          //       data.data.items;
+          //       if (_controller.text.isNotEmpty) {
+          //         return Expanded(
+          //             child: ListView.builder(
+          //           itemCount: data.data.items.length,
+          //           itemBuilder: (context, index) {
+          //             return Container(
+          //               height: 200.h,
+          //               width: 250.w,
+          //               decoration: BoxDecoration(
+          //                 image: DecorationImage(
+          //                     image: NetworkImage(
+          //                         data.data.items[0].thumbnailUrl),
+          //                     fit: BoxFit.cover),
+          //                 shape: BoxShape.circle,
+          //               ),
+          //             );
+          //           },
+          //         ));
+          //       }
+          //     }
 
-              return Container();
-            });
-          }
+          //     return Container();
+          //   });
+          // }
         }));
   }
 }

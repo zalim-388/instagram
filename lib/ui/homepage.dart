@@ -54,7 +54,7 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SearchReelBloc>(context).add(fetchSearchReel());
+   BlocProvider.of<PostBlocBloc>(context).add(UpdateLikeEvent());
     // imageSliders = imgList
     //     .map((item) => ClipRRect(
     //           child: Image.network(

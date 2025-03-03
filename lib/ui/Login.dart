@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/ui/bottomnavi.dart';
-
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,6 +12,32 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final FirebaseAuth_auth = FirebaseAuth.instance;
+  final TextEditingController _emilcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
+  bool isloading = false;
+
+  Future<void> _loginUser(dynamic _auth) async {
+    setState(() {
+      isloading = true;
+    });
+
+    try {
+      await _auth.signInWithEmailAndPassword(
+          email: _emilcontroller.text, password: _passwordcontroller.text);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => BottomNav()));
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Login failed")),
+      );
+    }
+
+    setState(() {
+      isloading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +70,7 @@ class _LoginState extends State<Login> {
                 height: 50.h,
               ),
               TextField(
+                controller: _emilcontroller,
                 decoration: InputDecoration(
                     hintText: 'username',
                     hintStyle: TextStyle(color: Colors.grey),
@@ -55,6 +83,7 @@ class _LoginState extends State<Login> {
                 height: 20.h,
               ),
               TextField(
+                controller: _passwordcontroller,
                 decoration: InputDecoration(
                     hintText: 'password',
                     hintStyle: TextStyle(color: Colors.grey),
@@ -80,7 +109,11 @@ class _LoginState extends State<Login> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav(),));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNav(),
+                      ));
                 },
                 child: Container(
                   height: 44.h,
@@ -132,16 +165,12 @@ class _LoginState extends State<Login> {
               RichText(
                   text: TextSpan(
                       text: 'Don’t have an account?',
-                      style: TextStyle(color: Colors.grey,fontSize: 14),
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
                       children: <TextSpan>[
-                        TextSpan(
-                          text: 'Sign up.',style: TextStyle(color: Colors.blue,fontSize: 14)
-                        )
-                      ]
-                      
-                      )),
-                      
-                      
+                    TextSpan(
+                        text: 'Sign up.',
+                        style: TextStyle(color: Colors.blue, fontSize: 14))
+                  ])),
             ],
           ),
         ),

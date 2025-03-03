@@ -15,7 +15,7 @@ class StoryBloc extends Bloc<StoryEvent, StoryState> {
         Stories = await api.getStory();
         emit(StoryBlocLoaded(Stories: Stories));
       } catch (e) {
-        print("0000000000000000000000${e}");
+        print("111111${e}");
         emit(StoryBlocError());
       }
     });
