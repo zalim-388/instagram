@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram/ui/bottomnavi.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -12,31 +10,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final FirebaseAuth_auth = FirebaseAuth.instance;
-  final TextEditingController _emilcontroller = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
   bool isloading = false;
-
-  Future<void> _loginUser(dynamic _auth) async {
-    setState(() {
-      isloading = true;
-    });
-
-    try {
-      await _auth.signInWithEmailAndPassword(
-          email: _emilcontroller.text, password: _passwordcontroller.text);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => BottomNav()));
-    } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message ?? "Login failed")),
-      );
-    }
-
-    setState(() {
-      isloading = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +47,10 @@ class _LoginState extends State<Login> {
                 height: 50.h,
               ),
               TextField(
-                controller: _emilcontroller,
+                controller: _emailcontroller,
                 decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
                     hintText: 'username',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
@@ -84,7 +63,10 @@ class _LoginState extends State<Login> {
               ),
               TextField(
                 controller: _passwordcontroller,
+                obscureText: true,
                 decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
                     hintText: 'password',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
@@ -98,7 +80,8 @@ class _LoginState extends State<Login> {
               Padding(
                   padding: const EdgeInsets.only(left: 230),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        _forgotpassword(context, _auth, _emailcontroller),
                     child: Text(
                       'Forgot password?',
                       style: TextStyle(color: Colors.blue),
@@ -108,13 +91,11 @@ class _LoginState extends State<Login> {
                 height: 20.h,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BottomNav(),
-                      ));
-                },
+                onTap: () => _Login(
+                  context,
+                  _emailcontroller.text,
+                  _passwordcontroller.text,
+                ),
                 child: Container(
                   height: 44.h,
                   width: 343.w,
@@ -123,10 +104,12 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   alignment: Alignment.center,
-                  child: Text(
-                    'Log in',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
+                  child: isloading
+                      ? CircularProgressIndicator(color: Colors.white)
+                      : Text(
+                          'Log in',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                 ),
               ),
               SizedBox(
@@ -177,4 +160,159 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+ Future<void> _Login(
+  BuildContext context,
+  String email,
+  String password,
+) async {
+  if (email.isEmpty || password.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Please enter both email and password.")),
+    );
+    return;
+  }
+
+  setState(() {
+    isloading = true;
+  });
+
+  try {
+    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      email: email.trim(),
+      password: password.trim(),
+    );
+    // Rest of your existing code...
+  } on FirebaseAuthException catch (e) {
+    // Existing error handling...
+  } catch (e) {
+    // Existing catch block...
+  } finally {
+    setState(() {
+      isloading = false;
+    });
+  }
+}
+
+Future<void> _forgotpassword(
+    BuildContext context, _auth, dynamic _emailcontroller) async {
+  try {
+    await _auth.sendPasswordResetEmail(email: _emailcontroller);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Check your email for the password rest link")));
+  } catch (e) {
+    print("forget paassword$e");
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Rest attempt unsuccessful.please Confirm youer email")));
+  }
+}
+
+// class LoginPage extends StatelessWidget {
+//   final FirebaseAuth _auth = FirebaseAuth.instance;
+//   final TextEditingController _emailController = TextEditingController();
+//   final TextEditingController _passwordController = TextEditingController();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Login"),
+//         backgroundColor: Colors.red[900],
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.only(top: 100, left: 30, right: 30),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             TextFormField(
+//               controller: _emailController,
+//               decoration: const InputDecoration(
+//                 labelText: 'Email',
+//               ),
+//             ),
+//             SizedBox(
+//               height: 25,
+//             ),
+//             TextFormField(
+//               controller: _passwordController,
+//               decoration: InputDecoration(
+//                 labelText: 'Password',
+//               ),
+//               obscureText: true,
+//             ),
+//             ElevatedButton(
+//               onPressed: () => _login(context),
+//               child: Text('Login'),
+//             ),
+//             TextButton(
+//               onPressed: () {
+//                 _forgotPassword(context);
+//               },
+//               child: Text(
+//                 'Forgot Password',
+//                 style: TextStyle(color: Colors.black),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   // Future<void> _login(BuildContext context) async {
+//   //   try {
+//   //     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+//   //       email: _emailController.text,
+//   //       password: _passwordController.text,
+//   //     );
+
+//   //     if (userCredential.user != null) {
+//   //       if (userCredential.user!.emailVerified) {
+//   //         print("User logged in: ${userCredential.user!.uid}");
+//   //         Navigator.pushReplacement(
+//   //           context,
+//   //           MaterialPageRoute(builder: (context) => StudentListScreen()),
+//   //         );
+//   //       } else {
+//   //         print("User's email is not verified.");
+//   //         ScaffoldMessenger.of(context).showSnackBar(
+//   //           SnackBar(
+//   //             content: Text(
+//   //                 "Your email is not verified. Please verify your email before logging in."),
+//   //           ),
+//   //         );
+//   //       }
+//   //     } else {
+//   //       print("Login failed.");
+//   //       ScaffoldMessenger.of(context).showSnackBar(
+//   //         SnackBar(content: Text("Login failed. Check your Details")),
+//   //       );
+//   //     }
+//   //   } catch (e) {
+//   //     print("Login error: $e");
+//   //     ScaffoldMessenger.of(context).showSnackBar(
+//   //       SnackBar(content: Text("Login failed. Add valid Details.")),
+//   //     );
+//   //   }
+//   // }
+
+//   Future<void> _forgotPassword(BuildContext context) async {
+//     try {
+//       await _auth.sendPasswordResetEmail(email: _emailController.text);
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(
+//           content: Text("Password reset email sent. Check your inbox."),
+//         ),
+//       );
+//     } catch (e) {
+//       print("Forgot Password error: $e");
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(
+//           content: Text("Password reset failed. Check your email address."),
+//         ),
+//       );
+//     }
+//   }
+// }
 }

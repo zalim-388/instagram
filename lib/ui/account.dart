@@ -15,7 +15,7 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<InstaBloc>(context).add(Fecthinsta());
+    // BlocProvider.of<InstaBloc>(context).add(Fecthinsta());
   }
 
   Widget build(BuildContext context) {
@@ -27,24 +27,24 @@ class _AccountState extends State<Account> {
             SizedBox(
               height: 180.h,
             ),
-            BlocBuilder<InstaBloc, InstaState>(builder: (context, state) {
-              if (state is InstaBlocLoading) {
-                print('loading...');
+            // BlocBuilder<InstaBloc, InstaState>(builder: (context, state) {
+            //   if (state is InstaBlocLoading) {
+            //     print('loading...');
 
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is InstaBlocError) {
-                return const Center(
-                  child: Text(
-                    'Something went wrong!',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  ),
-                );
-              } else if (state is InstaBlocLoaded) {
-                var data = state.instagram;
+            //     return const Center(
+            //       child: CircularProgressIndicator(),
+            //     );
+            //   } else if (state is InstaBlocError) {
+            //     return const Center(
+            //       child: Text(
+            //         'Something went wrong!',
+            //         style: TextStyle(color: Colors.white, fontSize: 25),
+            //       ),
+            //     );
+            //   } else if (state is InstaBlocLoaded) {
+            //     var data = state.instagram;
 
-                return Column(
+                Column(
                   children: [
                     Image.asset(
                       'assets/image/Instagram Logo (1).png',
@@ -64,14 +64,17 @@ class _AccountState extends State<Account> {
                       ),
                       child: CircleAvatar(
                         radius: 48,
-                        backgroundImage: NetworkImage(data.data!.profilePicUrl.toString()),
+                        backgroundColor: Colors.white,
+                        // backgroundImage: NetworkImage(data.data.user.profilePicUrl),
+
                       ),
                     ),
                     SizedBox(
                       height: 15.h,
                     ),
                     Text(
-                      data.data!.username.toString(),
+                      "Zaliiim__",
+                      // data.data.user.username.toString(),
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     SizedBox(
@@ -100,12 +103,8 @@ class _AccountState extends State<Account> {
                         ),
                       ),
                     ),
-                  ],
-                );
-              }
-              return Container();
-            }),
-            SizedBox(
+
+   SizedBox(
               height: 20.h,
             ),
             Align(
@@ -136,6 +135,13 @@ class _AccountState extends State<Account> {
                       text: 'Sign up.',
                       style: TextStyle(color: Colors.white, fontSize: 14))
                 ])),
+
+                  ],
+                )
+            //   }
+            //   return Container();
+            // }),
+         
           ]),
         ));
   }

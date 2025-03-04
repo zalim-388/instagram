@@ -148,7 +148,7 @@ class _ProfileState extends State<Profile> {
                         child: Row(
                           children: [
                             Text(
-                              data.data!.username.toString(),
+                              data.data.user.username.toString(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
@@ -192,7 +192,7 @@ class _ProfileState extends State<Profile> {
                                 child: CircleAvatar(
                                   radius: 48,
                                   backgroundImage: NetworkImage(
-                                      data.data!.profilePicUrl.toString()),
+                                      data.data.user. profilePicUrl.toString()),
                                 ),
                               ),
                               SizedBox(
@@ -220,7 +220,7 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data.data!.fullName.toString(),
+                               data.data.user.fullName.toString(),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 14),
                               ),
@@ -239,7 +239,7 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      data.data!.followerCount.toString(),
+                data.data.user.edgeFollow.count.toString(),
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
                                     ),
@@ -256,7 +256,8 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      data.data!.followingCount.toString(),
+                                        data.data.user.edgeFollowedBy.count.toString(),  
+                                //  data.data.user.followedByViewer,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 17),
                                     ),
