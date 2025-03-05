@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/bloc/profile/insta_bloc.dart';
 import 'package:instagram/ui/Login.dart';
+import 'package:instagram/ui/Registration.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -85,7 +86,7 @@ class _AccountState extends State<Account> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Login(),
+                            builder: (context) => Registration(),
                           ),
                         );
                       },

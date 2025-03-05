@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram/ui/bottomnavi.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -154,6 +155,13 @@ class _LoginState extends State<Login> {
                         text: 'Sign up.',
                         style: TextStyle(color: Colors.blue, fontSize: 14))
                   ])),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => BottomNav()));
+                },
+                child: Text('Already have an account'),
+              )
             ],
           ),
         ),
@@ -161,52 +169,90 @@ class _LoginState extends State<Login> {
     );
   }
 
- Future<void> _Login(
-  BuildContext context,
-  String email,
-  String password,
-) async {
-  if (email.isEmpty || password.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Please enter both email and password.")),
-    );
-    return;
-  }
+  Future<void> _Login(
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please enter both email and password.")),
+      );
 
-  setState(() {
-    isloading = true;
-  });
+      return;
+    }
 
-  try {
-    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-      email: email.trim(),
-      password: password.trim(),
-    );
-    // Rest of your existing code...
-  } on FirebaseAuthException catch (e) {
-    // Existing error handling...
-  } catch (e) {
-    // Existing catch block...
-  } finally {
     setState(() {
-      isloading = false;
+      isloading = true;
     });
-  }
-}
 
-Future<void> _forgotpassword(
-    BuildContext context, _auth, dynamic _emailcontroller) async {
-  try {
-    await _auth.sendPasswordResetEmail(email: _emailcontroller);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Check your email for the password rest link")));
-  } catch (e) {
-    print("forget paassword$e");
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Rest attempt unsuccessful.please Confirm youer email")));
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
+      if (userCredential.user != null) {
+        if (userCredential.user!.emailVerified) {
+          print("User Login: ${userCredential.user!.uid}");
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => BottomNav()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Email not verified. Check your email")),
+          );
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'invalid-credential':
+          errorMessage = 'Invalid email or password.';
+          break;
+        case 'user-not-found':
+          errorMessage = 'No account exists for this email.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Incorrect password.';
+          break;
+        case 'too-many-requests':
+          errorMessage =
+              'Device blocked due to unusual activity. Try again later.';
+          break;
+        default:
+          errorMessage = 'Login failed: ${e.message}';
+      }
+      print("Login error: ${e.code} - ${e.message}");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    } catch (e) {
+      print("Unexpected error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("An unexpected error occurred.")),
+      );
+    } finally {
+      setState(() {
+        isloading = false;
+      });
+    }
   }
-}
+
+  Future<void> _forgotpassword(
+      BuildContext context, _auth, dynamic _emailcontroller) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: _emailcontroller);
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Check your email for the password rest link")));
+    } catch (e) {
+      print("forget paassword$e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content:
+              Text("Rest attempt unsuccessful.please Confirm youer email")));
+    }
+  }
 
 // class LoginPage extends StatelessWidget {
 //   final FirebaseAuth _auth = FirebaseAuth.instance;
