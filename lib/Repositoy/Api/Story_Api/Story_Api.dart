@@ -9,7 +9,7 @@ class StoryApi {
 
   Future<StoryModel> getStory() async {
     String path =
-        'https://instagram-scraper-api2.p.rapidapi.com/v1/stories?username_or_id_or_url=zaliim__';
+        'https://instagram230.p.rapidapi.com/user/stories?user_id=zaliiim__';
 
     var body = '';
 

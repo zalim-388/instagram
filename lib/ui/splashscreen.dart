@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:instagram/ui/account.dart';
 
 class Splashscreen extends StatefulWidget {
@@ -33,7 +32,7 @@ class _SplashscreenState extends State<Splashscreen> {
       body: Column(
         children: [
           SizedBox(
-            height: 380.h,
+            height: 300.h,
           ),
           Center(
             child: Image.asset(
@@ -43,12 +42,24 @@ class _SplashscreenState extends State<Splashscreen> {
             ),
           ),
           SizedBox(
-            height: 280.h,
+            height: 350.h,
           ),
           Text(
             'From',
             style: TextStyle(color: Colors.grey, fontSize: 16),
-          )
+          ),
+
+
+ 
+              Row(
+                children: [SizedBox(width:  180,),
+                  Image.asset('assets/image/icons8-meta-24 (1).png',),
+                  Text("Meta",style: TextStyle(color: Colors.grey,fontSize: 20),)
+                ],
+              ),
+            
+
+
         ],
       ),
     );

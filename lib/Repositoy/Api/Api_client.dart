@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:http/http.dart';
+
 import 'api_exception.dart';
 
 class ApiClient {
@@ -49,8 +51,8 @@ class ApiClient {
           Uri.parse(url),
           headers: {
             'X-RapidAPI-Key':
-                '676ba820e3mshd41517a1ea902bap10b888jsnb345061c02ab',
-            'X-RapidAPI-Host': 'instagram-scraper-api2.p.rapidapi.com',
+                'ca62211e4cmshcd22b3f6295b989p18b2ccjsn35cbabc6e276',
+            'X-RapidAPI-Host': 'instagram230.p.rapidapi.com',
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },

@@ -8,13 +8,13 @@ import 'package:instagram/Repositoy/Model%20class/post%20model.dart';
 class postApi {
   ApiClient api = ApiClient();
 
-  Future<postmodel> getpost() async {
+  Future<Postmodel> getpost() async {
     String path =
-        'https://instagram-scraper-api2.p.rapidapi.com/v1/posts?username_or_id_or_url=trentarnold66';
+        'https://instagram230.p.rapidapi.com/user/posts?username=trentarnold66';
 
     var body = '';
 
     Response response = await api.invokeAPI(path, "GET", body);
-    return postmodel.fromJson(jsonDecode(response.body));
+    return Postmodel.fromJson(jsonDecode(response.body));
   }
 }

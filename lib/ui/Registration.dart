@@ -1,47 +1,58 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:instagram/ui/Login.dart';
+import 'package:instagram/ui/bottomnavi.dart';
 
-class Registration extends StatelessWidget {
+class RegistrationPage extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
 
-void _registration(BuildContext context) async {
-  try {
-    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-      email: _emailController.text.trim(), // Ensure no whitespace
-      password: _passwordController.text,
-    );
-    print("User registered: ${userCredential.user?.uid}");
-    await userCredential.user?.sendEmailVerification();
-    print("Email verification sent");
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Login()),
-    );
-  } catch (e) {
-    print("Registration error: $e");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Registration failed: $e')),
-    );
-  }
-}
-
-  Future<void> _signinwithgoogle(BuildContext context) async {
+  void _register(BuildContext context) async {
     try {
-      final GoogleSignIn _googlesignIn = GoogleSignIn();
-      await _googlesignIn.signOut;
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
 
-      final GoogleSignInAccount? Googleuser = await _googlesignIn.signIn();
+      // User has successfully registered
+      print("User registered: ${userCredential.user!.uid}");
 
-      if (Googleuser == null) {
+      // Send email verification
+      await userCredential.user?.sendEmailVerification();
+
+      // Navigate to the login page after successful registration
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => BottomNav()));
+    } catch (e) {
+      // Handle registration errors
+      print("Registration error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("check your email")),
+      );
+    }
+  }
+
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+      // Sign out of Google
+      await _googleSignIn.signOut();
+
+      // Start the Google sign-in process
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser == null) {
         print("Google Sign-In canceled by user.");
         return;
       }
-      final GoogleSignInAuthentication googleAuth =
-          await Googleuser!.authentication;
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
@@ -50,27 +61,19 @@ void _registration(BuildContext context) async {
           await _auth.signInWithCredential(credential);
 
       final User? user = userCredential.user;
-      print("sigined with Google ");
-      print("user id:${user?.uid}");
-      print("Email:${user?.email}");
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
-      } catch (error) {
-        print("Sign in with Google failed: $error");
-      }
+      print('Signed in with Google:');
+      print('User ID: ${user?.uid}');
+      print('Email: ${user?.email}');
+    } catch (error) {
+      print('Sign in with Google failed: $error');
     }
-  
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
+  }
 
-
-
-
-appBar: AppBar(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
           title: Text(
             "Registration",
             style: TextStyle(
@@ -95,30 +98,22 @@ appBar: AppBar(
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _registration(context);
+                  _register(context);
                 },
                 child: Text('Register'),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
+                      MaterialPageRoute(builder: (context) => BottomNav()));
                 },
                 child: Text('Already have an account'),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                // ElevatedButton(
-                //     onPressed: () {
-                //       Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => PhoneAuthScreen(),
-                //           ));
-                //     },
-                //     child: Icon(Icons.phone)),
-                // SizedBox(
-                //   width: 20,
-                // ),
+                ElevatedButton(onPressed: () {}, child: Icon(Icons.phone)),
+                SizedBox(
+                  width: 20,
+                ),
                 //       ElevatedButton(
                 //           onPressed: () => _signInWithGoogle(context),
                 //           child: Image.network(
@@ -127,7 +122,7 @@ appBar: AppBar(
                 // )               )
                 InkWell(
                     onTap: () {
-                      _signinwithgoogle(context);
+                      _signInWithGoogle(context);
 
                       print('Avatar pressed!');
                     },
@@ -139,11 +134,6 @@ appBar: AppBar(
               ])
             ],
           )),
-
-
-
-
-      );
-    }
+    );
   }
-
+}

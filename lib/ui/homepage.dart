@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram/bloc/post/post_bloc_bloc.dart';
-import 'package:instagram/bloc/search_reel/search_reel_bloc.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -14,7 +13,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   List<Map<String, String>> Story = [
-    {"Name": "Your Story", "image": "assets/image/IMG_20250211_083815_295.jpg"},
+    {"Name": "Your Story", "image": ""},
     {
       "Name": "trentarnold66",
       "image": "assets/image/bb51a152b060c49dde7bff9f0dbddd4b.png"
@@ -111,9 +110,15 @@ class _HomepageState extends State<Homepage> {
                     ],
                   ),
                 ),
+                
                 SizedBox(
                     height: 100.h,
-                    child: ListView.builder(
+                    child:
+
+
+                    
+                    
+                    ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: Story.length,
                       itemBuilder: (context, index) {
@@ -124,25 +129,28 @@ class _HomepageState extends State<Homepage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
-                                child: Container(
-                                  height: 70.h,
-                                  width: 70.w,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color(0xFFFBAA47),
-                                        Color(0xFFD91A46),
-                                        Color(0xFFA60F93)
-                                      ],
+                                child: GestureDetector(
+
+                                  child: Container(
+                                    height: 70.h,
+                                    width: 70.w,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color(0xFFFBAA47),
+                                          Color(0xFFD91A46),
+                                          Color(0xFFA60F93)
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(3),
-                                    child: CircleAvatar(
-                                      backgroundImage:
-                                          AssetImage(story["image"] ?? ''),
-                                      radius: 30,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(3),
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage(story["image"] ?? ''),
+                                        radius: 30,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -179,7 +187,7 @@ class _HomepageState extends State<Homepage> {
                     } else if (state is postBlocLoaded) {
                       var data = state.posts;
 
-                      var imageSliders = data.data.items[0].carouselMedia!;
+                      var imageSliders = data.items[0].carouselMedia!;
 
                       return Column(children: [
                         Row(
@@ -188,7 +196,7 @@ class _HomepageState extends State<Homepage> {
                             CircleAvatar(
                               radius: 20,
                               backgroundImage: NetworkImage(
-                                  data.data.user.profilePicUrl.toString()),
+                                  data.user.profilePicUrl.toString()),
                               // backgroundImage: AssetImage(
 
                               // // 'assets/image/bb51a152b060c49dde7bff9f0dbddd4b.png'),
@@ -199,7 +207,7 @@ class _HomepageState extends State<Homepage> {
                                 children: [
                                   Text(
                                     // "trentarnold66",
-                                    data.data.user.username.toString(),
+                                    data.user.username.toString(),
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 14),
                                   ),
@@ -232,7 +240,7 @@ class _HomepageState extends State<Homepage> {
                         CarouselSlider(
                           items: imageSliders.map<Widget>((Media) {
                             return Image.network(
-                              Media.imageVersions.items[2].url,
+                              Media.imageVersions2.toString(),
                               fit: BoxFit.cover,
                             );
                           }).toList(),
@@ -252,13 +260,13 @@ class _HomepageState extends State<Homepage> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  favorite = !favorite;
+                                  favorite = favorite;
                                   if (favorite) {
-                                    data.data.items[0].likeCount =
-                                        (data.data.items[0].likeCount ?? 0) + 0;
+                                    data.items[0].likeCount =
+                                        (data.items[0].likeCount) + 0;
                                   } else {
-                                    data.data.items[0].likeCount =
-                                        (data.data.items[0].likeCount ?? 1) - 1;
+                                    data.items[0].likeCount =
+                                        (data.items[0].likeCount) - 1;
                                   }
                                 });
                                 updateLikeCount();
@@ -272,7 +280,7 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                             Text(
-                              data.data.items[0].likeCount?.toString() ?? '',
+                              data.items[0].likeCount.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                             IconButton(
@@ -283,7 +291,7 @@ class _HomepageState extends State<Homepage> {
                                   size: 25,
                                 )),
                             Text(
-                              data.data.items[0].commentCount.toString(),
+                              data.items[0].commentCount.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                             Transform.rotate(
@@ -436,11 +444,11 @@ class _HomepageState extends State<Homepage> {
                                 setState(() {
                                   favorite = !favorite;
                                   if (favorite) {
-                                    data.data.items[0].likeCount =
-                                        (data.data.items[0].likeCount ?? 0) + 0;
+                                    data.items[0].likeCount =
+                                        (data.items[0].likeCount) + 0;
                                   } else {
-                                    data.data.items[0].likeCount =
-                                        (data.data.items[0].likeCount ?? 1) - 1;
+                                    data.items[0].likeCount =
+                                        (data.items[0].likeCount ) - 1;
                                   }
                                 });
                                 updateLikeCount();
@@ -454,7 +462,7 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                             Text(
-                              data.data.items[0].likeCount?.toString() ?? '',
+                              data.items[0].likeCount.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                             IconButton(
@@ -465,7 +473,7 @@ class _HomepageState extends State<Homepage> {
                                   size: 25,
                                 )),
                             Text(
-                              data.data.items[0].commentCount.toString(),
+                              data.items[0].commentCount.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                             Transform.rotate(
@@ -551,19 +559,20 @@ class _HomepageState extends State<Homepage> {
                           children: [
                             CircleAvatar(
                                 radius: 20,
-                                backgroundImage: NetworkImage(data.data.items[0]
-                                    .taggedUsers[0].user.profilePicUrl)
+                                // backgroundImage: NetworkImage(
+                                //     )
                                 // AssetImage(
                                 //     'assets/image/liverpool_logo_PNG5.png'),
+                            
                                 ),
                             Padding(
                               padding: const EdgeInsets.only(left: 0),
                               child: Column(
                                 children: [
                                   Text(
-                                    // 'Liverpoolfc',
-                                    data.data.items[0].taggedUsers[0].user
-                                        .fullName,
+                                    'Liverpoolfc',
+                                    // data.items[0].[0].user
+                                    //     .fullName,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 14),
                                   ),
@@ -596,7 +605,7 @@ class _HomepageState extends State<Homepage> {
                           height: 15,
                         ),
 
-                        Image.network(data.data.items[0].thumbnailUrl),
+                        // Image.network(data.items[0].),
                         // Image.asset(
                         //   'assets/image/imagesvoltaxMediaLibrarymmsportl.png',
                         //   // data.data.items[0].carouselMedia.toString(),
@@ -613,11 +622,11 @@ class _HomepageState extends State<Homepage> {
                                 setState(() {
                                   favorite = !favorite;
                                   if (favorite) {
-                                    data.data.items[0].likeCount =
-                                        (data.data.items[0].likeCount ?? 0) + 0;
+                                    data.items[0].likeCount =
+                                        (data.items[0].likeCount ) + 0;
                                   } else {
-                                    data.data.items[0].likeCount =
-                                        (data.data.items[0].likeCount ?? 1) - 1;
+                                    data.items[0].likeCount =
+                                        (data.items[0].likeCount ) - 1;
                                   }
                                 });
                                 updateLikeCount();
@@ -631,7 +640,7 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                             Text(
-                              data.data.items[0].likeCount?.toString() ?? '',
+                              data.items[0].likeCount.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                             IconButton(
@@ -642,7 +651,7 @@ class _HomepageState extends State<Homepage> {
                                   size: 25,
                                 )),
                             Text(
-                              data.data.items[0].commentCount.toString(),
+                              data.items[0].commentCount.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                             Transform.rotate(
@@ -694,7 +703,7 @@ class _HomepageState extends State<Homepage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 180),
-                          child: Text(data.data.items[0].caption?.text ?? '',
+                          child: Text(data.items[0].caption?.text ?? '',
                               style: TextStyle(color: Colors.white)),
                         )
                       ]);
@@ -710,3 +719,8 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
+
+ 
+  
+

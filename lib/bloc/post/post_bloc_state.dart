@@ -8,7 +8,7 @@ final class PostBlocInitial extends PostBlocState {}
 class postBlocLoading extends  PostBlocState{}
 
 class postBlocLoaded extends PostBlocState {
-  final postmodel posts;
+  final Postmodel posts;
 
   postBlocLoaded({required this.posts});
 }
