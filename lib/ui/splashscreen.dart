@@ -17,7 +17,7 @@ class _SplashscreenState extends State<Splashscreen> {
     super.initState();
 
     Timer(
-      Duration(seconds: 4),
+      Duration(seconds: 10),
       () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(

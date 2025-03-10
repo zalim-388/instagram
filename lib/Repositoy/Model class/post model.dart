@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-Postmodel postmodelFromJson(dynamic str) => Postmodel.fromJson(json.decode(str));
+Postmodel postmodelFromJson(String str) => Postmodel.fromJson(json.decode(str));
 
-dynamic postmodelToJson(Postmodel data) => json.encode(data.toJson());
+String postmodelToJson(Postmodel data) => json.encode(data.toJson());
 
 class Postmodel {
     dynamic profileGridItems;
@@ -16,10 +16,10 @@ class Postmodel {
     int numResults;
     bool moreAvailable;
     List<Item> items;
-    dynamic nextMaxId;
+    String nextMaxId;
     User user;
     bool autoLoadMoreEnabled;
-    dynamic status;
+    String status;
 
     Postmodel({
         required this.profileGridItems,
@@ -35,7 +35,7 @@ class Postmodel {
         required this.status,
     });
 
-    factory Postmodel.fromJson(Map<dynamic, dynamic> json) => Postmodel(
+    factory Postmodel.fromJson(Map<String, dynamic> json) => Postmodel(
         profileGridItems: json["profile_grid_items"],
         profileGridItemsCursor: json["profile_grid_items_cursor"],
         pinnedProfileGridItemsIds: json["pinned_profile_grid_items_ids"],
@@ -49,7 +49,7 @@ class Postmodel {
         status: json["status"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "profile_grid_items": profileGridItems,
         "profile_grid_items_cursor": profileGridItemsCursor,
         "pinned_profile_grid_items_ids": pinnedProfileGridItemsIds,
@@ -66,16 +66,16 @@ class Postmodel {
 
 class Item {
     int takenAt;
-    dynamic pk;
-    dynamic id;
-    dynamic fbid;
+    String pk;
+    String id;
+    String fbid;
     int deviceTimestamp;
     bool captionIsEdited;
-    dynamic strongId;
+    String strongId;
     int deletedReason;
     int hasSharedToFb;
     bool hasDelayedMetadata;
-    dynamic mezqlToken;
+    String mezqlToken;
     bool shareCountDisabled;
     bool shouldRequestAds;
     bool isReshareOfTextPostAppMediaInIg;
@@ -87,22 +87,23 @@ class Item {
     bool commentThreadingEnabled;
     bool isUnifiedVideo;
     CommercialityStatus commercialityStatus;
-    dynamic clientCacheKey;
+    String clientCacheKey;
     IntegrityReviewDecision integrityReviewDecision;
     bool hasPrivatelyLiked;
     int filterType;
-    
-    bool? photoOfYou;
+    Tags? usertags;
+    bool photoOfYou;
     bool canSeeInsightsAsBrand;
     int mediaType;
-    dynamic code;
+    String code;
     Caption? caption;
     SharingFrictionInfo sharingFrictionInfo;
-    List<dynamic> timelinePinnedUserIds;
+    List<int> timelinePinnedUserIds;
     bool hasViewsFetching;
-    dynamic accessibilityCaption;
-    bool originalMediaHasVisualReplyMedia;
-
+    String? accessibilityCaption;
+    bool? originalMediaHasVisualReplyMedia;
+    String displayUri;
+    Tags fbUserTags;
     List<User> coauthorProducers;
     bool coauthorProducerCanSeeOrganicInsights;
     List<dynamic> invitedCoauthorProducers;
@@ -113,19 +114,16 @@ class Item {
     ItemImageVersions2 imageVersions2;
     int originalWidth;
     int originalHeight;
-    MediaNotes mediaNotes;
     bool mediaReposterBottomsheetEnabled;
     bool enableMediaNotesProduction;
-    ItemProductType productType;
+    ProductType productType;
     bool isPaidPartnership;
-    MusicMetadata musicMetadata;
-    List<SocialContext> socialContext;
-    dynamic organicTrackingToken;
+    MusicMetadata? musicMetadata;
+    String organicTrackingToken;
     bool igMediaSharingDisabled;
-    CrosspostMetadata crosspostMetadata;
     dynamic boostUnavailableIdentifier;
     dynamic boostUnavailableReason;
-    dynamic boostUnavailableReasonV2;
+    List<dynamic> boostUnavailableReasonV2;
     bool subscribeCtaVisible;
     bool isCutoutStickerAllowed;
     GenAiDetectionMethod genAiDetectionMethod;
@@ -150,8 +148,6 @@ class Item {
     CommentInformTreatment commentInformTreatment;
     bool hasLiked;
     int likeCount;
-    List<User> facepileTopLikers;
-    List<dynamic> topLikers;
     List<dynamic> videoStickerLocales;
     List<dynamic> clipsTabPinnedUserIds;
     bool canViewerSave;
@@ -159,25 +155,36 @@ class Item {
     dynamic shopRoutingUserId;
     bool isOrganicProductTaggingEligible;
     dynamic igbioProduct;
-    List<dynamic> featuredProducts;
     List<dynamic> productSuggestions;
     bool isReuseAllowed;
     bool hasMoreComments;
     int maxNumVisiblePreviewComments;
     bool exploreHideComments;
     bool isOpenToPublicSubmission;
-    bool? canModifyCarousel;
-    dynamic commerceIntegrityReviewDecision;
-    dynamic openCarouselSubmissionState;
-    int? carouselMediaCount;
-    List<CarouselMedia>? carouselMedia;
-    int? carouselMediaPendingPostCount;
-    List<dynamic>? carouselMediaIds;
     Location? location;
     double? lng;
     double? lat;
-    CollabFollowButtonInfo? collabFollowButtonInfo;
-    bool? shouldOpenCollabBottomsheetOnFacepileTap;
+    bool? canModifyCarousel;
+    String? openCarouselSubmissionState;
+    int? carouselMediaCount;
+    List<CarouselMedia>? carouselMedia;
+    int? carouselMediaPendingPostCount;
+    List<String>? carouselMediaIds;
+    int? playCount;
+    int? igPlayCount;
+    List<dynamic>? creatorViewerInsights;
+    MediaCroppingInfo? mediaCroppingInfo;
+    bool? isArtistPick;
+    bool? isThirdPartyDownloadsEligible;
+    bool? areRemixesCrosspostable;
+    int? isDashEligible;
+    String? videoDashManifest;
+    int? numberOfQualities;
+    List<VideoVersion>? videoVersions;
+    double? videoDuration;
+    bool? hasAudio;
+    ClipsMetadata? clipsMetadata;
+    List<SponsorTag>? sponsorTags;
 
     Item({
         required this.takenAt,
@@ -206,8 +213,8 @@ class Item {
         required this.integrityReviewDecision,
         required this.hasPrivatelyLiked,
         required this.filterType,
-
-        this.photoOfYou,
+        this.usertags,
+        required this.photoOfYou,
         required this.canSeeInsightsAsBrand,
         required this.mediaType,
         required this.code,
@@ -215,9 +222,10 @@ class Item {
         required this.sharingFrictionInfo,
         required this.timelinePinnedUserIds,
         required this.hasViewsFetching,
-        required this.accessibilityCaption,
-        required this.originalMediaHasVisualReplyMedia,
-
+        this.accessibilityCaption,
+        this.originalMediaHasVisualReplyMedia,
+        required this.displayUri,
+        required this.fbUserTags,
         required this.coauthorProducers,
         required this.coauthorProducerCanSeeOrganicInsights,
         required this.invitedCoauthorProducers,
@@ -228,16 +236,13 @@ class Item {
         required this.imageVersions2,
         required this.originalWidth,
         required this.originalHeight,
-        required this.mediaNotes,
         required this.mediaReposterBottomsheetEnabled,
         required this.enableMediaNotesProduction,
         required this.productType,
         required this.isPaidPartnership,
         required this.musicMetadata,
-        required this.socialContext,
         required this.organicTrackingToken,
         required this.igMediaSharingDisabled,
-        required this.crosspostMetadata,
         required this.boostUnavailableIdentifier,
         required this.boostUnavailableReason,
         required this.boostUnavailableReasonV2,
@@ -265,8 +270,6 @@ class Item {
         required this.commentInformTreatment,
         required this.hasLiked,
         required this.likeCount,
-        required this.facepileTopLikers,
-        required this.topLikers,
         required this.videoStickerLocales,
         required this.clipsTabPinnedUserIds,
         required this.canViewerSave,
@@ -274,28 +277,39 @@ class Item {
         required this.shopRoutingUserId,
         required this.isOrganicProductTaggingEligible,
         required this.igbioProduct,
-        required this.featuredProducts,
         required this.productSuggestions,
         required this.isReuseAllowed,
         required this.hasMoreComments,
         required this.maxNumVisiblePreviewComments,
         required this.exploreHideComments,
         required this.isOpenToPublicSubmission,
+        this.location,
+        this.lng,
+        this.lat,
         this.canModifyCarousel,
-        this.commerceIntegrityReviewDecision,
         this.openCarouselSubmissionState,
         this.carouselMediaCount,
         this.carouselMedia,
         this.carouselMediaPendingPostCount,
         this.carouselMediaIds,
-        this.location,
-        this.lng,
-        this.lat,
-        this.collabFollowButtonInfo,
-        this.shouldOpenCollabBottomsheetOnFacepileTap,
+        this.playCount,
+        this.igPlayCount,
+        this.creatorViewerInsights,
+        this.mediaCroppingInfo,
+        this.isArtistPick,
+        this.isThirdPartyDownloadsEligible,
+        this.areRemixesCrosspostable,
+        this.isDashEligible,
+        this.videoDashManifest,
+        this.numberOfQualities,
+        this.videoVersions,
+        this.videoDuration,
+        this.hasAudio,
+        this.clipsMetadata,
+        this.sponsorTags,
     });
 
-    factory Item.fromJson(Map<dynamic, dynamic> json) => Item(
+    factory Item.fromJson(Map<String, dynamic> json) => Item(
         takenAt: json["taken_at"],
         pk: json["pk"],
         id: json["id"],
@@ -322,18 +336,19 @@ class Item {
         integrityReviewDecision: integrityReviewDecisionValues.map[json["integrity_review_decision"]]!,
         hasPrivatelyLiked: json["has_privately_liked"],
         filterType: json["filter_type"],
-
+        usertags: json["usertags"] == null ? null : Tags.fromJson(json["usertags"]),
         photoOfYou: json["photo_of_you"],
         canSeeInsightsAsBrand: json["can_see_insights_as_brand"],
         mediaType: json["media_type"],
         code: json["code"],
         caption: json["caption"] == null ? null : Caption.fromJson(json["caption"]),
         sharingFrictionInfo: SharingFrictionInfo.fromJson(json["sharing_friction_info"]),
-        timelinePinnedUserIds: List<dynamic>.from(json["timeline_pinned_user_ids"].map((x) => x)),
+        timelinePinnedUserIds: List<int>.from(json["timeline_pinned_user_ids"].map((x) => x)),
         hasViewsFetching: json["has_views_fetching"],
         accessibilityCaption: json["accessibility_caption"],
         originalMediaHasVisualReplyMedia: json["original_media_has_visual_reply_media"],
- 
+        displayUri: json["display_uri"],
+        fbUserTags: Tags.fromJson(json["fb_user_tags"]),
         coauthorProducers: List<User>.from(json["coauthor_producers"].map((x) => User.fromJson(x))),
         coauthorProducerCanSeeOrganicInsights: json["coauthor_producer_can_see_organic_insights"],
         invitedCoauthorProducers: List<dynamic>.from(json["invited_coauthor_producers"].map((x) => x)),
@@ -344,19 +359,16 @@ class Item {
         imageVersions2: ItemImageVersions2.fromJson(json["image_versions2"]),
         originalWidth: json["original_width"],
         originalHeight: json["original_height"],
-        mediaNotes: MediaNotes.fromJson(json["media_notes"]),
         mediaReposterBottomsheetEnabled: json["media_reposter_bottomsheet_enabled"],
         enableMediaNotesProduction: json["enable_media_notes_production"],
-        productType: itemProductTypeValues.map[json["product_type"]]!,
+        productType: productTypeValues.map[json["product_type"]]!,
         isPaidPartnership: json["is_paid_partnership"],
-        musicMetadata: MusicMetadata.fromJson(json["music_metadata"]),
-        socialContext: List<SocialContext>.from(json["social_context"].map((x) => SocialContext.fromJson(x))),
+        musicMetadata: json["music_metadata"] == null ? null : MusicMetadata.fromJson(json["music_metadata"]),
         organicTrackingToken: json["organic_tracking_token"],
         igMediaSharingDisabled: json["ig_media_sharing_disabled"],
-        crosspostMetadata: CrosspostMetadata.fromJson(json["crosspost_metadata"]),
         boostUnavailableIdentifier: json["boost_unavailable_identifier"],
         boostUnavailableReason: json["boost_unavailable_reason"],
-        boostUnavailableReasonV2: json["boost_unavailable_reason_v2"],
+        boostUnavailableReasonV2: List<dynamic>.from(json["boost_unavailable_reason_v2"].map((x) => x)),
         subscribeCtaVisible: json["subscribe_cta_visible"],
         isCutoutStickerAllowed: json["is_cutout_sticker_allowed"],
         genAiDetectionMethod: GenAiDetectionMethod.fromJson(json["gen_ai_detection_method"]),
@@ -381,8 +393,6 @@ class Item {
         commentInformTreatment: CommentInformTreatment.fromJson(json["comment_inform_treatment"]),
         hasLiked: json["has_liked"],
         likeCount: json["like_count"],
-        facepileTopLikers: List<User>.from(json["facepile_top_likers"].map((x) => User.fromJson(x))),
-        topLikers: List<dynamic>.from(json["top_likers"].map((x) => x)),
         videoStickerLocales: List<dynamic>.from(json["video_sticker_locales"].map((x) => x)),
         clipsTabPinnedUserIds: List<dynamic>.from(json["clips_tab_pinned_user_ids"].map((x) => x)),
         canViewerSave: json["can_viewer_save"],
@@ -390,28 +400,39 @@ class Item {
         shopRoutingUserId: json["shop_routing_user_id"],
         isOrganicProductTaggingEligible: json["is_organic_product_tagging_eligible"],
         igbioProduct: json["igbio_product"],
-        featuredProducts: List<dynamic>.from(json["featured_products"].map((x) => x)),
         productSuggestions: List<dynamic>.from(json["product_suggestions"].map((x) => x)),
         isReuseAllowed: json["is_reuse_allowed"],
         hasMoreComments: json["has_more_comments"],
         maxNumVisiblePreviewComments: json["max_num_visible_preview_comments"],
         exploreHideComments: json["explore_hide_comments"],
         isOpenToPublicSubmission: json["is_open_to_public_submission"],
+        location: json["location"] == null ? null : Location.fromJson(json["location"]),
+        lng: json["lng"]?.toDouble(),
+        lat: json["lat"]?.toDouble(),
         canModifyCarousel: json["can_modify_carousel"],
-        commerceIntegrityReviewDecision: json["commerce_integrity_review_decision"],
         openCarouselSubmissionState: json["open_carousel_submission_state"],
         carouselMediaCount: json["carousel_media_count"],
         carouselMedia: json["carousel_media"] == null ? [] : List<CarouselMedia>.from(json["carousel_media"]!.map((x) => CarouselMedia.fromJson(x))),
         carouselMediaPendingPostCount: json["carousel_media_pending_post_count"],
-        carouselMediaIds: json["carousel_media_ids"] == null ? [] : List<dynamic>.from(json["carousel_media_ids"]!.map((x) => x)),
-        location: json["location"] == null ? null : Location.fromJson(json["location"]),
-        lng: json["lng"]?.toDouble(),
-        lat: json["lat"]?.toDouble(),
-        collabFollowButtonInfo: json["collab_follow_button_info"] == null ? null : CollabFollowButtonInfo.fromJson(json["collab_follow_button_info"]),
-        shouldOpenCollabBottomsheetOnFacepileTap: json["should_open_collab_bottomsheet_on_facepile_tap"],
+        carouselMediaIds: json["carousel_media_ids"] == null ? [] : List<String>.from(json["carousel_media_ids"]!.map((x) => x)),
+        playCount: json["play_count"],
+        igPlayCount: json["ig_play_count"],
+        creatorViewerInsights: json["creator_viewer_insights"] == null ? [] : List<dynamic>.from(json["creator_viewer_insights"]!.map((x) => x)),
+        mediaCroppingInfo: json["media_cropping_info"] == null ? null : MediaCroppingInfo.fromJson(json["media_cropping_info"]),
+        isArtistPick: json["is_artist_pick"],
+        isThirdPartyDownloadsEligible: json["is_third_party_downloads_eligible"],
+        areRemixesCrosspostable: json["are_remixes_crosspostable"],
+        isDashEligible: json["is_dash_eligible"],
+        videoDashManifest: json["video_dash_manifest"],
+        numberOfQualities: json["number_of_qualities"],
+        videoVersions: json["video_versions"] == null ? [] : List<VideoVersion>.from(json["video_versions"]!.map((x) => VideoVersion.fromJson(x))),
+        videoDuration: json["video_duration"]?.toDouble(),
+        hasAudio: json["has_audio"],
+        clipsMetadata: json["clips_metadata"] == null ? null : ClipsMetadata.fromJson(json["clips_metadata"]),
+        sponsorTags: json["sponsor_tags"] == null ? [] : List<SponsorTag>.from(json["sponsor_tags"]!.map((x) => SponsorTag.fromJson(x))),
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "taken_at": takenAt,
         "pk": pk,
         "id": id,
@@ -438,7 +459,7 @@ class Item {
         "integrity_review_decision": integrityReviewDecisionValues.reverse[integrityReviewDecision],
         "has_privately_liked": hasPrivatelyLiked,
         "filter_type": filterType,
-
+        "usertags": usertags?.toJson(),
         "photo_of_you": photoOfYou,
         "can_see_insights_as_brand": canSeeInsightsAsBrand,
         "media_type": mediaType,
@@ -449,7 +470,8 @@ class Item {
         "has_views_fetching": hasViewsFetching,
         "accessibility_caption": accessibilityCaption,
         "original_media_has_visual_reply_media": originalMediaHasVisualReplyMedia,
-     
+        "display_uri": displayUri,
+        "fb_user_tags": fbUserTags.toJson(),
         "coauthor_producers": List<dynamic>.from(coauthorProducers.map((x) => x.toJson())),
         "coauthor_producer_can_see_organic_insights": coauthorProducerCanSeeOrganicInsights,
         "invited_coauthor_producers": List<dynamic>.from(invitedCoauthorProducers.map((x) => x)),
@@ -460,19 +482,16 @@ class Item {
         "image_versions2": imageVersions2.toJson(),
         "original_width": originalWidth,
         "original_height": originalHeight,
-        "media_notes": mediaNotes.toJson(),
         "media_reposter_bottomsheet_enabled": mediaReposterBottomsheetEnabled,
         "enable_media_notes_production": enableMediaNotesProduction,
-        "product_type": itemProductTypeValues.reverse[productType],
+        "product_type": productTypeValues.reverse[productType],
         "is_paid_partnership": isPaidPartnership,
-        "music_metadata": musicMetadata.toJson(),
-        "social_context": List<dynamic>.from(socialContext.map((x) => x.toJson())),
+        "music_metadata": musicMetadata?.toJson(),
         "organic_tracking_token": organicTrackingToken,
         "ig_media_sharing_disabled": igMediaSharingDisabled,
-        "crosspost_metadata": crosspostMetadata.toJson(),
         "boost_unavailable_identifier": boostUnavailableIdentifier,
         "boost_unavailable_reason": boostUnavailableReason,
-        "boost_unavailable_reason_v2": boostUnavailableReasonV2,
+        "boost_unavailable_reason_v2": List<dynamic>.from(boostUnavailableReasonV2.map((x) => x)),
         "subscribe_cta_visible": subscribeCtaVisible,
         "is_cutout_sticker_allowed": isCutoutStickerAllowed,
         "gen_ai_detection_method": genAiDetectionMethod.toJson(),
@@ -497,8 +516,6 @@ class Item {
         "comment_inform_treatment": commentInformTreatment.toJson(),
         "has_liked": hasLiked,
         "like_count": likeCount,
-        "facepile_top_likers": List<dynamic>.from(facepileTopLikers.map((x) => x.toJson())),
-        "top_likers": List<dynamic>.from(topLikers.map((x) => x)),
         "video_sticker_locales": List<dynamic>.from(videoStickerLocales.map((x) => x)),
         "clips_tab_pinned_user_ids": List<dynamic>.from(clipsTabPinnedUserIds.map((x) => x)),
         "can_viewer_save": canViewerSave,
@@ -506,25 +523,36 @@ class Item {
         "shop_routing_user_id": shopRoutingUserId,
         "is_organic_product_tagging_eligible": isOrganicProductTaggingEligible,
         "igbio_product": igbioProduct,
-        "featured_products": List<dynamic>.from(featuredProducts.map((x) => x)),
         "product_suggestions": List<dynamic>.from(productSuggestions.map((x) => x)),
         "is_reuse_allowed": isReuseAllowed,
         "has_more_comments": hasMoreComments,
         "max_num_visible_preview_comments": maxNumVisiblePreviewComments,
         "explore_hide_comments": exploreHideComments,
         "is_open_to_public_submission": isOpenToPublicSubmission,
+        "location": location?.toJson(),
+        "lng": lng,
+        "lat": lat,
         "can_modify_carousel": canModifyCarousel,
-        "commerce_integrity_review_decision": commerceIntegrityReviewDecision,
         "open_carousel_submission_state": openCarouselSubmissionState,
         "carousel_media_count": carouselMediaCount,
         "carousel_media": carouselMedia == null ? [] : List<dynamic>.from(carouselMedia!.map((x) => x.toJson())),
         "carousel_media_pending_post_count": carouselMediaPendingPostCount,
         "carousel_media_ids": carouselMediaIds == null ? [] : List<dynamic>.from(carouselMediaIds!.map((x) => x)),
-        "location": location?.toJson(),
-        "lng": lng,
-        "lat": lat,
-        "collab_follow_button_info": collabFollowButtonInfo?.toJson(),
-        "should_open_collab_bottomsheet_on_facepile_tap": shouldOpenCollabBottomsheetOnFacepileTap,
+        "play_count": playCount,
+        "ig_play_count": igPlayCount,
+        "creator_viewer_insights": creatorViewerInsights == null ? [] : List<dynamic>.from(creatorViewerInsights!.map((x) => x)),
+        "media_cropping_info": mediaCroppingInfo?.toJson(),
+        "is_artist_pick": isArtistPick,
+        "is_third_party_downloads_eligible": isThirdPartyDownloadsEligible,
+        "are_remixes_crosspostable": areRemixesCrosspostable,
+        "is_dash_eligible": isDashEligible,
+        "video_dash_manifest": videoDashManifest,
+        "number_of_qualities": numberOfQualities,
+        "video_versions": videoVersions == null ? [] : List<dynamic>.from(videoVersions!.map((x) => x.toJson())),
+        "video_duration": videoDuration,
+        "has_audio": hasAudio,
+        "clips_metadata": clipsMetadata?.toJson(),
+        "sponsor_tags": sponsorTags == null ? [] : List<dynamic>.from(sponsorTags!.map((x) => x.toJson())),
     };
 }
 
@@ -534,15 +562,15 @@ class Caption {
     int createdAtUtc;
     bool didReportAsSpam;
     bool isRankedComment;
-    dynamic pk;
+    String pk;
     bool shareEnabled;
-    dynamic contentType;
-    dynamic mediaId;
-    dynamic status;
+    ContentType contentType;
+    String mediaId;
+    Status status;
     int type;
-    dynamic userId;
-    dynamic strongId;
-    dynamic text;
+    String userId;
+    String strongId;
+    String text;
     User user;
     bool isCovered;
     int privateReplyStatus;
@@ -567,7 +595,7 @@ class Caption {
         required this.privateReplyStatus,
     });
 
-    factory Caption.fromJson(Map<dynamic, dynamic> json) => Caption(
+    factory Caption.fromJson(Map<String, dynamic> json) => Caption(
         bitFlags: json["bit_flags"],
         createdAt: json["created_at"],
         createdAtUtc: json["created_at_utc"],
@@ -575,9 +603,9 @@ class Caption {
         isRankedComment: json["is_ranked_comment"],
         pk: json["pk"],
         shareEnabled: json["share_enabled"],
-        contentType: json["content_type"],
+        contentType: contentTypeValues.map[json["content_type"]]!,
         mediaId: json["media_id"],
-        status: json["status"],
+        status: statusValues.map[json["status"]]!,
         type: json["type"],
         userId: json["user_id"],
         strongId: json["strong_id__"],
@@ -587,7 +615,7 @@ class Caption {
         privateReplyStatus: json["private_reply_status"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "bit_flags": bitFlags,
         "created_at": createdAt,
         "created_at_utc": createdAtUtc,
@@ -595,9 +623,9 @@ class Caption {
         "is_ranked_comment": isRankedComment,
         "pk": pk,
         "share_enabled": shareEnabled,
-        "content_type": contentType,
+        "content_type": contentTypeValues.reverse[contentType],
         "media_id": mediaId,
-        "status": status,
+        "status": statusValues.reverse[status],
         "type": type,
         "user_id": userId,
         "strong_id__": strongId,
@@ -608,22 +636,38 @@ class Caption {
     };
 }
 
+enum ContentType {
+    COMMENT
+}
+
+final contentTypeValues = EnumValues({
+    "comment": ContentType.COMMENT
+});
+
+enum Status {
+    ACTIVE
+}
+
+final statusValues = EnumValues({
+    "Active": Status.ACTIVE
+});
+
 class User {
-    dynamic pk;
-    dynamic pkId;
-    dynamic id;
-    dynamic username;
-    dynamic fullName;
+    String pk;
+    String pkId;
+    String id;
+    String username;
+    String fullName;
     bool isPrivate;
     bool? isUnpublished;
-    dynamic strongId;
-    dynamic fbidV2;
+    String strongId;
+    String? fbidV2;
     bool isVerified;
-    dynamic profilePicId;
-    dynamic profilePicUrl;
-    Map<dynamic, bool>? friendshipStatus;
+    String profilePicId;
+    String profilePicUrl;
+    int? followerCount;
     bool? isActiveOnTextPostApp;
-    dynamic profileGridDisplayType;
+    String? profileGridDisplayType;
 
     User({
         required this.pk,
@@ -636,14 +680,14 @@ class User {
         required this.strongId,
         this.fbidV2,
         required this.isVerified,
-        this.profilePicId,
+        required this.profilePicId,
         required this.profilePicUrl,
-        this.friendshipStatus,
+        this.followerCount,
         this.isActiveOnTextPostApp,
         this.profileGridDisplayType,
     });
 
-    factory User.fromJson(Map<dynamic, dynamic> json) => User(
+    factory User.fromJson(Map<String, dynamic> json) => User(
         pk: json["pk"],
         pkId: json["pk_id"],
         id: json["id"],
@@ -656,12 +700,12 @@ class User {
         isVerified: json["is_verified"],
         profilePicId: json["profile_pic_id"],
         profilePicUrl: json["profile_pic_url"],
-        friendshipStatus: Map.from(json["friendship_status"]!).map((k, v) => MapEntry<dynamic, bool>(k, v)),
+        followerCount: json["follower_count"],
         isActiveOnTextPostApp: json["is_active_on_text_post_app"],
         profileGridDisplayType: json["profile_grid_display_type"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "pk": pk,
         "pk_id": pkId,
         "id": id,
@@ -674,39 +718,39 @@ class User {
         "is_verified": isVerified,
         "profile_pic_id": profilePicId,
         "profile_pic_url": profilePicUrl,
-        "friendship_status": Map.from(friendshipStatus!).map((k, v) => MapEntry<dynamic, dynamic>(k, v)),
+        "follower_count": followerCount,
         "is_active_on_text_post_app": isActiveOnTextPostApp,
         "profile_grid_display_type": profileGridDisplayType,
     };
 }
 
 class CarouselMedia {
-    dynamic id;
+    String id;
     bool explorePivotGrid;
-    dynamic carouselParentId;
-    dynamic strongId;
-    dynamic pk;
+    String carouselParentId;
+    String strongId;
+    String pk;
     CommercialityStatus commercialityStatus;
     int takenAt;
-    CarouselMediaProductType productType;
+    String productType;
     int mediaType;
-    dynamic accessibilityCaption;
+    String? accessibilityCaption;
     CarouselMediaImageVersions2 imageVersions2;
     int originalWidth;
     int originalHeight;
-    dynamic preview;
-
-    List<dynamic> featuredProducts;
-
+    String preview;
+    Tags? usertags;
+    Tags fbUserTags;
     dynamic shopRoutingUserId;
     SharingFrictionInfo sharingFrictionInfo;
     List<dynamic> productSuggestions;
     List<dynamic> videoStickerLocales;
+    String displayUri;
     List<VideoVersion>? videoVersions;
     double? videoDuration;
     bool? hasAudio;
     int? isDashEligible;
-    dynamic videoDashManifest;
+    String? videoDashManifest;
     int? numberOfQualities;
 
     CarouselMedia({
@@ -724,13 +768,13 @@ class CarouselMedia {
         required this.originalWidth,
         required this.originalHeight,
         required this.preview,
-    
-        required this.featuredProducts,
-     
+        this.usertags,
+        required this.fbUserTags,
         required this.shopRoutingUserId,
         required this.sharingFrictionInfo,
         required this.productSuggestions,
         required this.videoStickerLocales,
+        required this.displayUri,
         this.videoVersions,
         this.videoDuration,
         this.hasAudio,
@@ -739,7 +783,7 @@ class CarouselMedia {
         this.numberOfQualities,
     });
 
-    factory CarouselMedia.fromJson(Map<dynamic, dynamic> json) => CarouselMedia(
+    factory CarouselMedia.fromJson(Map<String, dynamic> json) => CarouselMedia(
         id: json["id"],
         explorePivotGrid: json["explore_pivot_grid"],
         carouselParentId: json["carousel_parent_id"],
@@ -747,20 +791,20 @@ class CarouselMedia {
         pk: json["pk"],
         commercialityStatus: commercialityStatusValues.map[json["commerciality_status"]]!,
         takenAt: json["taken_at"],
-        productType: carouselMediaProductTypeValues.map[json["product_type"]]!,
+        productType: json["product_type"],
         mediaType: json["media_type"],
         accessibilityCaption: json["accessibility_caption"],
         imageVersions2: CarouselMediaImageVersions2.fromJson(json["image_versions2"]),
         originalWidth: json["original_width"],
         originalHeight: json["original_height"],
         preview: json["preview"],
-
-        featuredProducts: List<dynamic>.from(json["featured_products"].map((x) => x)),
-      
+        usertags: json["usertags"] == null ? null : Tags.fromJson(json["usertags"]),
+        fbUserTags: Tags.fromJson(json["fb_user_tags"]),
         shopRoutingUserId: json["shop_routing_user_id"],
         sharingFrictionInfo: SharingFrictionInfo.fromJson(json["sharing_friction_info"]),
         productSuggestions: List<dynamic>.from(json["product_suggestions"].map((x) => x)),
         videoStickerLocales: List<dynamic>.from(json["video_sticker_locales"].map((x) => x)),
+        displayUri: json["display_uri"],
         videoVersions: json["video_versions"] == null ? [] : List<VideoVersion>.from(json["video_versions"]!.map((x) => VideoVersion.fromJson(x))),
         videoDuration: json["video_duration"]?.toDouble(),
         hasAudio: json["has_audio"],
@@ -769,7 +813,7 @@ class CarouselMedia {
         numberOfQualities: json["number_of_qualities"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "id": id,
         "explore_pivot_grid": explorePivotGrid,
         "carousel_parent_id": carouselParentId,
@@ -777,19 +821,20 @@ class CarouselMedia {
         "pk": pk,
         "commerciality_status": commercialityStatusValues.reverse[commercialityStatus],
         "taken_at": takenAt,
-        "product_type": carouselMediaProductTypeValues.reverse[productType],
+        "product_type": productType,
         "media_type": mediaType,
         "accessibility_caption": accessibilityCaption,
         "image_versions2": imageVersions2.toJson(),
         "original_width": originalWidth,
         "original_height": originalHeight,
         "preview": preview,
-      
-
+        "usertags": usertags?.toJson(),
+        "fb_user_tags": fbUserTags.toJson(),
         "shop_routing_user_id": shopRoutingUserId,
         "sharing_friction_info": sharingFrictionInfo.toJson(),
         "product_suggestions": List<dynamic>.from(productSuggestions.map((x) => x)),
         "video_sticker_locales": List<dynamic>.from(videoStickerLocales.map((x) => x)),
+        "display_uri": displayUri,
         "video_versions": videoVersions == null ? [] : List<dynamic>.from(videoVersions!.map((x) => x.toJson())),
         "video_duration": videoDuration,
         "has_audio": hasAudio,
@@ -814,11 +859,11 @@ class Tags {
         required this.tagsIn,
     });
 
-    factory Tags.fromJson(Map<dynamic, dynamic> json) => Tags(
+    factory Tags.fromJson(Map<String, dynamic> json) => Tags(
         tagsIn: List<In>.from(json["in"].map((x) => In.fromJson(x))),
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "in": List<dynamic>.from(tagsIn.map((x) => x.toJson())),
     };
 }
@@ -832,12 +877,12 @@ class In {
         required this.user,
     });
 
-    factory In.fromJson(Map<dynamic, dynamic> json) => In(
+    factory In.fromJson(Map<String, dynamic> json) => In(
         position: List<double>.from(json["position"].map((x) => x?.toDouble())),
         user: User.fromJson(json["user"]),
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "position": List<dynamic>.from(position.map((x) => x)),
         "user": user.toJson(),
     };
@@ -845,45 +890,999 @@ class In {
 
 class CarouselMediaImageVersions2 {
     List<HdProfilePicUrlInfo> candidates;
-    ScrubberSpritesheetInfoCandidates? scrubberSpritesheetInfoCandidates;
 
     CarouselMediaImageVersions2({
         required this.candidates,
-        this.scrubberSpritesheetInfoCandidates,
     });
 
-    factory CarouselMediaImageVersions2.fromJson(Map<dynamic, dynamic> json) => CarouselMediaImageVersions2(
+    factory CarouselMediaImageVersions2.fromJson(Map<String, dynamic> json) => CarouselMediaImageVersions2(
         candidates: List<HdProfilePicUrlInfo>.from(json["candidates"].map((x) => HdProfilePicUrlInfo.fromJson(x))),
-        scrubberSpritesheetInfoCandidates: json["scrubber_spritesheet_info_candidates"] == null ? null : ScrubberSpritesheetInfoCandidates.fromJson(json["scrubber_spritesheet_info_candidates"]),
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "candidates": List<dynamic>.from(candidates.map((x) => x.toJson())),
-        "scrubber_spritesheet_info_candidates": scrubberSpritesheetInfoCandidates?.toJson(),
     };
 }
 
 class HdProfilePicUrlInfo {
-    int width;
     int height;
-    dynamic url;
+    String url;
+    int width;
 
     HdProfilePicUrlInfo({
-        required this.width,
         required this.height,
+        required this.url,
+        required this.width,
+    });
+
+    factory HdProfilePicUrlInfo.fromJson(Map<String, dynamic> json) => HdProfilePicUrlInfo(
+        height: json["height"],
+        url: json["url"],
+        width: json["width"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "height": height,
+        "url": url,
+        "width": width,
+    };
+}
+
+class SharingFrictionInfo {
+    dynamic bloksAppUrl;
+    bool shouldHaveSharingFriction;
+    dynamic sharingFrictionPayload;
+
+    SharingFrictionInfo({
+        required this.bloksAppUrl,
+        required this.shouldHaveSharingFriction,
+        required this.sharingFrictionPayload,
+    });
+
+    factory SharingFrictionInfo.fromJson(Map<String, dynamic> json) => SharingFrictionInfo(
+        bloksAppUrl: json["bloks_app_url"],
+        shouldHaveSharingFriction: json["should_have_sharing_friction"],
+        sharingFrictionPayload: json["sharing_friction_payload"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "bloks_app_url": bloksAppUrl,
+        "should_have_sharing_friction": shouldHaveSharingFriction,
+        "sharing_friction_payload": sharingFrictionPayload,
+    };
+}
+
+class VideoVersion {
+    dynamic bandwidth;
+    int height;
+    int type;
+    String url;
+    int width;
+
+    VideoVersion({
+        required this.bandwidth,
+        required this.height,
+        required this.type,
+        required this.url,
+        required this.width,
+    });
+
+    factory VideoVersion.fromJson(Map<String, dynamic> json) => VideoVersion(
+        bandwidth: json["bandwidth"],
+        height: json["height"],
+        type: json["type"],
+        url: json["url"],
+        width: json["width"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "bandwidth": bandwidth,
+        "height": height,
+        "type": type,
+        "url": url,
+        "width": width,
+    };
+}
+
+class ClipsMetadata {
+    dynamic breakingContentInfo;
+    dynamic breakingCreatorInfo;
+    ProductType clipsCreationEntryPoint;
+    dynamic featuredLabel;
+    bool isPublicChatWelcomeVideo;
+    bool isSharedToFb;
+    int professionalClipsUpsellType;
+    dynamic reelsOnTheRiseInfo;
+    dynamic showTips;
+    AchievementsInfo achievementsInfo;
+    AdditionalAudioInfo additionalAudioInfo;
+    dynamic assetRecommendationInfo;
+    AudioRankingInfo audioRankingInfo;
+    String audioType;
+    BrandedContentTagInfo brandedContentTagInfo;
+    dynamic challengeInfo;
+    ContentAppreciationInfo contentAppreciationInfo;
+    dynamic contextualHighlightInfo;
+    List<dynamic> cutoutStickerInfo;
+    bool disableUseInClipsClientCache;
+    dynamic externalMediaInfo;
+    dynamic isFanClubPromoVideo;
+    MashupInfo mashupInfo;
+    dynamic merchandisingPillInfo;
+    String musicCanonicalId;
+    MusicInfo? musicInfo;
+    dynamic nuxInfo;
+    OriginalSoundInfo? originalSoundInfo;
+    dynamic originalityInfo;
+    dynamic reusableTextAttributeString;
+    dynamic reusableTextInfo;
+    dynamic shoppingInfo;
+    bool showAchievements;
+    dynamic templateInfo;
+    dynamic viewerInteractionSettings;
+
+    ClipsMetadata({
+        required this.breakingContentInfo,
+        required this.breakingCreatorInfo,
+        required this.clipsCreationEntryPoint,
+        required this.featuredLabel,
+        required this.isPublicChatWelcomeVideo,
+        required this.isSharedToFb,
+        required this.professionalClipsUpsellType,
+        required this.reelsOnTheRiseInfo,
+        required this.showTips,
+        required this.achievementsInfo,
+        required this.additionalAudioInfo,
+        required this.assetRecommendationInfo,
+        required this.audioRankingInfo,
+        required this.audioType,
+        required this.brandedContentTagInfo,
+        required this.challengeInfo,
+        required this.contentAppreciationInfo,
+        required this.contextualHighlightInfo,
+        required this.cutoutStickerInfo,
+        required this.disableUseInClipsClientCache,
+        required this.externalMediaInfo,
+        required this.isFanClubPromoVideo,
+        required this.mashupInfo,
+        required this.merchandisingPillInfo,
+        required this.musicCanonicalId,
+        required this.musicInfo,
+        required this.nuxInfo,
+        required this.originalSoundInfo,
+        required this.originalityInfo,
+        required this.reusableTextAttributeString,
+        required this.reusableTextInfo,
+        required this.shoppingInfo,
+        required this.showAchievements,
+        required this.templateInfo,
+        required this.viewerInteractionSettings,
+    });
+
+    factory ClipsMetadata.fromJson(Map<String, dynamic> json) => ClipsMetadata(
+        breakingContentInfo: json["breaking_content_info"],
+        breakingCreatorInfo: json["breaking_creator_info"],
+        clipsCreationEntryPoint: productTypeValues.map[json["clips_creation_entry_point"]]!,
+        featuredLabel: json["featured_label"],
+        isPublicChatWelcomeVideo: json["is_public_chat_welcome_video"],
+        isSharedToFb: json["is_shared_to_fb"],
+        professionalClipsUpsellType: json["professional_clips_upsell_type"],
+        reelsOnTheRiseInfo: json["reels_on_the_rise_info"],
+        showTips: json["show_tips"],
+        achievementsInfo: AchievementsInfo.fromJson(json["achievements_info"]),
+        additionalAudioInfo: AdditionalAudioInfo.fromJson(json["additional_audio_info"]),
+        assetRecommendationInfo: json["asset_recommendation_info"],
+        audioRankingInfo: AudioRankingInfo.fromJson(json["audio_ranking_info"]),
+        audioType: json["audio_type"],
+        brandedContentTagInfo: BrandedContentTagInfo.fromJson(json["branded_content_tag_info"]),
+        challengeInfo: json["challenge_info"],
+        contentAppreciationInfo: ContentAppreciationInfo.fromJson(json["content_appreciation_info"]),
+        contextualHighlightInfo: json["contextual_highlight_info"],
+        cutoutStickerInfo: List<dynamic>.from(json["cutout_sticker_info"].map((x) => x)),
+        disableUseInClipsClientCache: json["disable_use_in_clips_client_cache"],
+        externalMediaInfo: json["external_media_info"],
+        isFanClubPromoVideo: json["is_fan_club_promo_video"],
+        mashupInfo: MashupInfo.fromJson(json["mashup_info"]),
+        merchandisingPillInfo: json["merchandising_pill_info"],
+        musicCanonicalId: json["music_canonical_id"],
+        musicInfo: json["music_info"] == null ? null : MusicInfo.fromJson(json["music_info"]),
+        nuxInfo: json["nux_info"],
+        originalSoundInfo: json["original_sound_info"] == null ? null : OriginalSoundInfo.fromJson(json["original_sound_info"]),
+        originalityInfo: json["originality_info"],
+        reusableTextAttributeString: json["reusable_text_attribute_string"],
+        reusableTextInfo: json["reusable_text_info"],
+        shoppingInfo: json["shopping_info"],
+        showAchievements: json["show_achievements"],
+        templateInfo: json["template_info"],
+        viewerInteractionSettings: json["viewer_interaction_settings"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "breaking_content_info": breakingContentInfo,
+        "breaking_creator_info": breakingCreatorInfo,
+        "clips_creation_entry_point": productTypeValues.reverse[clipsCreationEntryPoint],
+        "featured_label": featuredLabel,
+        "is_public_chat_welcome_video": isPublicChatWelcomeVideo,
+        "is_shared_to_fb": isSharedToFb,
+        "professional_clips_upsell_type": professionalClipsUpsellType,
+        "reels_on_the_rise_info": reelsOnTheRiseInfo,
+        "show_tips": showTips,
+        "achievements_info": achievementsInfo.toJson(),
+        "additional_audio_info": additionalAudioInfo.toJson(),
+        "asset_recommendation_info": assetRecommendationInfo,
+        "audio_ranking_info": audioRankingInfo.toJson(),
+        "audio_type": audioType,
+        "branded_content_tag_info": brandedContentTagInfo.toJson(),
+        "challenge_info": challengeInfo,
+        "content_appreciation_info": contentAppreciationInfo.toJson(),
+        "contextual_highlight_info": contextualHighlightInfo,
+        "cutout_sticker_info": List<dynamic>.from(cutoutStickerInfo.map((x) => x)),
+        "disable_use_in_clips_client_cache": disableUseInClipsClientCache,
+        "external_media_info": externalMediaInfo,
+        "is_fan_club_promo_video": isFanClubPromoVideo,
+        "mashup_info": mashupInfo.toJson(),
+        "merchandising_pill_info": merchandisingPillInfo,
+        "music_canonical_id": musicCanonicalId,
+        "music_info": musicInfo?.toJson(),
+        "nux_info": nuxInfo,
+        "original_sound_info": originalSoundInfo?.toJson(),
+        "originality_info": originalityInfo,
+        "reusable_text_attribute_string": reusableTextAttributeString,
+        "reusable_text_info": reusableTextInfo,
+        "shopping_info": shoppingInfo,
+        "show_achievements": showAchievements,
+        "template_info": templateInfo,
+        "viewer_interaction_settings": viewerInteractionSettings,
+    };
+}
+
+class AchievementsInfo {
+    dynamic numEarnedAchievements;
+    bool showAchievements;
+
+    AchievementsInfo({
+        required this.numEarnedAchievements,
+        required this.showAchievements,
+    });
+
+    factory AchievementsInfo.fromJson(Map<String, dynamic> json) => AchievementsInfo(
+        numEarnedAchievements: json["num_earned_achievements"],
+        showAchievements: json["show_achievements"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "num_earned_achievements": numEarnedAchievements,
+        "show_achievements": showAchievements,
+    };
+}
+
+class AdditionalAudioInfo {
+    dynamic additionalAudioUsername;
+    AudioReattributionInfo audioReattributionInfo;
+
+    AdditionalAudioInfo({
+        required this.additionalAudioUsername,
+        required this.audioReattributionInfo,
+    });
+
+    factory AdditionalAudioInfo.fromJson(Map<String, dynamic> json) => AdditionalAudioInfo(
+        additionalAudioUsername: json["additional_audio_username"],
+        audioReattributionInfo: AudioReattributionInfo.fromJson(json["audio_reattribution_info"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "additional_audio_username": additionalAudioUsername,
+        "audio_reattribution_info": audioReattributionInfo.toJson(),
+    };
+}
+
+class AudioReattributionInfo {
+    bool shouldAllowRestore;
+
+    AudioReattributionInfo({
+        required this.shouldAllowRestore,
+    });
+
+    factory AudioReattributionInfo.fromJson(Map<String, dynamic> json) => AudioReattributionInfo(
+        shouldAllowRestore: json["should_allow_restore"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "should_allow_restore": shouldAllowRestore,
+    };
+}
+
+class AudioRankingInfo {
+    String bestAudioClusterId;
+
+    AudioRankingInfo({
+        required this.bestAudioClusterId,
+    });
+
+    factory AudioRankingInfo.fromJson(Map<String, dynamic> json) => AudioRankingInfo(
+        bestAudioClusterId: json["best_audio_cluster_id"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "best_audio_cluster_id": bestAudioClusterId,
+    };
+}
+
+class BrandedContentTagInfo {
+    bool canAddTag;
+
+    BrandedContentTagInfo({
+        required this.canAddTag,
+    });
+
+    factory BrandedContentTagInfo.fromJson(Map<String, dynamic> json) => BrandedContentTagInfo(
+        canAddTag: json["can_add_tag"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "can_add_tag": canAddTag,
+    };
+}
+
+enum ProductType {
+    CAROUSEL_CONTAINER,
+    CLIPS,
+    FEED
+}
+
+final productTypeValues = EnumValues({
+    "carousel_container": ProductType.CAROUSEL_CONTAINER,
+    "clips": ProductType.CLIPS,
+    "feed": ProductType.FEED
+});
+
+class ContentAppreciationInfo {
+    bool enabled;
+    dynamic entryPointContainer;
+
+    ContentAppreciationInfo({
+        required this.enabled,
+        required this.entryPointContainer,
+    });
+
+    factory ContentAppreciationInfo.fromJson(Map<String, dynamic> json) => ContentAppreciationInfo(
+        enabled: json["enabled"],
+        entryPointContainer: json["entry_point_container"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "enabled": enabled,
+        "entry_point_container": entryPointContainer,
+    };
+}
+
+class MashupInfo {
+    bool canToggleMashupsAllowed;
+    dynamic formattedMashupsCount;
+    bool hasBeenMashedUp;
+    bool hasNonmimicableAdditionalAudio;
+    bool isCreatorRequestingMashup;
+    bool isLightWeightCheck;
+    bool isLightWeightReuseAllowedCheck;
+    bool isPivotPageAvailable;
+    bool isReuseAllowed;
+    dynamic mashupType;
+    bool mashupsAllowed;
+    int nonPrivacyFilteredMashupsMediaCount;
+    dynamic privacyFilteredMashupsMediaCount;
+    dynamic originalMedia;
+
+    MashupInfo({
+        required this.canToggleMashupsAllowed,
+        required this.formattedMashupsCount,
+        required this.hasBeenMashedUp,
+        required this.hasNonmimicableAdditionalAudio,
+        required this.isCreatorRequestingMashup,
+        required this.isLightWeightCheck,
+        required this.isLightWeightReuseAllowedCheck,
+        required this.isPivotPageAvailable,
+        required this.isReuseAllowed,
+        required this.mashupType,
+        required this.mashupsAllowed,
+        required this.nonPrivacyFilteredMashupsMediaCount,
+        required this.privacyFilteredMashupsMediaCount,
+        required this.originalMedia,
+    });
+
+    factory MashupInfo.fromJson(Map<String, dynamic> json) => MashupInfo(
+        canToggleMashupsAllowed: json["can_toggle_mashups_allowed"],
+        formattedMashupsCount: json["formatted_mashups_count"],
+        hasBeenMashedUp: json["has_been_mashed_up"],
+        hasNonmimicableAdditionalAudio: json["has_nonmimicable_additional_audio"],
+        isCreatorRequestingMashup: json["is_creator_requesting_mashup"],
+        isLightWeightCheck: json["is_light_weight_check"],
+        isLightWeightReuseAllowedCheck: json["is_light_weight_reuse_allowed_check"],
+        isPivotPageAvailable: json["is_pivot_page_available"],
+        isReuseAllowed: json["is_reuse_allowed"],
+        mashupType: json["mashup_type"],
+        mashupsAllowed: json["mashups_allowed"],
+        nonPrivacyFilteredMashupsMediaCount: json["non_privacy_filtered_mashups_media_count"],
+        privacyFilteredMashupsMediaCount: json["privacy_filtered_mashups_media_count"],
+        originalMedia: json["original_media"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "can_toggle_mashups_allowed": canToggleMashupsAllowed,
+        "formatted_mashups_count": formattedMashupsCount,
+        "has_been_mashed_up": hasBeenMashedUp,
+        "has_nonmimicable_additional_audio": hasNonmimicableAdditionalAudio,
+        "is_creator_requesting_mashup": isCreatorRequestingMashup,
+        "is_light_weight_check": isLightWeightCheck,
+        "is_light_weight_reuse_allowed_check": isLightWeightReuseAllowedCheck,
+        "is_pivot_page_available": isPivotPageAvailable,
+        "is_reuse_allowed": isReuseAllowed,
+        "mashup_type": mashupType,
+        "mashups_allowed": mashupsAllowed,
+        "non_privacy_filtered_mashups_media_count": nonPrivacyFilteredMashupsMediaCount,
+        "privacy_filtered_mashups_media_count": privacyFilteredMashupsMediaCount,
+        "original_media": originalMedia,
+    };
+}
+
+class MusicInfo {
+    dynamic musicCanonicalId;
+    MusicAssetInfo musicAssetInfo;
+    MusicConsumptionInfo musicConsumptionInfo;
+
+    MusicInfo({
+        required this.musicCanonicalId,
+        required this.musicAssetInfo,
+        required this.musicConsumptionInfo,
+    });
+
+    factory MusicInfo.fromJson(Map<String, dynamic> json) => MusicInfo(
+        musicCanonicalId: json["music_canonical_id"],
+        musicAssetInfo: MusicAssetInfo.fromJson(json["music_asset_info"]),
+        musicConsumptionInfo: MusicConsumptionInfo.fromJson(json["music_consumption_info"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "music_canonical_id": musicCanonicalId,
+        "music_asset_info": musicAssetInfo.toJson(),
+        "music_consumption_info": musicConsumptionInfo.toJson(),
+    };
+}
+
+class MusicAssetInfo {
+    bool allowsSaving;
+    String? artistId;
+    String audioAssetId;
+    String audioClusterId;
+    String coverArtworkThumbnailUri;
+    String coverArtworkUri;
+    dynamic darkMessage;
+    dynamic dashManifest;
+    String displayArtist;
+    int durationInMs;
+    String fastStartProgressiveDownloadUrl;
+    bool hasLyrics;
+    List<int> highlightStartTimesInMs;
+    String id;
+    String? igUsername;
+    bool isEligibleForAudioEffects;
+    bool isEligibleForVinylSticker;
+    bool isExplicit;
+    String licensedMusicSubtype;
+    String progressiveDownloadUrl;
+    dynamic reactiveAudioDownloadUrl;
+    dynamic sanitizedTitle;
+    String subtitle;
+    String title;
+    String web30SPreviewDownloadUrl;
+    dynamic lyrics;
+
+    MusicAssetInfo({
+        required this.allowsSaving,
+        required this.artistId,
+        required this.audioAssetId,
+        required this.audioClusterId,
+        required this.coverArtworkThumbnailUri,
+        required this.coverArtworkUri,
+        required this.darkMessage,
+        required this.dashManifest,
+        required this.displayArtist,
+        required this.durationInMs,
+        required this.fastStartProgressiveDownloadUrl,
+        required this.hasLyrics,
+        required this.highlightStartTimesInMs,
+        required this.id,
+        required this.igUsername,
+        required this.isEligibleForAudioEffects,
+        required this.isEligibleForVinylSticker,
+        required this.isExplicit,
+        required this.licensedMusicSubtype,
+        required this.progressiveDownloadUrl,
+        required this.reactiveAudioDownloadUrl,
+        required this.sanitizedTitle,
+        required this.subtitle,
+        required this.title,
+        required this.web30SPreviewDownloadUrl,
+        required this.lyrics,
+    });
+
+    factory MusicAssetInfo.fromJson(Map<String, dynamic> json) => MusicAssetInfo(
+        allowsSaving: json["allows_saving"],
+        artistId: json["artist_id"],
+        audioAssetId: json["audio_asset_id"],
+        audioClusterId: json["audio_cluster_id"],
+        coverArtworkThumbnailUri: json["cover_artwork_thumbnail_uri"],
+        coverArtworkUri: json["cover_artwork_uri"],
+        darkMessage: json["dark_message"],
+        dashManifest: json["dash_manifest"],
+        displayArtist: json["display_artist"],
+        durationInMs: json["duration_in_ms"],
+        fastStartProgressiveDownloadUrl: json["fast_start_progressive_download_url"],
+        hasLyrics: json["has_lyrics"],
+        highlightStartTimesInMs: List<int>.from(json["highlight_start_times_in_ms"].map((x) => x)),
+        id: json["id"],
+        igUsername: json["ig_username"],
+        isEligibleForAudioEffects: json["is_eligible_for_audio_effects"],
+        isEligibleForVinylSticker: json["is_eligible_for_vinyl_sticker"],
+        isExplicit: json["is_explicit"],
+        licensedMusicSubtype: json["licensed_music_subtype"],
+        progressiveDownloadUrl: json["progressive_download_url"],
+        reactiveAudioDownloadUrl: json["reactive_audio_download_url"],
+        sanitizedTitle: json["sanitized_title"],
+        subtitle: json["subtitle"],
+        title: json["title"],
+        web30SPreviewDownloadUrl: json["web_30s_preview_download_url"],
+        lyrics: json["lyrics"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "allows_saving": allowsSaving,
+        "artist_id": artistId,
+        "audio_asset_id": audioAssetId,
+        "audio_cluster_id": audioClusterId,
+        "cover_artwork_thumbnail_uri": coverArtworkThumbnailUri,
+        "cover_artwork_uri": coverArtworkUri,
+        "dark_message": darkMessage,
+        "dash_manifest": dashManifest,
+        "display_artist": displayArtist,
+        "duration_in_ms": durationInMs,
+        "fast_start_progressive_download_url": fastStartProgressiveDownloadUrl,
+        "has_lyrics": hasLyrics,
+        "highlight_start_times_in_ms": List<dynamic>.from(highlightStartTimesInMs.map((x) => x)),
+        "id": id,
+        "ig_username": igUsername,
+        "is_eligible_for_audio_effects": isEligibleForAudioEffects,
+        "is_eligible_for_vinyl_sticker": isEligibleForVinylSticker,
+        "is_explicit": isExplicit,
+        "licensed_music_subtype": licensedMusicSubtype,
+        "progressive_download_url": progressiveDownloadUrl,
+        "reactive_audio_download_url": reactiveAudioDownloadUrl,
+        "sanitized_title": sanitizedTitle,
+        "subtitle": subtitle,
+        "title": title,
+        "web_30s_preview_download_url": web30SPreviewDownloadUrl,
+        "lyrics": lyrics,
+    };
+}
+
+class MusicConsumptionInfo {
+    bool allowMediaCreationWithMusic;
+    int audioAssetStartTimeInMs;
+    dynamic containsLyrics;
+    dynamic derivedContentId;
+    dynamic displayLabels;
+    dynamic formattedClipsMediaCount;
+    User? igArtist;
+    bool isBookmarked;
+    bool isTrendingInClips;
+    int overlapDurationInMs;
+    String placeholderProfilePicUrl;
+    bool shouldAllowMusicEditing;
+    bool shouldMuteAudio;
+    String shouldMuteAudioReason;
+    dynamic shouldMuteAudioReasonType;
+    bool shouldRenderSoundwave;
+    dynamic trendRank;
+    dynamic previousTrendRank;
+    List<dynamic> audioFilterInfos;
+    AudioMutingInfo audioMutingInfo;
+
+    MusicConsumptionInfo({
+        required this.allowMediaCreationWithMusic,
+        required this.audioAssetStartTimeInMs,
+        required this.containsLyrics,
+        required this.derivedContentId,
+        required this.displayLabels,
+        required this.formattedClipsMediaCount,
+        required this.igArtist,
+        required this.isBookmarked,
+        required this.isTrendingInClips,
+        required this.overlapDurationInMs,
+        required this.placeholderProfilePicUrl,
+        required this.shouldAllowMusicEditing,
+        required this.shouldMuteAudio,
+        required this.shouldMuteAudioReason,
+        required this.shouldMuteAudioReasonType,
+        required this.shouldRenderSoundwave,
+        required this.trendRank,
+        required this.previousTrendRank,
+        required this.audioFilterInfos,
+        required this.audioMutingInfo,
+    });
+
+    factory MusicConsumptionInfo.fromJson(Map<String, dynamic> json) => MusicConsumptionInfo(
+        allowMediaCreationWithMusic: json["allow_media_creation_with_music"],
+        audioAssetStartTimeInMs: json["audio_asset_start_time_in_ms"],
+        containsLyrics: json["contains_lyrics"],
+        derivedContentId: json["derived_content_id"],
+        displayLabels: json["display_labels"],
+        formattedClipsMediaCount: json["formatted_clips_media_count"],
+        igArtist: json["ig_artist"] == null ? null : User.fromJson(json["ig_artist"]),
+        isBookmarked: json["is_bookmarked"],
+        isTrendingInClips: json["is_trending_in_clips"],
+        overlapDurationInMs: json["overlap_duration_in_ms"],
+        placeholderProfilePicUrl: json["placeholder_profile_pic_url"],
+        shouldAllowMusicEditing: json["should_allow_music_editing"],
+        shouldMuteAudio: json["should_mute_audio"],
+        shouldMuteAudioReason: json["should_mute_audio_reason"],
+        shouldMuteAudioReasonType: json["should_mute_audio_reason_type"],
+        shouldRenderSoundwave: json["should_render_soundwave"],
+        trendRank: json["trend_rank"],
+        previousTrendRank: json["previous_trend_rank"],
+        audioFilterInfos: List<dynamic>.from(json["audio_filter_infos"].map((x) => x)),
+        audioMutingInfo: AudioMutingInfo.fromJson(json["audio_muting_info"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "allow_media_creation_with_music": allowMediaCreationWithMusic,
+        "audio_asset_start_time_in_ms": audioAssetStartTimeInMs,
+        "contains_lyrics": containsLyrics,
+        "derived_content_id": derivedContentId,
+        "display_labels": displayLabels,
+        "formatted_clips_media_count": formattedClipsMediaCount,
+        "ig_artist": igArtist?.toJson(),
+        "is_bookmarked": isBookmarked,
+        "is_trending_in_clips": isTrendingInClips,
+        "overlap_duration_in_ms": overlapDurationInMs,
+        "placeholder_profile_pic_url": placeholderProfilePicUrl,
+        "should_allow_music_editing": shouldAllowMusicEditing,
+        "should_mute_audio": shouldMuteAudio,
+        "should_mute_audio_reason": shouldMuteAudioReason,
+        "should_mute_audio_reason_type": shouldMuteAudioReasonType,
+        "should_render_soundwave": shouldRenderSoundwave,
+        "trend_rank": trendRank,
+        "previous_trend_rank": previousTrendRank,
+        "audio_filter_infos": List<dynamic>.from(audioFilterInfos.map((x) => x)),
+        "audio_muting_info": audioMutingInfo.toJson(),
+    };
+}
+
+class AudioMutingInfo {
+    bool muteAudio;
+    String muteReasonStr;
+    bool allowAudioEditing;
+    bool showMutedAudioToast;
+
+    AudioMutingInfo({
+        required this.muteAudio,
+        required this.muteReasonStr,
+        required this.allowAudioEditing,
+        required this.showMutedAudioToast,
+    });
+
+    factory AudioMutingInfo.fromJson(Map<String, dynamic> json) => AudioMutingInfo(
+        muteAudio: json["mute_audio"],
+        muteReasonStr: json["mute_reason_str"],
+        allowAudioEditing: json["allow_audio_editing"],
+        showMutedAudioToast: json["show_muted_audio_toast"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "mute_audio": muteAudio,
+        "mute_reason_str": muteReasonStr,
+        "allow_audio_editing": allowAudioEditing,
+        "show_muted_audio_toast": showMutedAudioToast,
+    };
+}
+
+class OriginalSoundInfo {
+    bool allowCreatorToRename;
+    String audioAssetId;
+    dynamic attributedCustomAudioAssetId;
+    bool canRemixBeSharedToFb;
+    bool canRemixBeSharedToFbExpansion;
+    String dashManifest;
+    int durationInMs;
+    dynamic formattedClipsMediaCount;
+    bool hideRemixing;
+    User igArtist;
+    bool isAudioAutomaticallyAttributed;
+    bool isEligibleForAudioEffects;
+    bool isEligibleForVinylSticker;
+    bool isExplicit;
+    bool isOriginalAudioDownloadEligible;
+    bool isReuseDisabled;
+    bool isXpostFromFb;
+    dynamic musicCanonicalId;
+    bool oaOwnerIsMusicArtist;
+    String originalAudioSubtype;
+    String originalAudioTitle;
+    String originalMediaId;
+    String progressiveDownloadUrl;
+    bool shouldMuteAudio;
+    int timeCreated;
+    dynamic trendRank;
+    dynamic previousTrendRank;
+    dynamic overlapDurationInMs;
+    dynamic audioAssetStartTimeInMs;
+    List<dynamic> audioFilterInfos;
+    List<dynamic> audioParts;
+    List<dynamic> audioPartsByFilter;
+    ConsumptionInfo consumptionInfo;
+    dynamic xpostFbCreatorInfo;
+    FbDownstreamUseXpostMetadata fbDownstreamUseXpostMetadata;
+
+    OriginalSoundInfo({
+        required this.allowCreatorToRename,
+        required this.audioAssetId,
+        required this.attributedCustomAudioAssetId,
+        required this.canRemixBeSharedToFb,
+        required this.canRemixBeSharedToFbExpansion,
+        required this.dashManifest,
+        required this.durationInMs,
+        required this.formattedClipsMediaCount,
+        required this.hideRemixing,
+        required this.igArtist,
+        required this.isAudioAutomaticallyAttributed,
+        required this.isEligibleForAudioEffects,
+        required this.isEligibleForVinylSticker,
+        required this.isExplicit,
+        required this.isOriginalAudioDownloadEligible,
+        required this.isReuseDisabled,
+        required this.isXpostFromFb,
+        required this.musicCanonicalId,
+        required this.oaOwnerIsMusicArtist,
+        required this.originalAudioSubtype,
+        required this.originalAudioTitle,
+        required this.originalMediaId,
+        required this.progressiveDownloadUrl,
+        required this.shouldMuteAudio,
+        required this.timeCreated,
+        required this.trendRank,
+        required this.previousTrendRank,
+        required this.overlapDurationInMs,
+        required this.audioAssetStartTimeInMs,
+        required this.audioFilterInfos,
+        required this.audioParts,
+        required this.audioPartsByFilter,
+        required this.consumptionInfo,
+        required this.xpostFbCreatorInfo,
+        required this.fbDownstreamUseXpostMetadata,
+    });
+
+    factory OriginalSoundInfo.fromJson(Map<String, dynamic> json) => OriginalSoundInfo(
+        allowCreatorToRename: json["allow_creator_to_rename"],
+        audioAssetId: json["audio_asset_id"],
+        attributedCustomAudioAssetId: json["attributed_custom_audio_asset_id"],
+        canRemixBeSharedToFb: json["can_remix_be_shared_to_fb"],
+        canRemixBeSharedToFbExpansion: json["can_remix_be_shared_to_fb_expansion"],
+        dashManifest: json["dash_manifest"],
+        durationInMs: json["duration_in_ms"],
+        formattedClipsMediaCount: json["formatted_clips_media_count"],
+        hideRemixing: json["hide_remixing"],
+        igArtist: User.fromJson(json["ig_artist"]),
+        isAudioAutomaticallyAttributed: json["is_audio_automatically_attributed"],
+        isEligibleForAudioEffects: json["is_eligible_for_audio_effects"],
+        isEligibleForVinylSticker: json["is_eligible_for_vinyl_sticker"],
+        isExplicit: json["is_explicit"],
+        isOriginalAudioDownloadEligible: json["is_original_audio_download_eligible"],
+        isReuseDisabled: json["is_reuse_disabled"],
+        isXpostFromFb: json["is_xpost_from_fb"],
+        musicCanonicalId: json["music_canonical_id"],
+        oaOwnerIsMusicArtist: json["oa_owner_is_music_artist"],
+        originalAudioSubtype: json["original_audio_subtype"],
+        originalAudioTitle: json["original_audio_title"],
+        originalMediaId: json["original_media_id"],
+        progressiveDownloadUrl: json["progressive_download_url"],
+        shouldMuteAudio: json["should_mute_audio"],
+        timeCreated: json["time_created"],
+        trendRank: json["trend_rank"],
+        previousTrendRank: json["previous_trend_rank"],
+        overlapDurationInMs: json["overlap_duration_in_ms"],
+        audioAssetStartTimeInMs: json["audio_asset_start_time_in_ms"],
+        audioFilterInfos: List<dynamic>.from(json["audio_filter_infos"].map((x) => x)),
+        audioParts: List<dynamic>.from(json["audio_parts"].map((x) => x)),
+        audioPartsByFilter: List<dynamic>.from(json["audio_parts_by_filter"].map((x) => x)),
+        consumptionInfo: ConsumptionInfo.fromJson(json["consumption_info"]),
+        xpostFbCreatorInfo: json["xpost_fb_creator_info"],
+        fbDownstreamUseXpostMetadata: FbDownstreamUseXpostMetadata.fromJson(json["fb_downstream_use_xpost_metadata"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "allow_creator_to_rename": allowCreatorToRename,
+        "audio_asset_id": audioAssetId,
+        "attributed_custom_audio_asset_id": attributedCustomAudioAssetId,
+        "can_remix_be_shared_to_fb": canRemixBeSharedToFb,
+        "can_remix_be_shared_to_fb_expansion": canRemixBeSharedToFbExpansion,
+        "dash_manifest": dashManifest,
+        "duration_in_ms": durationInMs,
+        "formatted_clips_media_count": formattedClipsMediaCount,
+        "hide_remixing": hideRemixing,
+        "ig_artist": igArtist.toJson(),
+        "is_audio_automatically_attributed": isAudioAutomaticallyAttributed,
+        "is_eligible_for_audio_effects": isEligibleForAudioEffects,
+        "is_eligible_for_vinyl_sticker": isEligibleForVinylSticker,
+        "is_explicit": isExplicit,
+        "is_original_audio_download_eligible": isOriginalAudioDownloadEligible,
+        "is_reuse_disabled": isReuseDisabled,
+        "is_xpost_from_fb": isXpostFromFb,
+        "music_canonical_id": musicCanonicalId,
+        "oa_owner_is_music_artist": oaOwnerIsMusicArtist,
+        "original_audio_subtype": originalAudioSubtype,
+        "original_audio_title": originalAudioTitle,
+        "original_media_id": originalMediaId,
+        "progressive_download_url": progressiveDownloadUrl,
+        "should_mute_audio": shouldMuteAudio,
+        "time_created": timeCreated,
+        "trend_rank": trendRank,
+        "previous_trend_rank": previousTrendRank,
+        "overlap_duration_in_ms": overlapDurationInMs,
+        "audio_asset_start_time_in_ms": audioAssetStartTimeInMs,
+        "audio_filter_infos": List<dynamic>.from(audioFilterInfos.map((x) => x)),
+        "audio_parts": List<dynamic>.from(audioParts.map((x) => x)),
+        "audio_parts_by_filter": List<dynamic>.from(audioPartsByFilter.map((x) => x)),
+        "consumption_info": consumptionInfo.toJson(),
+        "xpost_fb_creator_info": xpostFbCreatorInfo,
+        "fb_downstream_use_xpost_metadata": fbDownstreamUseXpostMetadata.toJson(),
+    };
+}
+
+class ConsumptionInfo {
+    dynamic displayMediaId;
+    bool isBookmarked;
+    bool isTrendingInClips;
+    String shouldMuteAudioReason;
+    dynamic shouldMuteAudioReasonType;
+
+    ConsumptionInfo({
+        required this.displayMediaId,
+        required this.isBookmarked,
+        required this.isTrendingInClips,
+        required this.shouldMuteAudioReason,
+        required this.shouldMuteAudioReasonType,
+    });
+
+    factory ConsumptionInfo.fromJson(Map<String, dynamic> json) => ConsumptionInfo(
+        displayMediaId: json["display_media_id"],
+        isBookmarked: json["is_bookmarked"],
+        isTrendingInClips: json["is_trending_in_clips"],
+        shouldMuteAudioReason: json["should_mute_audio_reason"],
+        shouldMuteAudioReasonType: json["should_mute_audio_reason_type"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "display_media_id": displayMediaId,
+        "is_bookmarked": isBookmarked,
+        "is_trending_in_clips": isTrendingInClips,
+        "should_mute_audio_reason": shouldMuteAudioReason,
+        "should_mute_audio_reason_type": shouldMuteAudioReasonType,
+    };
+}
+
+class FbDownstreamUseXpostMetadata {
+    DetectionMethod downstreamUseXpostDenyReason;
+
+    FbDownstreamUseXpostMetadata({
+        required this.downstreamUseXpostDenyReason,
+    });
+
+    factory FbDownstreamUseXpostMetadata.fromJson(Map<String, dynamic> json) => FbDownstreamUseXpostMetadata(
+        downstreamUseXpostDenyReason: detectionMethodValues.map[json["downstream_use_xpost_deny_reason"]]!,
+    );
+
+    Map<String, dynamic> toJson() => {
+        "downstream_use_xpost_deny_reason": detectionMethodValues.reverse[downstreamUseXpostDenyReason],
+    };
+}
+
+enum DetectionMethod {
+    C2_PA_METADATA_EDITED,
+    NONE
+}
+
+final detectionMethodValues = EnumValues({
+    "C2PA_METADATA_EDITED": DetectionMethod.C2_PA_METADATA_EDITED,
+    "NONE": DetectionMethod.NONE
+});
+
+class CommentInformTreatment {
+    dynamic actionType;
+    bool shouldHaveInformTreatment;
+    String text;
+    dynamic url;
+
+    CommentInformTreatment({
+        required this.actionType,
+        required this.shouldHaveInformTreatment,
+        required this.text,
         required this.url,
     });
 
-    factory HdProfilePicUrlInfo.fromJson(Map<dynamic, dynamic> json) => HdProfilePicUrlInfo(
-        width: json["width"],
-        height: json["height"],
+    factory CommentInformTreatment.fromJson(Map<String, dynamic> json) => CommentInformTreatment(
+        actionType: json["action_type"],
+        shouldHaveInformTreatment: json["should_have_inform_treatment"],
+        text: json["text"],
         url: json["url"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
-        "width": width,
-        "height": height,
+    Map<String, dynamic> toJson() => {
+        "action_type": actionType,
+        "should_have_inform_treatment": shouldHaveInformTreatment,
+        "text": text,
         "url": url,
+    };
+}
+
+class GenAiDetectionMethod {
+    DetectionMethod detectionMethod;
+
+    GenAiDetectionMethod({
+        required this.detectionMethod,
+    });
+
+    factory GenAiDetectionMethod.fromJson(Map<String, dynamic> json) => GenAiDetectionMethod(
+        detectionMethod: detectionMethodValues.map[json["detection_method"]]!,
+    );
+
+    Map<String, dynamic> toJson() => {
+        "detection_method": detectionMethodValues.reverse[detectionMethod],
+    };
+}
+
+class ItemImageVersions2 {
+    List<HdProfilePicUrlInfo> candidates;
+    AdditionalCandidates? additionalCandidates;
+    ScrubberSpritesheetInfoCandidates? scrubberSpritesheetInfoCandidates;
+
+    ItemImageVersions2({
+        required this.candidates,
+        this.additionalCandidates,
+        this.scrubberSpritesheetInfoCandidates,
+    });
+
+    factory ItemImageVersions2.fromJson(Map<String, dynamic> json) => ItemImageVersions2(
+        candidates: List<HdProfilePicUrlInfo>.from(json["candidates"].map((x) => HdProfilePicUrlInfo.fromJson(x))),
+        additionalCandidates: json["additional_candidates"] == null ? null : AdditionalCandidates.fromJson(json["additional_candidates"]),
+        scrubberSpritesheetInfoCandidates: json["scrubber_spritesheet_info_candidates"] == null ? null : ScrubberSpritesheetInfoCandidates.fromJson(json["scrubber_spritesheet_info_candidates"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "candidates": List<dynamic>.from(candidates.map((x) => x.toJson())),
+        "additional_candidates": additionalCandidates?.toJson(),
+        "scrubber_spritesheet_info_candidates": scrubberSpritesheetInfoCandidates?.toJson(),
+    };
+}
+
+class AdditionalCandidates {
+    HdProfilePicUrlInfo igtvFirstFrame;
+    HdProfilePicUrlInfo firstFrame;
+    dynamic smartFrame;
+
+    AdditionalCandidates({
+        required this.igtvFirstFrame,
+        required this.firstFrame,
+        required this.smartFrame,
+    });
+
+    factory AdditionalCandidates.fromJson(Map<String, dynamic> json) => AdditionalCandidates(
+        igtvFirstFrame: HdProfilePicUrlInfo.fromJson(json["igtv_first_frame"]),
+        firstFrame: HdProfilePicUrlInfo.fromJson(json["first_frame"]),
+        smartFrame: json["smart_frame"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "igtv_first_frame": igtvFirstFrame.toJson(),
+        "first_frame": firstFrame.toJson(),
+        "smart_frame": smartFrame,
     };
 }
 
@@ -894,11 +1893,11 @@ class ScrubberSpritesheetInfoCandidates {
         required this.scrubberSpritesheetInfoCandidatesDefault,
     });
 
-    factory ScrubberSpritesheetInfoCandidates.fromJson(Map<dynamic, dynamic> json) => ScrubberSpritesheetInfoCandidates(
+    factory ScrubberSpritesheetInfoCandidates.fromJson(Map<String, dynamic> json) => ScrubberSpritesheetInfoCandidates(
         scrubberSpritesheetInfoCandidatesDefault: Default.fromJson(json["default"]),
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "default": scrubberSpritesheetInfoCandidatesDefault.toJson(),
     };
 }
@@ -908,7 +1907,7 @@ class Default {
     int thumbnailWidth;
     int thumbnailHeight;
     double thumbnailDuration;
-    List<dynamic> spriteUrls;
+    List<String> spriteUrls;
     int thumbnailsPerRow;
     int totalThumbnailNumPerSprite;
     int maxThumbnailsPerSprite;
@@ -932,12 +1931,12 @@ class Default {
         required this.fileSizeKb,
     });
 
-    factory Default.fromJson(Map<dynamic, dynamic> json) => Default(
+    factory Default.fromJson(Map<String, dynamic> json) => Default(
         videoLength: json["video_length"]?.toDouble(),
         thumbnailWidth: json["thumbnail_width"],
         thumbnailHeight: json["thumbnail_height"],
         thumbnailDuration: json["thumbnail_duration"]?.toDouble(),
-        spriteUrls: List<dynamic>.from(json["sprite_urls"].map((x) => x)),
+        spriteUrls: List<String>.from(json["sprite_urls"].map((x) => x)),
         thumbnailsPerRow: json["thumbnails_per_row"],
         totalThumbnailNumPerSprite: json["total_thumbnail_num_per_sprite"],
         maxThumbnailsPerSprite: json["max_thumbnails_per_sprite"],
@@ -947,7 +1946,7 @@ class Default {
         fileSizeKb: json["file_size_kb"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "video_length": videoLength,
         "thumbnail_width": thumbnailWidth,
         "thumbnail_height": thumbnailHeight,
@@ -960,194 +1959,6 @@ class Default {
         "sprite_height": spriteHeight,
         "rendered_width": renderedWidth,
         "file_size_kb": fileSizeKb,
-    };
-}
-
-enum CarouselMediaProductType {
-    CAROUSEL_ITEM
-}
-
-final carouselMediaProductTypeValues = EnumValues({
-    "carousel_item": CarouselMediaProductType.CAROUSEL_ITEM
-});
-
-class SharingFrictionInfo {
-    dynamic bloksAppUrl;
-    bool shouldHaveSharingFriction;
-    dynamic sharingFrictionPayload;
-
-    SharingFrictionInfo({
-        required this.bloksAppUrl,
-        required this.shouldHaveSharingFriction,
-        required this.sharingFrictionPayload,
-    });
-
-    factory SharingFrictionInfo.fromJson(Map<dynamic, dynamic> json) => SharingFrictionInfo(
-        bloksAppUrl: json["bloks_app_url"],
-        shouldHaveSharingFriction: json["should_have_sharing_friction"],
-        sharingFrictionPayload: json["sharing_friction_payload"],
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "bloks_app_url": bloksAppUrl,
-        "should_have_sharing_friction": shouldHaveSharingFriction,
-        "sharing_friction_payload": sharingFrictionPayload,
-    };
-}
-
-class VideoVersion {
-    int bandwidth;
-    int height;
-    dynamic id;
-    int type;
-    dynamic url;
-    int width;
-
-    VideoVersion({
-        required this.bandwidth,
-        required this.height,
-        required this.id,
-        required this.type,
-        required this.url,
-        required this.width,
-    });
-
-    factory VideoVersion.fromJson(Map<dynamic, dynamic> json) => VideoVersion(
-        bandwidth: json["bandwidth"],
-        height: json["height"],
-        id: json["id"],
-        type: json["type"],
-        url: json["url"],
-        width: json["width"],
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "bandwidth": bandwidth,
-        "height": height,
-        "id": id,
-        "type": type,
-        "url": url,
-        "width": width,
-    };
-}
-
-class CollabFollowButtonInfo {
-    bool showFollowButton;
-    bool isOwnerInAuthorExp;
-
-    CollabFollowButtonInfo({
-        required this.showFollowButton,
-        required this.isOwnerInAuthorExp,
-    });
-
-    factory CollabFollowButtonInfo.fromJson(Map<dynamic, dynamic> json) => CollabFollowButtonInfo(
-        showFollowButton: json["show_follow_button"],
-        isOwnerInAuthorExp: json["is_owner_in_author_exp"],
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "show_follow_button": showFollowButton,
-        "is_owner_in_author_exp": isOwnerInAuthorExp,
-    };
-}
-
-class CommentInformTreatment {
-    dynamic actionType;
-    bool shouldHaveInformTreatment;
-    dynamic text;
-    dynamic url;
-
-    CommentInformTreatment({
-        required this.actionType,
-        required this.shouldHaveInformTreatment,
-        required this.text,
-        required this.url,
-    });
-
-    factory CommentInformTreatment.fromJson(Map<dynamic, dynamic> json) => CommentInformTreatment(
-        actionType: json["action_type"],
-        shouldHaveInformTreatment: json["should_have_inform_treatment"],
-        text: json["text"],
-        url: json["url"],
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "action_type": actionType,
-        "should_have_inform_treatment": shouldHaveInformTreatment,
-        "text": text,
-        "url": url,
-    };
-}
-
-class CrosspostMetadata {
-    FbDownstreamUseXpostMetadata fbDownstreamUseXpostMetadata;
-
-    CrosspostMetadata({
-        required this.fbDownstreamUseXpostMetadata,
-    });
-
-    factory CrosspostMetadata.fromJson(Map<dynamic, dynamic> json) => CrosspostMetadata(
-        fbDownstreamUseXpostMetadata: FbDownstreamUseXpostMetadata.fromJson(json["fb_downstream_use_xpost_metadata"]),
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "fb_downstream_use_xpost_metadata": fbDownstreamUseXpostMetadata.toJson(),
-    };
-}
-
-class FbDownstreamUseXpostMetadata {
-    DetectionMethod downstreamUseXpostDenyReason;
-
-    FbDownstreamUseXpostMetadata({
-        required this.downstreamUseXpostDenyReason,
-    });
-
-    factory FbDownstreamUseXpostMetadata.fromJson(Map<dynamic, dynamic> json) => FbDownstreamUseXpostMetadata(
-        downstreamUseXpostDenyReason: detectionMethodValues.map[json["downstream_use_xpost_deny_reason"]]!,
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "downstream_use_xpost_deny_reason": detectionMethodValues.reverse[downstreamUseXpostDenyReason],
-    };
-}
-
-enum DetectionMethod {
-    NONE
-}
-
-final detectionMethodValues = EnumValues({
-    "NONE": DetectionMethod.NONE
-});
-
-class GenAiDetectionMethod {
-    DetectionMethod detectionMethod;
-
-    GenAiDetectionMethod({
-        required this.detectionMethod,
-    });
-
-    factory GenAiDetectionMethod.fromJson(Map<dynamic, dynamic> json) => GenAiDetectionMethod(
-        detectionMethod: detectionMethodValues.map[json["detection_method"]]!,
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "detection_method": detectionMethodValues.reverse[detectionMethod],
-    };
-}
-
-class ItemImageVersions2 {
-    List<HdProfilePicUrlInfo> candidates;
-
-    ItemImageVersions2({
-        required this.candidates,
-    });
-
-    factory ItemImageVersions2.fromJson(Map<dynamic, dynamic> json) => ItemImageVersions2(
-        candidates: List<HdProfilePicUrlInfo>.from(json["candidates"].map((x) => HdProfilePicUrlInfo.fromJson(x))),
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "candidates": List<dynamic>.from(candidates.map((x) => x.toJson())),
     };
 }
 
@@ -1168,14 +1979,14 @@ final integrityReviewDecisionValues = EnumValues({
 });
 
 class Location {
-    dynamic name;
-    dynamic address;
-    dynamic city;
+    String name;
+    String address;
+    String city;
     bool hasViewerSaved;
-    dynamic pk;
-    dynamic shortName;
-    dynamic facebookPlacesId;
-    dynamic externalSource;
+    String pk;
+    String shortName;
+    String facebookPlacesId;
+    String externalSource;
     double lng;
     double lat;
 
@@ -1192,7 +2003,7 @@ class Location {
         required this.lat,
     });
 
-    factory Location.fromJson(Map<dynamic, dynamic> json) => Location(
+    factory Location.fromJson(Map<String, dynamic> json) => Location(
         name: json["name"],
         address: json["address"],
         city: json["city"],
@@ -1205,7 +2016,7 @@ class Location {
         lat: json["lat"]?.toDouble(),
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "name": name,
         "address": address,
         "city": city,
@@ -1219,25 +2030,57 @@ class Location {
     };
 }
 
-class MediaNotes {
-    List<dynamic> items;
+class MediaCroppingInfo {
+    ECrop? fourByThreeCrop;
+    ECrop? squareCrop;
 
-    MediaNotes({
-        required this.items,
+    MediaCroppingInfo({
+        this.fourByThreeCrop,
+        this.squareCrop,
     });
 
-    factory MediaNotes.fromJson(Map<dynamic, dynamic> json) => MediaNotes(
-        items: List<dynamic>.from(json["items"].map((x) => x)),
+    factory MediaCroppingInfo.fromJson(Map<String, dynamic> json) => MediaCroppingInfo(
+        fourByThreeCrop: json["four_by_three_crop"] == null ? null : ECrop.fromJson(json["four_by_three_crop"]),
+        squareCrop: json["square_crop"] == null ? null : ECrop.fromJson(json["square_crop"]),
     );
 
-    Map<dynamic, dynamic> toJson() => {
-        "items": List<dynamic>.from(items.map((x) => x)),
+    Map<String, dynamic> toJson() => {
+        "four_by_three_crop": fourByThreeCrop?.toJson(),
+        "square_crop": squareCrop?.toJson(),
+    };
+}
+
+class ECrop {
+    int cropLeft;
+    double cropRight;
+    double cropTop;
+    double cropBottom;
+
+    ECrop({
+        required this.cropLeft,
+        required this.cropRight,
+        required this.cropTop,
+        required this.cropBottom,
+    });
+
+    factory ECrop.fromJson(Map<String, dynamic> json) => ECrop(
+        cropLeft: json["crop_left"],
+        cropRight: json["crop_right"]?.toDouble(),
+        cropTop: json["crop_top"]?.toDouble(),
+        cropBottom: json["crop_bottom"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "crop_left": cropLeft,
+        "crop_right": cropRight,
+        "crop_top": cropTop,
+        "crop_bottom": cropBottom,
     };
 }
 
 class MusicMetadata {
     dynamic audioType;
-    dynamic musicCanonicalId;
+    String musicCanonicalId;
     dynamic pinnedMediaIds;
     dynamic musicInfo;
     dynamic originalSoundInfo;
@@ -1250,7 +2093,7 @@ class MusicMetadata {
         required this.originalSoundInfo,
     });
 
-    factory MusicMetadata.fromJson(Map<dynamic, dynamic> json) => MusicMetadata(
+    factory MusicMetadata.fromJson(Map<String, dynamic> json) => MusicMetadata(
         audioType: json["audio_type"],
         musicCanonicalId: json["music_canonical_id"],
         pinnedMediaIds: json["pinned_media_ids"],
@@ -1258,7 +2101,7 @@ class MusicMetadata {
         originalSoundInfo: json["original_sound_info"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "audio_type": audioType,
         "music_canonical_id": musicCanonicalId,
         "pinned_media_ids": pinnedMediaIds,
@@ -1268,16 +2111,16 @@ class MusicMetadata {
 }
 
 class Owner {
-    dynamic fbidV2;
+    String fbidV2;
     bool feedPostReshareDisabled;
     FullName fullName;
-    dynamic id;
+    String id;
     bool isPrivate;
     bool isUnpublished;
-    dynamic pk;
-    dynamic pkId;
+    String pk;
+    String pkId;
     bool showAccountTransparencyDetails;
-    dynamic strongId;
+    String strongId;
     int thirdPartyDownloadsEnabled;
     Username username;
     int accountType;
@@ -1287,13 +2130,11 @@ class Owner {
     bool hasAnonymousProfilePicture;
     HdProfilePicUrlInfo hdProfilePicUrlInfo;
     List<HdProfilePicUrlInfo> hdProfilePicVersions;
-    bool isFavorite;
     bool isVerified;
     ProfilePicId profilePicId;
-    dynamic profilePicUrl;
+    String profilePicUrl;
     bool transparencyProductEnabled;
     bool isEmbedsDisabled;
-    int latestReelMedia;
 
     Owner({
         required this.fbidV2,
@@ -1315,16 +2156,14 @@ class Owner {
         required this.hasAnonymousProfilePicture,
         required this.hdProfilePicUrlInfo,
         required this.hdProfilePicVersions,
-        required this.isFavorite,
         required this.isVerified,
         required this.profilePicId,
         required this.profilePicUrl,
         required this.transparencyProductEnabled,
         required this.isEmbedsDisabled,
-        required this.latestReelMedia,
     });
 
-    factory Owner.fromJson(Map<dynamic, dynamic> json) => Owner(
+    factory Owner.fromJson(Map<String, dynamic> json) => Owner(
         fbidV2: json["fbid_v2"],
         feedPostReshareDisabled: json["feed_post_reshare_disabled"],
         fullName: fullNameValues.map[json["full_name"]]!,
@@ -1344,16 +2183,14 @@ class Owner {
         hasAnonymousProfilePicture: json["has_anonymous_profile_picture"],
         hdProfilePicUrlInfo: HdProfilePicUrlInfo.fromJson(json["hd_profile_pic_url_info"]),
         hdProfilePicVersions: List<HdProfilePicUrlInfo>.from(json["hd_profile_pic_versions"].map((x) => HdProfilePicUrlInfo.fromJson(x))),
-        isFavorite: json["is_favorite"],
         isVerified: json["is_verified"],
         profilePicId: profilePicIdValues.map[json["profile_pic_id"]]!,
         profilePicUrl: json["profile_pic_url"],
         transparencyProductEnabled: json["transparency_product_enabled"],
         isEmbedsDisabled: json["is_embeds_disabled"],
-        latestReelMedia: json["latest_reel_media"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "fbid_v2": fbidV2,
         "feed_post_reshare_disabled": feedPostReshareDisabled,
         "full_name": fullNameValues.reverse[fullName],
@@ -1373,13 +2210,11 @@ class Owner {
         "has_anonymous_profile_picture": hasAnonymousProfilePicture,
         "hd_profile_pic_url_info": hdProfilePicUrlInfo.toJson(),
         "hd_profile_pic_versions": List<dynamic>.from(hdProfilePicVersions.map((x) => x.toJson())),
-        "is_favorite": isFavorite,
         "is_verified": isVerified,
         "profile_pic_id": profilePicIdValues.reverse[profilePicId],
         "profile_pic_url": profilePicUrl,
         "transparency_product_enabled": transparencyProductEnabled,
         "is_embeds_disabled": isEmbedsDisabled,
-        "latest_reel_media": latestReelMedia,
     };
 }
 
@@ -1412,7 +2247,7 @@ class FanClubInfo {
         required this.fanConsiderationPageRevampEligiblity,
     });
 
-    factory FanClubInfo.fromJson(Map<dynamic, dynamic> json) => FanClubInfo(
+    factory FanClubInfo.fromJson(Map<String, dynamic> json) => FanClubInfo(
         autosaveToExclusiveHighlight: json["autosave_to_exclusive_highlight"],
         connectedMemberCount: json["connected_member_count"],
         fanClubId: json["fan_club_id"],
@@ -1427,7 +2262,7 @@ class FanClubInfo {
         fanConsiderationPageRevampEligiblity: json["fan_consideration_page_revamp_eligiblity"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "autosave_to_exclusive_highlight": autosaveToExclusiveHighlight,
         "connected_member_count": connectedMemberCount,
         "fan_club_id": fanClubId,
@@ -1444,37 +2279,33 @@ class FanClubInfo {
 }
 
 enum FullName {
-    TRENT_ALEXANDER_ARNOLD
+    LIVERPOOL_FC_WOMEN,
+    LIVERPOOL_FOOTBALL_CLUB
 }
 
 final fullNameValues = EnumValues({
-    "Trent Alexander-Arnold": FullName.TRENT_ALEXANDER_ARNOLD
+    "Liverpool FC Women": FullName.LIVERPOOL_FC_WOMEN,
+    "Liverpool Football Club": FullName.LIVERPOOL_FOOTBALL_CLUB
 });
 
 enum ProfilePicId {
-    THE_3174294645814577759282989710
+    THE_34995915027048598661335001084,
+    THE_3499591847171584592187102427
 }
 
 final profilePicIdValues = EnumValues({
-    "3174294645814577759_282989710": ProfilePicId.THE_3174294645814577759282989710
+    "3499591502704859866_1335001084": ProfilePicId.THE_34995915027048598661335001084,
+    "3499591847171584592_187102427": ProfilePicId.THE_3499591847171584592187102427
 });
 
 enum Username {
-    TRENTARNOLD66
+    LIVERPOOLFC,
+    LIVERPOOLFCW
 }
 
 final usernameValues = EnumValues({
-    "trentarnold66": Username.TRENTARNOLD66
-});
-
-enum ItemProductType {
-    CAROUSEL_CONTAINER,
-    FEED
-}
-
-final itemProductTypeValues = EnumValues({
-    "carousel_container": ItemProductType.CAROUSEL_CONTAINER,
-    "feed": ItemProductType.FEED
+    "liverpoolfc": Username.LIVERPOOLFC,
+    "liverpoolfcw": Username.LIVERPOOLFCW
 });
 
 enum ProfileGridThumbnailFittingStyle {
@@ -1485,61 +2316,45 @@ final profileGridThumbnailFittingStyleValues = EnumValues({
     "UNSET": ProfileGridThumbnailFittingStyle.UNSET
 });
 
-class SocialContext {
-    dynamic socialContextType;
-    int socialContextUsersCount;
-    List<User> socialContextFacepileUsers;
-    List<SocialContextActionMetadatum> socialContextActionMetadata;
+class SponsorTag {
+    User sponsor;
+    bool permission;
+    dynamic sponsorId;
+    dynamic username;
+    bool isPending;
 
-    SocialContext({
-        required this.socialContextType,
-        required this.socialContextUsersCount,
-        required this.socialContextFacepileUsers,
-        required this.socialContextActionMetadata,
+    SponsorTag({
+        required this.sponsor,
+        required this.permission,
+        required this.sponsorId,
+        required this.username,
+        required this.isPending,
     });
 
-    factory SocialContext.fromJson(Map<dynamic, dynamic> json) => SocialContext(
-        socialContextType: json["social_context_type"],
-        socialContextUsersCount: json["social_context_users_count"],
-        socialContextFacepileUsers: List<User>.from(json["social_context_facepile_users"].map((x) => User.fromJson(x))),
-        socialContextActionMetadata: List<SocialContextActionMetadatum>.from(json["social_context_action_metadata"].map((x) => SocialContextActionMetadatum.fromJson(x))),
+    factory SponsorTag.fromJson(Map<String, dynamic> json) => SponsorTag(
+        sponsor: User.fromJson(json["sponsor"]),
+        permission: json["permission"],
+        sponsorId: json["sponsor_id"],
+        username: json["username"],
+        isPending: json["is_pending"],
     );
 
-    Map<dynamic, dynamic> toJson() => {
-        "social_context_type": socialContextType,
-        "social_context_users_count": socialContextUsersCount,
-        "social_context_facepile_users": List<dynamic>.from(socialContextFacepileUsers.map((x) => x.toJson())),
-        "social_context_action_metadata": List<dynamic>.from(socialContextActionMetadata.map((x) => x.toJson())),
-    };
-}
-
-class SocialContextActionMetadatum {
-    dynamic facepileUserId;
-    bool isHighValue;
-
-    SocialContextActionMetadatum({
-        required this.facepileUserId,
-        required this.isHighValue,
-    });
-
-    factory SocialContextActionMetadatum.fromJson(Map<dynamic, dynamic> json) => SocialContextActionMetadatum(
-        facepileUserId: json["facepile_user_id"],
-        isHighValue: json["is_high_value"],
-    );
-
-    Map<dynamic, dynamic> toJson() => {
-        "facepile_user_id": facepileUserId,
-        "is_high_value": isHighValue,
+    Map<String, dynamic> toJson() => {
+        "sponsor": sponsor.toJson(),
+        "permission": permission,
+        "sponsor_id": sponsorId,
+        "username": username,
+        "is_pending": isPending,
     };
 }
 
 class EnumValues<T> {
-    Map<dynamic, T> map;
-    late Map<T, dynamic> reverseMap;
+    Map<String, T> map;
+    late Map<T, String> reverseMap;
 
     EnumValues(this.map);
 
-    Map<T, dynamic> get reverse {
+    Map<T, String> get reverse {
             reverseMap = map.map((k, v) => MapEntry(v, k));
             return reverseMap;
     }
