@@ -4,25 +4,25 @@
 
 import 'dart:convert';
 
-ProfileModel profileModelFromJson(String str) => ProfileModel.fromJson(json.decode(str));
+ProfileModel profileModelFromJson(dynamic str) => ProfileModel.fromJson(json.decode(str));
 
-String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
+dynamic profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
     Data data;
-    String status;
+    dynamic status;
 
     ProfileModel({
         required this.data,
         required this.status,
     });
 
-    factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+    factory ProfileModel.fromJson(Map<dynamic, dynamic> json) => ProfileModel(
         data: Data.fromJson(json["data"]),
         status: json["status"],
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "data": data.toJson(),
         "status": status,
     };
@@ -35,33 +35,33 @@ class Data {
         required this.user,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory Data.fromJson(Map<dynamic, dynamic> json) => Data(
         user: DataUser.fromJson(json["user"]),
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "user": user.toJson(),
     };
 }
 
 class DataUser {
     dynamic aiAgentType;
-    String biography;
+    dynamic biography;
     List<BioLink> bioLinks;
     dynamic fbProfileBiolink;
     BiographyWithEntities biographyWithEntities;
     bool blockedByViewer;
     bool restrictedByViewer;
     bool countryBlock;
-    String eimuId;
-    String externalUrl;
-    String externalUrlLinkshimmed;
+    dynamic eimuId;
+    dynamic externalUrl;
+    dynamic externalUrlLinkshimmed;
     EdgeFollow edgeFollowedBy;
-    String fbid;
+    dynamic fbid;
     bool followedByViewer;
     EdgeFollow edgeFollow;
     bool followsViewer;
-    String fullName;
+    dynamic fullName;
     dynamic groupMetadata;
     bool hasArEffects;
     bool hasClips;
@@ -72,7 +72,7 @@ class DataUser {
     int highlightReelCount;
     bool hasRequestedViewer;
     bool hideLikeAndViewCounts;
-    String id;
+    dynamic id;
     bool isBusinessAccount;
     bool isProfessionalAccount;
     bool isSupervisionEnabled;
@@ -83,28 +83,28 @@ class DataUser {
     bool isJoinedRecently;
     dynamic guardianId;
     dynamic businessAddressJson;
-    String businessContactMethod;
+    dynamic businessContactMethod;
     dynamic businessEmail;
     dynamic businessPhoneNumber;
     dynamic businessCategoryName;
     dynamic overallCategoryName;
     dynamic categoryEnum;
-    String categoryName;
+    dynamic categoryName;
     bool isPrivate;
     bool isVerified;
     bool isVerifiedByMv4B;
     bool isRegulatedC18;
     EdgeMutualFollowedBy edgeMutualFollowedBy;
     int pinnedChannelsListCount;
-    String profilePicUrl;
-    String profilePicUrlHd;
+    dynamic profilePicUrl;
+    dynamic profilePicUrlHd;
     bool requestedByViewer;
     bool shouldShowCategory;
     bool shouldShowPublicContacts;
     bool showAccountTransparencyDetails;
     dynamic transparencyLabel;
     dynamic transparencyProduct;
-    String username;
+    dynamic username;
     dynamic connectedFbPage;
     List<dynamic> pronouns;
     EdgeOwnerToTimelineMedia edgeOwnerToTimelineMedia;
@@ -175,7 +175,7 @@ class DataUser {
         required this.edgeOwnerToTimelineMedia,
     });
 
-    factory DataUser.fromJson(Map<String, dynamic> json) => DataUser(
+    factory DataUser.fromJson(Map<dynamic, dynamic> json) => DataUser(
         aiAgentType: json["ai_agent_type"],
         biography: json["biography"],
         bioLinks: List<BioLink>.from(json["bio_links"].map((x) => BioLink.fromJson(x))),
@@ -241,7 +241,7 @@ class DataUser {
         edgeOwnerToTimelineMedia: EdgeOwnerToTimelineMedia.fromJson(json["edge_owner_to_timeline_media"]),
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "ai_agent_type": aiAgentType,
         "biography": biography,
         "bio_links": List<dynamic>.from(bioLinks.map((x) => x.toJson())),
@@ -309,10 +309,10 @@ class DataUser {
 }
 
 class BioLink {
-    String title;
-    String lynxUrl;
-    String url;
-    String linkType;
+    dynamic title;
+    dynamic lynxUrl;
+    dynamic url;
+    dynamic linkType;
 
     BioLink({
         required this.title,
@@ -321,14 +321,14 @@ class BioLink {
         required this.linkType,
     });
 
-    factory BioLink.fromJson(Map<String, dynamic> json) => BioLink(
+    factory BioLink.fromJson(Map<dynamic, dynamic> json) => BioLink(
         title: json["title"],
         lynxUrl: json["lynx_url"],
         url: json["url"],
         linkType: json["link_type"],
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "title": title,
         "lynx_url": lynxUrl,
         "url": url,
@@ -337,7 +337,7 @@ class BioLink {
 }
 
 class BiographyWithEntities {
-    String rawText;
+    dynamic rawText;
     List<Entity> entities;
 
     BiographyWithEntities({
@@ -345,12 +345,12 @@ class BiographyWithEntities {
         required this.entities,
     });
 
-    factory BiographyWithEntities.fromJson(Map<String, dynamic> json) => BiographyWithEntities(
+    factory BiographyWithEntities.fromJson(Map<dynamic, dynamic> json) => BiographyWithEntities(
         rawText: json["raw_text"],
         entities: List<Entity>.from(json["entities"].map((x) => Entity.fromJson(x))),
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "raw_text": rawText,
         "entities": List<dynamic>.from(entities.map((x) => x.toJson())),
     };
@@ -365,29 +365,29 @@ class Entity {
         required this.hashtag,
     });
 
-    factory Entity.fromJson(Map<String, dynamic> json) => Entity(
+    factory Entity.fromJson(Map<dynamic, dynamic> json) => Entity(
         user: EntityUser.fromJson(json["user"]),
         hashtag: json["hashtag"],
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "user": user.toJson(),
         "hashtag": hashtag,
     };
 }
 
 class EntityUser {
-    String username;
+    dynamic username;
 
     EntityUser({
         required this.username,
     });
 
-    factory EntityUser.fromJson(Map<String, dynamic> json) => EntityUser(
+    factory EntityUser.fromJson(Map<dynamic, dynamic> json) => EntityUser(
         username: json["username"],
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "username": username,
     };
 }
@@ -399,11 +399,11 @@ class EdgeFollow {
         required this.count,
     });
 
-    factory EdgeFollow.fromJson(Map<String, dynamic> json) => EdgeFollow(
+    factory EdgeFollow.fromJson(Map<dynamic, dynamic> json) => EdgeFollow(
         count: json["count"],
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "count": count,
     };
 }
@@ -417,12 +417,12 @@ class EdgeMutualFollowedBy {
         required this.edges,
     });
 
-    factory EdgeMutualFollowedBy.fromJson(Map<String, dynamic> json) => EdgeMutualFollowedBy(
+    factory EdgeMutualFollowedBy.fromJson(Map<dynamic, dynamic> json) => EdgeMutualFollowedBy(
         count: json["count"],
         edges: List<dynamic>.from(json["edges"].map((x) => x)),
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "count": count,
         "edges": List<dynamic>.from(edges.map((x) => x)),
     };
@@ -439,13 +439,13 @@ class EdgeOwnerToTimelineMedia {
         required this.edges,
     });
 
-    factory EdgeOwnerToTimelineMedia.fromJson(Map<String, dynamic> json) => EdgeOwnerToTimelineMedia(
+    factory EdgeOwnerToTimelineMedia.fromJson(Map<dynamic, dynamic> json) => EdgeOwnerToTimelineMedia(
         count: json["count"],
         pageInfo: PageInfo.fromJson(json["page_info"]),
         edges: List<dynamic>.from(json["edges"].map((x) => x)),
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "count": count,
         "page_info": pageInfo.toJson(),
         "edges": List<dynamic>.from(edges.map((x) => x)),
@@ -461,12 +461,12 @@ class PageInfo {
         required this.endCursor,
     });
 
-    factory PageInfo.fromJson(Map<String, dynamic> json) => PageInfo(
+    factory PageInfo.fromJson(Map<dynamic, dynamic> json) => PageInfo(
         hasNextPage: json["has_next_page"],
         endCursor: json["end_cursor"],
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<dynamic, dynamic> toJson() => {
         "has_next_page": hasNextPage,
         "end_cursor": endCursor,
     };

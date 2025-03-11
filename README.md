@@ -1,29 +1,16 @@
-# Instagram Clone 📸  
+# instagram
 
-A Flutter-based Instagram clone with **BLoC state management** and **real-time updates**. Built using Firebase for backend services.  
+A new Flutter project.
 
-## 🚀 Features  
-✅ User Authentication (Sign Up & Login)  
-✅ Post Creation (Image Upload + Caption)  
-✅ Like & Comment System  
-✅ Real-Time Updates with Firebase  
-✅ Responsive UI for Android & iOS  
+## Getting Started
 
-## 📸 Screenshots 
-![splashscreen](assets/screenshorts/Screenshot_20250310-131346.png)
-  ![](assets/screenshorts/Screenshot_20250310-131400.png)
-![Login Screen](assets/screenshorts/Screenshot_20250310-131413.png)  
-![Home Feed](assets/screenshorts/flutter_01.png)  
-![Post Upload](screenshot3.png)  
+This project is a starting point for a Flutter application.
 
-## 🛠 Tech Stack  
-- **Flutter** - Frontend UI  
-- **BLoC** - State Management  
-- **Firebase** - Backend & Realtime Database  
-- **Cloud Storage** - Image Upload  
+A few resources to get you started if this is your first Flutter project:
 
-## 🔥 How to Run?  
-1. Clone the repo:  
-   ```sh
-   git clone https://github.com/zalim-388/instagram.git
-   cd instagram
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

@@ -10,50 +10,46 @@ StoryModel storyModelFromJson(String str) =>
 String storyModelToJson(StoryModel data) => json.encode(data.toJson());
 
 class StoryModel {
-  Data data;
+  List<Detail> detail;
 
   StoryModel({
-    required this.data,
+    required this.detail,
   });
 
   factory StoryModel.fromJson(Map<String, dynamic> json) => StoryModel(
-        data: Data.fromJson(json["data"]),
+        detail:
+            List<Detail>.from(json["detail"].map((x) => Detail.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data.toJson(),
+        "detail": List<dynamic>.from(detail.map((x) => x.toJson())),
       };
 }
 
-class Data {
-  AdditionalData additionalData;
-  int count;
-  List<dynamic> items;
+class Detail {
+  String type;
+  List<String> loc;
+  String msg;
+  String input;
 
-  Data({
-    required this.additionalData,
-    required this.count,
-    required this.items,
+  Detail({
+    required this.type,
+    required this.loc,
+    required this.msg,
+    required this.input,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        additionalData: AdditionalData.fromJson(json["additional_data"]),
-        count: json["count"],
-        items: List<dynamic>.from(json["items"].map((x) => x)),
+  factory Detail.fromJson(Map<String, dynamic> json) => Detail(
+        type: json["type"],
+        loc: List<String>.from(json["loc"].map((x) => x)),
+        msg: json["msg"],
+        input: json["input"],
       );
 
   Map<String, dynamic> toJson() => {
-        "additional_data": additionalData.toJson(),
-        "count": count,
-        "items": List<dynamic>.from(items.map((x) => x)),
+        "type": type,
+        "loc": List<dynamic>.from(loc.map((x) => x)),
+        "msg": msg,
+        "input": input,
       };
-}
-
-class AdditionalData {
-  AdditionalData();
-
-  factory AdditionalData.fromJson(Map<String, dynamic> json) =>
-      AdditionalData();
-
-  Map<String, dynamic> toJson() => {};
 }

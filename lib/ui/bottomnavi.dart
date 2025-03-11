@@ -25,7 +25,7 @@ class _BottomNavState extends State<BottomNav> {
   final List<Widget> pages = [
     Homepage(),
     Search(),
-    Add(),
+   Add(),
     Reel(),
     Profile(),
   ];

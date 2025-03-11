@@ -58,6 +58,7 @@ class _SearchState extends State<Search> {
             ),
           ),
           title: TextField(
+            style: TextStyle(color: Colors.white),
             controller: _controller,
             onChanged: _SearchList,
             cursorColor: Colors.white,

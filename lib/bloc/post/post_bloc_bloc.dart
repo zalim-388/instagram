@@ -8,18 +8,17 @@ part 'post_bloc_state.dart';
 
 class PostBlocBloc extends Bloc<PostBlocEvent, PostBlocState> {
   postApi api = postApi();
-  
-  late postmodel posts;
+
+  late Postmodel posts;
   PostBlocBloc() : super(PostBlocInitial()) {
-    on<PostBlocEvent>((event, emit)async {
-   try {
+    on<PostBlocEvent>((event, emit) async {
+      try {
         posts = await api.getpost();
         emit(postBlocLoaded(posts: posts));
       } catch (e) {
         print("123${e}");
         emit(postBlocError());
       }
-
     });
   }
 }

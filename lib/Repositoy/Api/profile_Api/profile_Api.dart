@@ -9,7 +9,7 @@ class ProfileApi {
 
   Future<ProfileModel> getinsta() async {
     String path =
-        'https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=zaliiim__';
+        'https://instagram230.p.rapidapi.com/user/details?username=zaliiim__';
     var body = {};
 
     Response response = await api.invokeAPI(path, 'GET', body);
