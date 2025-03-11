@@ -13,7 +13,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(const MyApp());
+  runApp(
+      // ChangeNotifierProvider(
+        // create: (context) => PostProvider(),
+        // child:
+         const MyApp(),
+      // ),
+  );
 }
 
 class MyApp extends StatelessWidget {
