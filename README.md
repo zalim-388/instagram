@@ -1,13 +1,7 @@
 # Instagram Clone 📸  
 
-A Flutter-based Instagram clone with **BLoC state management** and **real-time updates**. Built using Firebase for backend services.  
 
-## 🚀 Features  
-✅ User Authentication (Sign Up & Login)  
-✅ Post Creation (Image Upload + Caption)  
-✅ Like & Comment System  
-✅ Real-Time Updates with Firebase  
-✅ Responsive UI for Android & iOS  
+
 
 <<<<<<< HEAD
 ## 📸 Screenshots 
