@@ -1,6 +1,15 @@
 # Instagram Clone 📸  
 
 
+An Instagram-like mobile application built using Flutter, integrated with backend APIs, and utilizing BLoC (Business Logic Component) and Provider for efficient state management..  
+🚀 Features
+
+✅ User Authentication (Sign Up & Login via API)
+✅ Post Creation (Image Upload + Caption via Multipart API)
+✅ Like & Comment System (API-driven)
+✅ Real-Time UI Updates with BLoC Streams
+✅ Responsive UI for Android & iOS
+
 
 
 <<<<<<< HEAD
